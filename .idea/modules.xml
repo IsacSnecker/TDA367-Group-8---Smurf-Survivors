@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SmurfSurvivors/SmurfSurvivors.iml" filepath="$PROJECT_DIR$/SmurfSurvivors/SmurfSurvivors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TDA367-Group-8---Smurf-Survivors.iml" filepath="$PROJECT_DIR$/.idea/TDA367-Group-8---Smurf-Survivors.iml" />
+    </modules>
+  </component>
+</project>
