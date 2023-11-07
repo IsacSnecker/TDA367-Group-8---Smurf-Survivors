@@ -12,7 +12,7 @@ public class smurfSurvivors extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("smurf.jpg");
+		img = new Texture("Map/grass.png");
 
 	}
 
