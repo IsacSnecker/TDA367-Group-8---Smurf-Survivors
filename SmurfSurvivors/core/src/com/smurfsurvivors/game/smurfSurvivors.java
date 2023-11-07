@@ -8,11 +8,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class smurfSurvivors extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+	Texture background;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("smurf.jpg");
+		img = new Texture("smurf.png");
+		background = new Texture("Map/grass.png");
 
 	}
 
@@ -20,6 +22,7 @@ public class smurfSurvivors extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
+		batch.draw(background, 0, 0);
 		batch.draw(img, 0, 0);
 		batch.end();
 	}
