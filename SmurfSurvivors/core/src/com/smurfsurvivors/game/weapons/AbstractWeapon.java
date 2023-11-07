@@ -2,7 +2,7 @@ package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class AbstractWeapon {
+public abstract class AbstractWeapon {
 
     private Texture sprite;
     private int range;
@@ -13,22 +13,20 @@ public class AbstractWeapon {
     public Texture getSprite() {
         return sprite;
     }
-
     public int getRange() {
         return range;
     }
-
     public int getDamage() {
         return damage;
     }
-
     public float getCooldown() {
         return cooldown;
     }
-
     public String getName() {
         return name;
     }
+    public abstract void performAttack();
+
 
 
 
