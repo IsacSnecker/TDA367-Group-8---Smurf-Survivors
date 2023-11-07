@@ -1,4 +1,4 @@
 package com.smurfsurvivors.game;
 
-public class GameModel {
+public class GameModel implements IGameModel{
 }
