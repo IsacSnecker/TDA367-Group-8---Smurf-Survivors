@@ -9,6 +9,9 @@ public abstract class Entity {
     private int width;
     private int height;
 
+    public Texture getSprite() {
+        return sprite;
+    }
     public int getX() {
         return x;
     }
