@@ -26,7 +26,7 @@ public abstract class AbstractWeapon {
         return name;
     }
     public abstract void performAttack();
-    public abstract void test();
+
 
 
 
