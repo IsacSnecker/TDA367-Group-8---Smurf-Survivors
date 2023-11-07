@@ -3,7 +3,6 @@ package com.smurfsurvivors.game;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.smurfsurvivors.game.smurfSurvivors;
 
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
@@ -18,6 +17,11 @@ public class DesktopLauncher {
 		Graphics.DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
 		config.setWindowedMode(dm.width, dm.height);
 
-		new Lwjgl3Application(new smurfSurvivors(), config);
+		// MVC initialization
+		IGameModel gameModel = new GameModel();
+		IGameController gameController = new GameController(gameModel);
+		GameView gameView = new GameView(gameModel, gameController);
+
+		new Lwjgl3Application(gameView, config);
 	}
 }
