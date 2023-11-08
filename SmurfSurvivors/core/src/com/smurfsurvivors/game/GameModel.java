@@ -4,7 +4,7 @@ import com.smurfsurvivors.game.entity.*;
 
 import java.util.ArrayList;
 
-public class GameModel implements IGameModel, Observer{
+public class GameModel implements IGameModel{
 
     //private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
