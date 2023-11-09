@@ -24,7 +24,7 @@ public class GameModel implements IGameModel{
 
     public void updateEnemyPositions(){
         for (Enemy enemy : enemyList) {
-            //enemy.updatePosition();
+            enemy.moveTowardsEntity(player);
         }
     }
 
