@@ -3,13 +3,13 @@ package com.smurfsurvivors.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.smurfsurvivors.game.entity.Demon;
 import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
@@ -88,6 +88,12 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         batch.begin();
         batch.draw(img,10,10);
+        PlayerCharacter player = model.getPlayer();
+        player.render(this.batch);
+        Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
+                                    player.getWidth(), player.getHeight());
+        sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
+        //sprite
         renderEnemies();
         batch.end();
     }

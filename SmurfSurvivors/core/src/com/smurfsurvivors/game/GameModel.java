@@ -17,6 +17,10 @@ public class GameModel implements IGameModel{
         this.collisionHandler = new CollisionHandler();
     }
 
+
+    public PlayerCharacter getPlayer(){
+        return this.player;
+    }
     public void setPlayer(PlayerCharacter player) {
         this.player = player;
     }
