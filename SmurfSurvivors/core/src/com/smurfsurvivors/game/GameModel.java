@@ -11,6 +11,7 @@ public class GameModel implements IGameModel, Observer{
     public GameModel(){
         this.enemyList = new ArrayList<Enemy>();
         //this.player = new PlayerCharacter();
+
     }
 
     public void updatePlayerPosition(){
@@ -27,4 +28,9 @@ public class GameModel implements IGameModel, Observer{
         //updatePlayerPosition
         updateEnemyPositions();
     }
+
+    public ArrayList<Enemy> getEnemies() {
+        return this.enemyList;
+    }
+
 }
