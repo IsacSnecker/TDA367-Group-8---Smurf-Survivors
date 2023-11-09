@@ -3,9 +3,10 @@ package com.smurfsurvivors.game.entity;
 import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Enemy extends Creature{
-
-    public Enemy(Texture sprite, int x, int y, int width, int height) {
-        super(sprite, x, y, width, height);
+    private int attackPower;
+    public Enemy(int attackPower, int health, Texture sprite, int x, int y, int width, int height) {
+        super(health, sprite, x, y, width, height);
+        this.attackPower = attackPower;
     }
     public void moveTowardsEntity(Entity entity){
         if(entity.getX() < getX() && entity.getY() < getY()){
@@ -22,8 +23,8 @@ public abstract class Enemy extends Creature{
         }
     }
 
-    public void damageEntity(Entity entity){
-        //enti
+    public void damageEntity(HasHealth entity){
+        entity.decreaseHealth(2);
     }
 
 }
