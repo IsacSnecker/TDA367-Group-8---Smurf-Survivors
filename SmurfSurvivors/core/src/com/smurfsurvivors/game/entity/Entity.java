@@ -1,9 +1,14 @@
 package com.smurfsurvivors.game.entity;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 
+import javax.crypto.spec.OAEPParameterSpec;
+import java.nio.file.Path;
+
 public abstract class Entity {
-    private Texture sprite; //Should probably not be final
+    //private Texture sprite; //Should probably not be final
+    private Texture sprite;
     private int x;
     private int y;
     private final int width; //should width be final?
@@ -18,9 +23,14 @@ public abstract class Entity {
     }
 
 
+    /*public Texture getSprite() {
+        return sprite;
+    }*/
+
     public Texture getSprite() {
         return sprite;
     }
+
     public int getX() {
         return x;
     }

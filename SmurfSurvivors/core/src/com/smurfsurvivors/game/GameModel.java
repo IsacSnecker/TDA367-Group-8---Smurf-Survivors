@@ -1,12 +1,13 @@
 package com.smurfsurvivors.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.entity.*;
 
 import java.util.ArrayList;
 
 public class GameModel implements IGameModel{
 
-    //private PlayerCharacter player;
+    private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
 
     private CollisionHandler collisionHandler;
@@ -14,9 +15,16 @@ public class GameModel implements IGameModel{
     public GameModel(){
         this.enemyList = new ArrayList<Enemy>();
         this.collisionHandler = new CollisionHandler();
-        //this.player = new PlayerCharacter();
-
     }
+
+    public void setPlayer(PlayerCharacter player) {
+        this.player = player;
+    }
+
+    public void addEnemy(Enemy enemy) {
+        this.enemyList.add(enemy);
+    }
+
 
     public void updatePlayerPosition(){
         //player.updatePosition();
@@ -44,7 +52,6 @@ public class GameModel implements IGameModel{
         */
     }
 
-    @Override
     public void update() {
         updatePlayerPosition();
         updateEnemyPositions();

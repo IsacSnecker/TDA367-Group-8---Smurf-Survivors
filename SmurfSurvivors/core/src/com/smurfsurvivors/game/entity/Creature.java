@@ -3,6 +3,7 @@ package com.smurfsurvivors.game.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.weapons.AbstractWeapon;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public abstract class Creature extends Entity implements hasHealth, Movable{

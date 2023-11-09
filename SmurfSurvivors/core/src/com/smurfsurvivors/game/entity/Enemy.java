@@ -2,6 +2,8 @@ package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.nio.file.Path;
+
 public abstract class Enemy extends Creature{
 
     public Enemy(Texture sprite, int x, int y, int width, int height) {

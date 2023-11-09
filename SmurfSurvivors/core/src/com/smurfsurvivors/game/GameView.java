@@ -91,15 +91,23 @@ public class GameView extends ApplicationAdapter implements IGameView{
         img.dispose();
     }
 
-
     public void renderEnemies() {
 
         for (Enemy e: model.getEnemies()) {
-            //e.render(this.batch);
+
         }
 
     }
 
+
+/*    public void renderEnemies() {
+
+        for (Enemy e: model.getEnemies()) {
+            e.render(this.batch);
+        }
+
+    }
+*/
 
 }
 

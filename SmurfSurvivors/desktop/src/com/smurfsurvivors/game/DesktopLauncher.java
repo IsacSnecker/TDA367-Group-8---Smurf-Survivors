@@ -18,9 +18,10 @@ public class DesktopLauncher {
 		config.setWindowedMode(dm.width, dm.height);
 
 		// MVC initialization
-		IGameModel gameModel = new GameModel();
+		IGameModel gameModel = GameModelFactory.createDefaultModel();
 		IGameController gameController = new GameController(gameModel);
 		GameView gameView = new GameView(gameModel, gameController);
+Lwjgl3Application
 
 		new Lwjgl3Application(gameView, config);
 	}
