@@ -9,7 +9,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.smurfsurvivors.game.entity.Demon;
 import com.smurfsurvivors.game.entity.Enemy;
+import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 
 public class GameView extends ApplicationAdapter implements IGameView{
@@ -70,6 +72,12 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         viewInit();
 
+        PlayerCharacter player = new PlayerCharacter(new Texture("Player/smurf.png"), 0,0, 32,32);
+        model.setPlayer(player);
+
+        Demon demon = new Demon(new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
+        model.addEnemy(demon);
+
     }
 
     @Override
@@ -80,9 +88,8 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         batch.begin();
         batch.draw(img,10,10);
+        renderEnemies();
         batch.end();
-
-
     }
 
     @Override
@@ -94,7 +101,7 @@ public class GameView extends ApplicationAdapter implements IGameView{
     public void renderEnemies() {
 
         for (Enemy e: model.getEnemies()) {
-
+            e.render(this.batch);
         }
 
     }

@@ -11,8 +11,8 @@ public abstract class GameModelFactory {
 
         IGameModel model = new GameModel();
 
-        PlayerCharacter player = new PlayerCharacter(new Texture("Player/smurf.png"), 0,0, 32,32);
-        model.setPlayer(player);
+        //PlayerCharacter player = new PlayerCharacter(new Texture("Player/smurf.png"), 0,0, 32,32);
+        //model.setPlayer(player);
 
         //Demon demon = new Demon(new Texture("Enemies/blueDemon.png"), 0, 0, 32, 32);
         //model.addEnemy(demon);
