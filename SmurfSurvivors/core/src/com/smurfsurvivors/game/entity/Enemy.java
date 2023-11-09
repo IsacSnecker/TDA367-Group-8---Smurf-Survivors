@@ -5,17 +5,28 @@ import com.badlogic.gdx.graphics.Texture;
 import java.nio.file.Path;
 
 public abstract class Enemy extends Creature{
-
-    public Enemy(Texture sprite, int x, int y, int width, int height) {
-        super(sprite, x, y, width, height);
+    private int attackPower;
+    public Enemy(int attackPower, int health, Texture sprite, int x, int y, int width, int height) {
+        super(health, sprite, x, y, width, height);
+        this.attackPower = attackPower;
     }
     public void moveTowardsEntity(Entity entity){
-        if(entity.getX() < getX()){
-            move(-10, 0);
+        if(entity.getX() < getX() && entity.getY() < getY()){
+            move(-10, -10);
         }
-        else if(entity.getX() > getX()){
-            move(10, 0);
+        else if(entity.getX() < getX() && entity.getY() > getY()){
+            move(-10, 10);
         }
-        //move()
+        else if(entity.getX() > getX() && entity.getY() < getY()){
+            move(10, -10);
+        }
+        else if(entity.getX() > getX() && entity.getY() > getY()) {
+            move(10, 10);
+        }
     }
+
+    public void damageEntity(HasHealth entity){
+        entity.decreaseHealth(2);
+    }
+
 }

@@ -1,16 +1,13 @@
 package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.smurfsurvivors.game.weapons.AbstractWeapon;
 
-import java.nio.file.Path;
-import java.util.List;
-
-public abstract class Creature extends Entity implements hasHealth, Movable{
+public abstract class Creature extends Entity implements HasHealth, Movable{
     private int health;
 
-    public Creature(Texture sprite, int x, int y, int width, int height) {
+    public Creature(int health, Texture sprite, int x, int y, int width, int height) {
         super(sprite, x, y, width, height);
+        this.health = health;
     }
 
     public int getHealth(){

@@ -2,15 +2,17 @@ package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.weapons.ActiveWeapon;
+import com.smurfsurvivors.game.weapons.PassiveWeapon;
 
 import java.util.List;
 
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
-    private List<AbstractWeapon> passiveWeapons; //Should be List<PassiveWeapon>
-    private List<AbstractWeapon> abilities; //Should be List<Ability>
+    private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
+    private List<ActiveWeapon> abilities; //Should be List<Ability>
 
-    public PlayerCharacter(Texture sprite, int x, int y, int width, int height) {
-        super(sprite, x, y, width, height);
+    public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height) {
+        super(health,sprite, x, y, width, height);
     }
     //private
 
