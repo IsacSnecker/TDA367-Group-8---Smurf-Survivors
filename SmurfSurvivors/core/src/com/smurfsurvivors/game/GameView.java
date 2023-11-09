@@ -72,10 +72,10 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         viewInit();
 
-        PlayerCharacter player = new PlayerCharacter(new Texture("Player/smurf.png"), 0,0, 32,32);
+        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf.png"), 0,0, 32,32);
         model.setPlayer(player);
 
-        Demon demon = new Demon(new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
+        Enemy demon = new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
         model.addEnemy(demon);
 
     }

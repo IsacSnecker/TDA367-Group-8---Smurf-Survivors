@@ -1,5 +1,5 @@
 package com.smurfsurvivors.game.weapons;
 
-abstract class PassiveWeapon extends AbstractWeapon{
+public abstract class PassiveWeapon extends AbstractWeapon{
 
 }

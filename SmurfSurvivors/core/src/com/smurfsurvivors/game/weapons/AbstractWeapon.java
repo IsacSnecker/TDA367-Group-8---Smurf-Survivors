@@ -3,7 +3,7 @@ package com.smurfsurvivors.game.weapons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-abstract class AbstractWeapon {
+public abstract class AbstractWeapon {
     Texture weaponTexture;
     int attackRange;
     int attackDamage;
@@ -13,4 +13,7 @@ abstract class AbstractWeapon {
 
     abstract void update();
     abstract void render(SpriteBatch batch);
+
+    public void performAttack() {
+    }
 }
