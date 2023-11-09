@@ -39,6 +39,6 @@ public abstract class Entity {
     public void setY(int y) { this.y = y; }
 
     public void render(SpriteBatch batch){
-
+        batch.draw(sprite, x - getWidth()/2, y - getHeight()/2);
     }
 }
