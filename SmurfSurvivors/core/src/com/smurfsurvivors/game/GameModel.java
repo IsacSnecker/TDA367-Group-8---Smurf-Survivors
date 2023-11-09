@@ -15,6 +15,7 @@ public class GameModel implements IGameModel{
         this.enemyList = new ArrayList<Enemy>();
         this.collisionHandler = new CollisionHandler();
         //this.player = new PlayerCharacter();
+
     }
 
     public void updatePlayerPosition(){
@@ -49,4 +50,9 @@ public class GameModel implements IGameModel{
         updateEnemyPositions();
         updatePlayerHealth();
     }
+
+    public ArrayList<Enemy> getEnemies() {
+        return this.enemyList;
+    }
+
 }
