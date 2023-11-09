@@ -20,7 +20,7 @@ public class smurfSurvivors extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("smurf.png");
 		background = new Texture("Map/grass.png");
-		WHandler = new WeaponHandler();
+		WHandler = new WeaponHandler(batch);
 
 	}
 

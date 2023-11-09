@@ -18,10 +18,10 @@ public class KnifeWeapon extends PassiveWeapon{
     boolean isUseable; //true if cooldown has passed, false otherwise
     public KnifeWeapon(Vector2 _position){
         position = _position;
-        originalPosition = _position;
+        originalPosition = new Vector2(_position.x,position.y);
         weaponTexture = new Texture("Weapons/knife.png");
         attackRange = 1000f;
-        velocity = 5f;
+        velocity = 20f;
         attackDamage = 10;
         attackCooldown = 0.8f;
         weaponName = "Knife";
@@ -30,7 +30,7 @@ public class KnifeWeapon extends PassiveWeapon{
     }
 
     public void update(){
-        if(calculateDistance(position, new Vector2(100,100)) < attackRange){
+        if(calculateDistance(position, originalPosition) < attackRange){
             position.x += velocity;
         } else {
             isUseable = false;

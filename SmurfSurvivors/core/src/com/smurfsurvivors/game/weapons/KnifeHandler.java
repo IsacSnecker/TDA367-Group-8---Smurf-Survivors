@@ -15,27 +15,28 @@ public class KnifeHandler {
     SpriteBatch batch;
     long oldTime;
 
-    public void KnifeHandler(SpriteBatch _batch){
-        cooldown = 2f;
+    public KnifeHandler(SpriteBatch _batch){
+        cooldown = 500f;
         Useable = true;
         batch = _batch;
         oldTime = 0;
     }
 
     public void update(Vector2 position, long currentTime){
+        for(KnifeWeapon knife : knifeList){
+            if(!knife.isUseable){
+                //knifeList.remove(knife);
+            } else {
+                knife.render(batch);
+                knife.update();
+            }
+        }
         if(Useable){
             spawnKnife(position);
             Useable = false;
             oldTime = currentTime;
-        } else if (currentTime - oldTime > cooldown) {
+        } else if ((currentTime - oldTime) > cooldown) {
             Useable = true;
-        }
-        for(KnifeWeapon knife : knifeList){
-            knife.update();
-            knife.render(batch);
-            if(!knife.isUseable){
-                knife = null;
-            }
         }
     }
 

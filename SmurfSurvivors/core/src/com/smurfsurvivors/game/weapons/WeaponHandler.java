@@ -14,18 +14,16 @@ public class WeaponHandler {
 
     SpriteBatch batch;
     long startTime = TimeUtils.millis();
-    long elapsedTime = TimeUtils.timeSinceMillis(startTime);
     public interface List<E> extends Collection<E>{};
-    ArrayList<PassiveWeapon> passiveWeaponList = new ArrayList<PassiveWeapon> ();
-    ArrayList<ActiveWeapon> activeWeaponList = new ArrayList<ActiveWeapon> ();
+    KnifeHandler knifeHandler;
 
-    public void WeaponHandler(SpriteBatch _batch){
+    public WeaponHandler(SpriteBatch _batch){
         batch = _batch;
+        knifeHandler = new KnifeHandler(batch);
     }
 
-    KnifeHandler knifeHandler = new KnifeHandler();
-
     public void passiveWeaponUpdate(Vector2 position){
+        long elapsedTime = TimeUtils.timeSinceMillis(startTime);
         knifeHandler.update(position, elapsedTime);
     }
 
