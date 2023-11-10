@@ -52,6 +52,14 @@ public class GameModel implements IGameModel{
         */
     }
 
+    public void init(){
+        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf.png"), 0,0, 32,32);
+        setPlayer(player);
+
+        Enemy demon = new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
+        addEnemy(demon);
+    }
+
     public void update() {
         updatePlayerPosition();
         updateEnemyPositions();

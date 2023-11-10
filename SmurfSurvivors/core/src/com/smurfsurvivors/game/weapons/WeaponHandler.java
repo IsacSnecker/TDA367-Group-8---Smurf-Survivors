@@ -11,20 +11,30 @@ import java.util.Collection;
 import java.util.Vector;
 
 public class WeaponHandler {
-
-    SpriteBatch batch;
     long startTime = TimeUtils.millis();
     public interface List<E> extends Collection<E>{};
-    KnifeHandler knifeHandler;
 
-    public WeaponHandler(SpriteBatch _batch){
-        batch = _batch;
-        knifeHandler = new KnifeHandler(batch);
+    ArrayList<IHandler> handlerList = new ArrayList<IHandler>();
+
+    public WeaponHandler(){}
+
+    public void giveKnife(){
+        handlerList.add(new KnifeHandler());
     }
 
     public void passiveWeaponUpdate(Vector2 position){
         long elapsedTime = TimeUtils.timeSinceMillis(startTime);
-        knifeHandler.update(position, elapsedTime);
+        for(IHandler handler : handlerList){
+            handler.updateProjectiles(position, elapsedTime);
+        }
+    }
+
+    public ArrayList getProjectiles(){
+        ArrayList<AbstractWeapon> returnList = new ArrayList<AbstractWeapon>();
+        for(IHandler handler : handlerList){
+            returnList.addAll(handler.getProjectiles());
+        }
+        return returnList;
     }
 
 }
