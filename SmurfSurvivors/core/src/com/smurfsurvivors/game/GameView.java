@@ -14,35 +14,33 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 
-public class GameView extends ApplicationAdapter implements IGameView{
+public class GameView implements Observer{
 
-    private IGameModel model;
-    private IGameController controller;
+    private GameModel model;
+    private GameController controller;
 
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public GameView(IGameModel model, IGameController controller) {
+    public GameView(GameModel model, GameController controller) {
         this.model = model;
         this.controller = controller;
 
+        model.addObserver(this);
     }
 
     SpriteBatch batch;
     Texture img;
 
-    private void viewInit() {
-
+    public void init() {
         mapInit();
         rendererInit();
         cameraInit();
         batchInit();
-
     }
 
     private void cameraInit() {
-
         this.camera = new OrthographicCamera();
 
         camera.viewportWidth = 1920;
@@ -51,7 +49,6 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         camera.update();
         renderer.setView(camera);
-
     }
 
     private void rendererInit() {
@@ -67,25 +64,10 @@ public class GameView extends ApplicationAdapter implements IGameView{
         img = new Texture("Map/grass.png");
     }
 
-    @Override
-    public void create () {
-
-        viewInit();
-
-        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf.png"), 0,0, 32,32);
-        model.setPlayer(player);
-
-        Enemy demon = new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
-        model.addEnemy(demon);
-
-    }
-
-    @Override
-    public void render () {
-
+    //@Override
+    public void update () {
         renderer.setView(camera);
         renderer.render();
-
         batch.begin();
         batch.draw(img,10,10);
         PlayerCharacter player = model.getPlayer();
@@ -98,29 +80,17 @@ public class GameView extends ApplicationAdapter implements IGameView{
         batch.end();
     }
 
-    @Override
+    //@Override
     public void dispose () {
         batch.dispose();
         img.dispose();
     }
 
     public void renderEnemies() {
-
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
         }
 
     }
-
-
-/*    public void renderEnemies() {
-
-        for (Enemy e: model.getEnemies()) {
-            e.render(this.batch);
-        }
-
-    }
-*/
-
 }
 
