@@ -11,4 +11,5 @@ public interface IGameModel {
     public PlayerCharacter getPlayer();
     public void setPlayer(PlayerCharacter player);
     public void addEnemy(Enemy enemy);
+    public void init();
 }

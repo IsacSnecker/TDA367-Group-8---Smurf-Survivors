@@ -71,12 +71,7 @@ public class GameView extends ApplicationAdapter implements IGameView{
     public void create () {
 
         viewInit();
-
-        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf.png"), 0,0, 32,32);
-        model.setPlayer(player);
-
-        Enemy demon = new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
-        model.addEnemy(demon);
+        model.init();
 
     }
 
