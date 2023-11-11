@@ -11,11 +11,11 @@ public abstract class GameModelFactory {
 
         GameModel model = new GameModel();
 
-        //PlayerCharacter player = new PlayerCharacter(new Texture("Player/smurf.png"), 0,0, 32,32);
-        //model.setPlayer(player);
+        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"), 100,100, 100,100);
+        model.setPlayer(player);
 
-        //Demon demon = new Demon(new Texture("Enemies/blueDemon.png"), 0, 0, 32, 32);
-        //model.addEnemy(demon);
+        Demon demon = new Demon(new Texture("Enemies/blueDemon.png"), 1000, 100, 64, 64);
+        model.addEnemy(demon);
 
         return model;
     }

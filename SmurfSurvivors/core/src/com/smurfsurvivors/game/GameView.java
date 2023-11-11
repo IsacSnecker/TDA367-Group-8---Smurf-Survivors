@@ -14,7 +14,7 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 
-public class GameView implements Observer{
+public class GameView implements Observer {
 
     private GameModel model;
     private GameController controller;
@@ -23,21 +23,32 @@ public class GameView implements Observer{
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
+    private SpriteBatch batch;
+
     public GameView(GameModel model, GameController controller) {
         this.model = model;
         this.controller = controller;
+        gameViewInit();
 
-        model.addObserver(this);
+
     }
 
-    SpriteBatch batch;
-    Texture img;
-
-    public void init() {
+    public void gameViewInit() {
+        observerInit();
+        batchInit();
         mapInit();
         rendererInit();
         cameraInit();
-        batchInit();
+    }
+
+
+    public void observerUpdate() {
+
+        renderFrame();
+    }
+
+    public void observerInit() {
+        model.addObserver(this);
     }
 
     private void cameraInit() {
@@ -59,31 +70,16 @@ public class GameView implements Observer{
         map = new TmxMapLoader().load("Map/TestMap/TestMap.tmx");
     }
 
-    private void batchInit() {
-        batch = new SpriteBatch();
-        img = new Texture("Map/grass.png");
-    }
+    private void batchInit() { batch = new SpriteBatch(); }
 
-    //@Override
-    public void update () {
-        renderer.setView(camera);
-        renderer.render();
+    private void renderFrame() {
         batch.begin();
-        batch.draw(img,10,10);
-        PlayerCharacter player = model.getPlayer();
-        player.render(this.batch);
-        Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
-                player.getWidth(), player.getHeight());
-        sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
-        //sprite
-        renderEnemies();
-        batch.end();
-    }
 
-    //@Override
-    public void dispose () {
-        batch.dispose();
-        img.dispose();
+        renderer.render();
+        model.getPlayer().render(this.batch);
+        renderEnemies();
+
+        batch.end();
     }
 
     public void renderEnemies() {

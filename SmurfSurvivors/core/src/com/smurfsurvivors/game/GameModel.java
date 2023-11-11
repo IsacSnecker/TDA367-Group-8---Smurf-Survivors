@@ -20,24 +20,20 @@ public class GameModel implements Observable{
     }
 
     public void init(){
-        this.player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"), 0,0, 32,32);
-        addEnemy(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 100, 32, 32));
-        addEnemy(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 300, 300, 32, 32));
-        addEnemy(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 200, 200, 32, 32));
         initializeObservers();
     }
 
     @Override
     public void initializeObservers() {
         for (Observer o : observerList){
-            o.init();
+            o.observerInit();
         }
     }
 
     @Override
     public void notifyObservers() {
         for (Observer o: observerList){
-            o.update();
+            o.observerUpdate();
         }
     }
 
@@ -46,6 +42,9 @@ public class GameModel implements Observable{
         observerList.add(o);
     }
 
+    @Override
+    public void removeObserver(Observer o) { observerList.remove(o);}
+
     public PlayerCharacter getPlayer(){
         return this.player;
     }
@@ -53,6 +52,8 @@ public class GameModel implements Observable{
     public void addEnemy(Enemy enemy) {
         this.enemyList.add(enemy);
     }
+
+    public void setPlayer(PlayerCharacter player) { this.player = player; }
 
 
     public void updatePlayerPosition(ArrayList<Integer> inputList){
@@ -81,8 +82,7 @@ public class GameModel implements Observable{
         */
     }
 
-    public void update(ArrayList<Integer> inputList) {
-        updatePlayerPosition(inputList);
+    public void update() {
         updateEnemyPositions();
         updatePlayerHealth();
         notifyObservers();

@@ -2,26 +2,35 @@ package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public abstract class Entity {
-    private Texture sprite; //Should probably not be final
+    private Texture texture; //Should probably not be final
+
+    private Sprite sprite;
+
     private int x;
     private int y;
     private final int width; //should width be final?
     private final int height; //should height be final?
 
     public Entity(Texture sprite, int x, int y, int width, int height) {
-        this.sprite = sprite;
+        this.texture = sprite;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        entityInit();
     }
 
+    private void entityInit() {
+        this.sprite = new Sprite(texture, 0, 0, width, height);
+    }
 
     public Texture getTexture() {
-        return sprite;
+        return texture;
     }
+
     public int getX() {
         return x;
     }
