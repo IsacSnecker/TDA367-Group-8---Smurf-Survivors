@@ -20,7 +20,7 @@ public abstract class Entity {
     }
 
 
-    public Texture getSprite() {
+    public Texture getTexture() {
         return sprite;
     }
     public int getX() {
