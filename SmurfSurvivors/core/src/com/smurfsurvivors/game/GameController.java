@@ -15,9 +15,11 @@ import java.util.Arrays;
 public class GameController extends ApplicationAdapter implements Observer {
 
     private GameModel model;
+    private GameView view;
 
-    public GameController(GameModel _model) {
-        this.model = _model;
+    public GameController(GameModel model, GameView view) {
+        this.model = model;
+        this.view = view;
         controllerInit();
     }
 

@@ -17,7 +17,6 @@ import com.smurfsurvivors.game.entity.PlayerCharacter;
 public class GameView implements Observer {
 
     private GameModel model;
-    private GameController controller;
 
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
@@ -25,9 +24,8 @@ public class GameView implements Observer {
 
     private SpriteBatch batch;
 
-    public GameView(GameModel model, GameController controller) {
+    public GameView(GameModel model) {
         this.model = model;
-        this.controller = controller;
         gameViewInit();
 
     }

@@ -17,7 +17,6 @@ public class DesktopLauncher {
 		Graphics.DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
 		config.setWindowedMode(dm.width, dm.height);
 
-
 		new Lwjgl3Application(new SmurfSurvivors(), config);
 	}
 }

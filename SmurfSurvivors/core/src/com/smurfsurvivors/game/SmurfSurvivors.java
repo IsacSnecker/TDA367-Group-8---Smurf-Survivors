@@ -7,7 +7,6 @@ public class SmurfSurvivors extends ApplicationAdapter {
 
     GameModel gameModel;
     GameController gameController;
-
     GameView gameView;
 
 
@@ -16,8 +15,8 @@ public class SmurfSurvivors extends ApplicationAdapter {
 
         // MVC initialization
         gameModel = GameModelFactory.createDefaultModel();
-        gameController = new GameController(gameModel);
-        gameView = new GameView(gameModel, gameController);
+        gameView = new GameView(gameModel);
+        gameController = new GameController(gameModel, gameView);
 
     }
 
