@@ -7,9 +7,9 @@ import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 public abstract class GameModelFactory {
 
-    public static IGameModel createDefaultModel() {
+    public static GameModel createDefaultModel() {
 
-        IGameModel model = new GameModel();
+        GameModel model = new GameModel();
 
         //PlayerCharacter player = new PlayerCharacter(new Texture("Player/smurf.png"), 0,0, 32,32);
         //model.setPlayer(player);

@@ -6,6 +6,8 @@ import com.smurfsurvivors.game.weapons.ActiveWeapon;
 import com.smurfsurvivors.game.weapons.WeaponHandler;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
@@ -34,6 +36,21 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public void useAllAbilities(){
         for(ActiveWeapon ability : abilities){
             useAbility(ability);
+        }
+    }
+
+    public void updatePosition(ArrayList<Integer> inputList){
+        if (inputList.get(0) == 1 && inputList.get(1) != 1){
+            this.setY(this.getY() + 10);
+        }
+        if (inputList.get(1) == 1 && inputList.get(0) != 1){
+            this.setY(this.getY() - 10);
+        }
+        if (inputList.get(2) == 1 && inputList.get(3) != 1){
+            this.setX(this.getX() + 10);
+        }
+        if (inputList.get(3) == 1 && inputList.get(2) != 1){
+            this.setX(this.getX() - 10);
         }
     }
 }
