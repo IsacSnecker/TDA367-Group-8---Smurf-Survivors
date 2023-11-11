@@ -25,8 +25,8 @@ public class Enemy extends Creature{
         }
     }
 
-    public void damageEntity(HasHealth entity){
-        entity.decreaseHealth(2);
+    public void damageEntity(HasHealth entity, int damage){
+        entity.decreaseHealth(damage);
     }
 
 }

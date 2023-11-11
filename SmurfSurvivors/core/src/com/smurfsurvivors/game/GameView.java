@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.smurfsurvivors.game.entity.Demon;
 import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
+import com.smurfsurvivors.game.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.weapons.IHandler;
 
 
 public class GameView extends ApplicationAdapter implements IGameView{
@@ -83,6 +85,13 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         batch.begin();
         batch.draw(img,10,10);
+        //batch.draw(img,10,10);
+        PlayerCharacter player = model.getPlayer();
+        player.render(this.batch);
+        renderPlayerProjectiles(player);
+        Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
+                player.getWidth(), player.getHeight());
+        sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
         renderEnemies();
         batch.end();
     }
@@ -101,6 +110,7 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
     }
 
+<<<<<<< Updated upstream
 
 /*    public void renderEnemies() {
 
@@ -111,5 +121,12 @@ public class GameView extends ApplicationAdapter implements IGameView{
     }
 */
 
+=======
+    public void renderPlayerProjectiles(PlayerCharacter player){
+        for(IHandler weaponHandler : player.WHandler.getWeaponHandlers()){
+            weaponHandler.renderProjectiles(this.batch);
+        }
+    }
+>>>>>>> Stashed changes
 }
 

@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class KnifeHandler implements IHandler{
 
     public interface List<E> extends Collection<E> {};
@@ -21,13 +24,14 @@ public class KnifeHandler implements IHandler{
     }
 
     public void updateProjectiles(Vector2 position, long currentTime){
+        ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon knife : knifeList){
-            if(!knife.isUseable){
-                knifeList.remove(knife);
-            } else {
-                knife.update();
+            if(calculateDistance(new Vector2(knife.positionRectangle.x, knife.positionRectangle.y), knife.originalPosition) > knife.attackRange){
+                knivesToRemove.add(knife);
             }
+            knife.update();
         }
+        knifeList.removeAll(knivesToRemove);
         if(Useable){
             spawnKnife(position);
             Useable = false;
@@ -49,5 +53,9 @@ public class KnifeHandler implements IHandler{
 
     public void spawnKnife(Vector2 position) {
         knifeList.add(new KnifeWeapon(position));
+    }
+
+    public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
+        return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
     }
 }

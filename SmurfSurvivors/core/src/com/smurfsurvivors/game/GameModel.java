@@ -2,6 +2,7 @@ package com.smurfsurvivors.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.entity.*;
+import com.smurfsurvivors.game.weapons.AbstractWeapon;
 
 import java.util.ArrayList;
 
@@ -60,14 +61,25 @@ public class GameModel implements IGameModel{
         addEnemy(demon);
     }
 
-    public void update() {
-        updatePlayerPosition();
+    public void update(ArrayList<Integer> inputList) {
+        updatePlayerPosition(inputList);
+        player.usePassiveWeapon();
         updateEnemyPositions();
         updatePlayerHealth();
     }
 
     public ArrayList<Enemy> getEnemies() {
         return this.enemyList;
+    }
+
+    public void enemyProjectileCollision(){
+        for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
+            for(Enemy enemy : getEnemies()){
+                if(projectile.positionRectangle.contains(enemy.getRectangle())){
+                    enemy.damageEntity(enemy, projectile.attackDamage);
+                }
+            }
+        }
     }
 
 }

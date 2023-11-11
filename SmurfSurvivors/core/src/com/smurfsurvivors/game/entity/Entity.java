@@ -2,6 +2,7 @@ package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity {
     private Texture sprite; //Should probably not be final
@@ -38,8 +39,10 @@ public abstract class Entity {
     public void setX(int x) { this.x = x; }
     public void setY(int y) { this.y = y; }
 
-    public void render(Batch batch) {
-        batch.draw(this.sprite, x - getWidth() / 2, y - getHeight() / 2);
+    public void render(Batch batch) {batch.draw(this.sprite, x - getWidth() / 2, y - getHeight() / 2);
+    }
+    public Rectangle getRectangle(){
+        return new Rectangle(x, y, width, height);
     }
 
 }
