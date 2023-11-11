@@ -27,7 +27,7 @@ public class SmurfSurvivors extends ApplicationAdapter {
     }
     @Override
     public void dispose() {
-
+        gameView.dispose();
     }
 
 }

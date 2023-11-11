@@ -30,7 +30,6 @@ public class GameView implements Observer {
         this.controller = controller;
         gameViewInit();
 
-
     }
 
     public void gameViewInit() {
@@ -86,7 +85,12 @@ public class GameView implements Observer {
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
         }
+    }
 
+    public void dispose() {
+        map.dispose();
+        renderer.dispose();
+        batch.dispose();
     }
 }
 

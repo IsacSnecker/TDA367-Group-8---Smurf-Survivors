@@ -16,6 +16,8 @@ public abstract class GameModelFactory {
 
         Demon demon = new Demon(new Texture("Enemies/blueDemon.png"), 1000, 100, 64, 64);
         model.addEnemy(demon);
+        demon = new Demon(new Texture("Enemies/blueDemon.png"), 500, 900, 64, 64);
+        model.addEnemy(demon);
 
         return model;
     }
