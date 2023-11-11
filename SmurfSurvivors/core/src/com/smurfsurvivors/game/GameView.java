@@ -14,35 +14,33 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 
-public class GameView extends ApplicationAdapter implements IGameView{
+public class GameView implements Observer{
 
-    private IGameModel model;
-    private IGameController controller;
+    private GameModel model;
+    private GameController controller;
 
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public GameView(IGameModel model, IGameController controller) {
+    public GameView(GameModel model, GameController controller) {
         this.model = model;
         this.controller = controller;
 
+        model.addObserver(this);
     }
 
     SpriteBatch batch;
     Texture img;
 
-    private void viewInit() {
-
+    public void init() {
         mapInit();
         rendererInit();
         cameraInit();
         batchInit();
-
     }
 
     private void cameraInit() {
-
         this.camera = new OrthographicCamera();
 
         camera.viewportWidth = 1920;
@@ -51,7 +49,6 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         camera.update();
         renderer.setView(camera);
-
     }
 
     private void rendererInit() {
@@ -67,55 +64,33 @@ public class GameView extends ApplicationAdapter implements IGameView{
         img = new Texture("Map/grass.png");
     }
 
-    @Override
-    public void create () {
-
-        viewInit();
-        model.init();
-
-    }
-
-    @Override
-    public void render () {
-
+    //@Override
+    public void update () {
         renderer.setView(camera);
         renderer.render();
-
         batch.begin();
         batch.draw(img,10,10);
         PlayerCharacter player = model.getPlayer();
         player.render(this.batch);
         Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
-                                    player.getWidth(), player.getHeight());
+                player.getWidth(), player.getHeight());
         sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
         //sprite
         renderEnemies();
         batch.end();
     }
 
-    @Override
+    //@Override
     public void dispose () {
         batch.dispose();
         img.dispose();
     }
 
     public void renderEnemies() {
-
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
         }
 
     }
-
-
-/*    public void renderEnemies() {
-
-        for (Enemy e: model.getEnemies()) {
-            e.render(this.batch);
-        }
-
-    }
-*/
-
 }
 

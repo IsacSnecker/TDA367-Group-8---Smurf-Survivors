@@ -5,8 +5,9 @@ import com.smurfsurvivors.game.entity.*;
 
 import java.util.ArrayList;
 
-public class GameModel implements IGameModel{
+public class GameModel implements Observable{
 
+    private ArrayList<Observer> observerList;
     private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
 
@@ -15,14 +16,38 @@ public class GameModel implements IGameModel{
     public GameModel(){
         this.enemyList = new ArrayList<Enemy>();
         this.collisionHandler = new CollisionHandler();
+        this.observerList = new ArrayList<Observer>();
     }
 
+    public void init(){
+        this.player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"), 0,0, 32,32);
+        addEnemy(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 100, 32, 32));
+        addEnemy(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 300, 300, 32, 32));
+        addEnemy(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 200, 200, 32, 32));
+        initializeObservers();
+    }
+
+    @Override
+    public void initializeObservers() {
+        for (Observer o : observerList){
+            o.init();
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer o: observerList){
+            o.update();
+        }
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        observerList.add(o);
+    }
 
     public PlayerCharacter getPlayer(){
         return this.player;
-    }
-    public void setPlayer(PlayerCharacter player) {
-        this.player = player;
     }
 
     public void addEnemy(Enemy enemy) {
@@ -30,8 +55,8 @@ public class GameModel implements IGameModel{
     }
 
 
-    public void updatePlayerPosition(){
-        //player.updatePosition();
+    public void updatePlayerPosition(ArrayList<Integer> inputList){
+        player.updatePosition(inputList);
     }
 
     public void updateEnemyPositions(){
@@ -56,18 +81,11 @@ public class GameModel implements IGameModel{
         */
     }
 
-    public void init(){
-        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf.png"), 0,0, 32,32);
-        setPlayer(player);
-
-        Enemy demon = new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
-        addEnemy(demon);
-    }
-
-    public void update() {
-        updatePlayerPosition();
+    public void update(ArrayList<Integer> inputList) {
+        updatePlayerPosition(inputList);
         updateEnemyPositions();
         updatePlayerHealth();
+        notifyObservers();
     }
 
     public ArrayList<Enemy> getEnemies() {
