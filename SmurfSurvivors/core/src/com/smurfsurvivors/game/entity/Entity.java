@@ -22,6 +22,7 @@ public abstract class Entity {
     public Texture getTexture() {
         return sprite;
     }
+    public void setTexture(Texture sprite){ this.sprite = sprite; }
     public int getX() {
         return x;
     }
