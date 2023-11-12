@@ -12,21 +12,22 @@ import com.smurfsurvivors.game.entity.PlayerCharacter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameController extends ApplicationAdapter {
+public class GameController extends ApplicationAdapter implements Observer {
 
     private GameModel model;
+    private GameView view;
 
-    public GameController(GameModel _model) {
-        this.model = _model;
+    public GameController(GameModel model, GameView view) {
+        this.model = model;
+        this.view = view;
+        controllerInit();
     }
 
-    @Override
-    public void create () {
-        model.init();
+    public void controllerInit() {
+        observerInit();
     }
 
-    @Override
-    public void render () {
+    private void getInput() {
         int inputUp = 0;
         int inputDown = 0;
         int inputRight = 0;
@@ -43,7 +44,16 @@ public class GameController extends ApplicationAdapter {
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
             inputLeft = 1;
         }
-        model.update(new ArrayList<Integer>(Arrays.asList(inputUp, inputDown, inputRight, inputLeft)));
+        model.updatePlayerPosition(new ArrayList<Integer>(Arrays.asList(inputUp, inputDown, inputRight, inputLeft)));
+    }
+
+    public void observerInit() {
+        model.addObserver(this);
+    }
+
+
+    public void observerUpdate() {
+        getInput();
     }
 
 }

@@ -1,6 +1,8 @@
 package com.smurfsurvivors.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,30 +16,38 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 
-public class GameView implements Observer{
+public class GameView implements Observer {
 
     private GameModel model;
-    private GameController controller;
 
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public GameView(GameModel model, GameController controller) {
-        this.model = model;
-        this.controller = controller;
+    private SpriteBatch batch;
 
-        model.addObserver(this);
+    public GameView(GameModel model) {
+        this.model = model;
+        gameViewInit();
+
     }
 
-    SpriteBatch batch;
-    Texture img;
-
-    public void init() {
+    public void gameViewInit() {
+        observerInit();
+        batchInit();
         mapInit();
         rendererInit();
         cameraInit();
-        batchInit();
+    }
+
+
+    public void observerUpdate() {
+
+        renderFrame();
+    }
+
+    public void observerInit() {
+        model.addObserver(this);
     }
 
     private void cameraInit() {
@@ -59,38 +69,35 @@ public class GameView implements Observer{
         map = new TmxMapLoader().load("Map/TestMap/TestMap.tmx");
     }
 
-    private void batchInit() {
-        batch = new SpriteBatch();
-        img = new Texture("Map/grass.png");
-    }
+    private void batchInit() { batch = new SpriteBatch(); }
 
-    //@Override
-    public void update () {
-        renderer.setView(camera);
-        renderer.render();
+    private void renderFrame() {
+
+        // Clears screen
+        Gdx.gl.glClearColor( 1, 0, 0, 1 );
+        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+
+        // Render process
         batch.begin();
-        batch.draw(img,10,10);
-        PlayerCharacter player = model.getPlayer();
-        player.render(this.batch);
-        Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
-                                    player.getWidth(), player.getHeight());
-        sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
-        //sprite
-        renderEnemies();
-        batch.end();
-    }
 
-    //@Override
-    public void dispose () {
-        batch.dispose();
-        img.dispose();
+        renderer.render();
+        model.getPlayer().render(this.batch);
+        renderEnemies();
+
+        batch.end();
     }
 
     public void renderEnemies() {
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
         }
+    }
 
+    // Disposes variables from memory. (Used during shutdown)
+    public void dispose() {
+        map.dispose();
+        renderer.dispose();
+        batch.dispose();
     }
 }
 
