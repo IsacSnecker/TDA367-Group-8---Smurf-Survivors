@@ -84,6 +84,12 @@ public class GameView implements Observer {
         model.getPlayer().render(this.batch);
         renderEnemies();
 
+        // Move camera
+        camera.position.x = model.getPlayer().getX();
+        camera.position.y = model.getPlayer().getY();
+        camera.update();
+        renderer.setView(camera);
+
         batch.end();
     }
 
