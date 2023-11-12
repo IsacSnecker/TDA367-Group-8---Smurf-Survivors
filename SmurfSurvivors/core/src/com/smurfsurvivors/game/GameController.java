@@ -12,7 +12,7 @@ import com.smurfsurvivors.game.entity.PlayerCharacter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameController extends ApplicationAdapter implements Observer {
+public class GameController implements Observer {
 
     private GameModel model;
     private GameView view;
