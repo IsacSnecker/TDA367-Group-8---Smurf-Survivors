@@ -18,8 +18,8 @@ public class WeaponHandler {
 
     public WeaponHandler(){}
 
-    public void giveKnife(){
-        handlerList.add(new KnifeHandler());
+    public void addWeaponHandler(IHandler handler){
+        handlerList.add(handler);
     }
 
     public void passiveWeaponUpdate(Vector2 position){
