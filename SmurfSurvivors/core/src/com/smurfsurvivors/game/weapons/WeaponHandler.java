@@ -1,22 +1,22 @@
 package com.smurfsurvivors.game.weapons;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
-import jdk.internal.vm.vector.VectorSupport;
+import com.smurfsurvivors.game.entity.Entity;
+import sun.security.x509.AVA;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Vector;
 
 public class WeaponHandler {
-    long startTime = TimeUtils.millis();
+    long startTime;
     public interface List<E> extends Collection<E>{};
 
     ArrayList<IHandler> handlerList = new ArrayList<IHandler>();
 
-    public WeaponHandler(){}
+    public WeaponHandler(){
+        startTime = TimeUtils.millis();
+    }
 
     public void addWeaponHandler(IHandler handler){
         handlerList.add(handler);
@@ -29,12 +29,35 @@ public class WeaponHandler {
         }
     }
 
-    public ArrayList getProjectiles(){
+    public void projectilesTowardsEntity(Entity entity){
+        for(AbstractWeapon projectile : getProjectiles()){
+            projectile.moveTowardsEntity(entity);
+        }
+    }
+
+    public ArrayList<AbstractWeapon> getProjectiles(){
         ArrayList<AbstractWeapon> returnList = new ArrayList<AbstractWeapon>();
         for(IHandler handler : handlerList){
-            returnList.addAll(handler.getProjectiles());
+            for(AbstractWeapon projectile : handler.getProjectiles())
+                returnList.add(projectile);
         }
         return returnList;
+    }
+
+    public ArrayList<IHandler> getWeaponHandlers(){
+        ArrayList<IHandler> returnList = new ArrayList<IHandler>();
+        for(IHandler handler : handlerList){
+            returnList.add(handler);
+        }
+        return returnList;
+    }
+
+    public void removeProjectile(AbstractWeapon projectile){
+        for(IHandler handler :handlerList){
+            if(handler.getProjectiles().contains(projectile)){
+                handler.removeProjectile(projectile);
+            }
+        }
     }
 
 }

@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
+import com.smurfsurvivors.game.weapons.IHandler;
 
 
 public class GameView implements Observer {
@@ -71,6 +72,7 @@ public class GameView implements Observer {
 
     private void batchInit() { batch = new SpriteBatch(); }
 
+
     private void renderFrame() {
 
         // Clears screen
@@ -79,7 +81,6 @@ public class GameView implements Observer {
 
         // Render process
         batch.begin();
-
         renderer.render();
         model.getPlayer().render(this.batch);
         renderEnemies();
@@ -104,6 +105,11 @@ public class GameView implements Observer {
         map.dispose();
         renderer.dispose();
         batch.dispose();
+    }
+    public void renderPlayerProjectiles(PlayerCharacter player){
+        for(IHandler weaponHandler : player.WHandler.getWeaponHandlers()){
+            weaponHandler.renderProjectiles(this.batch);
+        }
     }
 }
 
