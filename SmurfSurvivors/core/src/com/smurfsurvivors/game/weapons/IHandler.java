@@ -9,4 +9,5 @@ public interface IHandler {
     public ArrayList<AbstractWeapon> getProjectiles();
     public void updateProjectiles(Vector2 position, long time);
     public void renderProjectiles(SpriteBatch batch);
+    public void removeProjectile(AbstractWeapon projectile);
 }

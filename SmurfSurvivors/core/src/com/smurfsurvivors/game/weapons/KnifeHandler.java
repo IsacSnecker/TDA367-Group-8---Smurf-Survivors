@@ -18,7 +18,7 @@ public class KnifeHandler implements IHandler{
     long oldTime;
 
     public KnifeHandler(){
-        cooldown = 500f;
+        cooldown = 200f;
         Useable = true;
         oldTime = 0;
     }
@@ -26,7 +26,7 @@ public class KnifeHandler implements IHandler{
     public void updateProjectiles(Vector2 position, long currentTime){
         ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon knife : knifeList){
-            if(calculateDistance(new Vector2(knife.positionRectangle.x, knife.positionRectangle.y), knife.originalPosition) > knife.attackRange){
+            if(calculateDistance(new Vector2(knife.position.x, knife.position.x), knife.originalPosition) > knife.attackRange){
                 knivesToRemove.add(knife);
             }
             knife.update();
@@ -45,6 +45,10 @@ public class KnifeHandler implements IHandler{
         for(AbstractWeapon knife : knifeList){
             knife.render(batch);
         }
+    }
+
+    public void removeProjectile(AbstractWeapon projectile){
+        knifeList.remove(projectile);
     }
 
     public ArrayList<AbstractWeapon> getProjectiles(){

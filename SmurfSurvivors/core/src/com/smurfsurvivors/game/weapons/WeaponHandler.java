@@ -2,6 +2,8 @@ package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.smurfsurvivors.game.entity.Entity;
+import sun.security.x509.AVA;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +29,12 @@ public class WeaponHandler {
         }
     }
 
+    public void projectilesTowardsEntity(Entity entity){
+        for(AbstractWeapon projectile : getProjectiles()){
+            projectile.moveTowardsEntity(entity);
+        }
+    }
+
     public ArrayList<AbstractWeapon> getProjectiles(){
         ArrayList<AbstractWeapon> returnList = new ArrayList<AbstractWeapon>();
         for(IHandler handler : handlerList){
@@ -42,6 +50,14 @@ public class WeaponHandler {
             returnList.add(handler);
         }
         return returnList;
+    }
+
+    public void removeProjectile(AbstractWeapon projectile){
+        for(IHandler handler :handlerList){
+            if(handler.getProjectiles().contains(projectile)){
+                handler.removeProjectile(projectile);
+            }
+        }
     }
 
 }
