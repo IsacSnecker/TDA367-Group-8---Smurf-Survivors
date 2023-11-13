@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 public class EnemyHandler {
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+
+    public EnemyHandler(){
+
+    }
+
     public void spawnDemon(){
         enemyList.add(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 100, 32, 32));
     }
@@ -24,5 +29,9 @@ public class EnemyHandler {
     }
     public ArrayList<Enemy> getEnemies(){
         return enemyList;
+    }
+
+    public void addEnemy(Enemy enemy){
+        enemyList.add(enemy);
     }
 }
