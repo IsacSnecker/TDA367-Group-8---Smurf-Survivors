@@ -31,6 +31,10 @@ public abstract class Entity {
         return texture;
     }
 
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+
     public int getX() {
         return x;
     }
@@ -48,6 +52,7 @@ public abstract class Entity {
     public void setY(int y) { this.y = y; }
 
     public void render(Batch batch) {
+        this.sprite = new Sprite(texture, 0, 0, width, height);
         batch.draw(this.sprite, x - getWidth() / 2, y - getHeight() / 2);
     }
 
