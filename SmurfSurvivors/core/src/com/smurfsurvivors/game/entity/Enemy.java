@@ -38,7 +38,7 @@ public class Enemy extends Creature{
     }
 
     public void damageEntity(HasHealth entity){
-        entity.decreaseHealth(2);
+        entity.decreaseHealth(attackPower);
     }
 
 }
