@@ -1,6 +1,8 @@
 package com.smurfsurvivors.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,35 +16,41 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 
-public class GameView extends ApplicationAdapter implements IGameView{
+public class GameView implements Observer {
 
-    private IGameModel model;
-    private IGameController controller;
+    private GameModel model;
 
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public GameView(IGameModel model, IGameController controller) {
+    private SpriteBatch batch;
+
+    public GameView(GameModel model) {
         this.model = model;
-        this.controller = controller;
+        gameViewInit();
 
     }
 
-    SpriteBatch batch;
-    Texture img;
-
-    private void viewInit() {
-
+    public void gameViewInit() {
+        observerInit();
+        batchInit();
         mapInit();
         rendererInit();
         cameraInit();
-        batchInit();
+    }
 
+
+    public void observerUpdate() {
+
+        renderFrame();
+    }
+
+    public void observerInit() {
+        model.addObserver(this);
     }
 
     private void cameraInit() {
-
         this.camera = new OrthographicCamera();
 
         camera.viewportWidth = 1920;
@@ -51,7 +59,6 @@ public class GameView extends ApplicationAdapter implements IGameView{
 
         camera.update();
         renderer.setView(camera);
-
     }
 
     private void rendererInit() {
@@ -62,65 +69,41 @@ public class GameView extends ApplicationAdapter implements IGameView{
         map = new TmxMapLoader().load("Map/TestMap/TestMap.tmx");
     }
 
-    private void batchInit() {
-        batch = new SpriteBatch();
-        img = new Texture("Map/grass.png");
-    }
+    private void batchInit() { batch = new SpriteBatch(); }
 
-    @Override
-    public void create () {
+    private void renderFrame() {
 
-        viewInit();
+        // Clears screen
+        Gdx.gl.glClearColor( 1, 0, 0, 1 );
+        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
-        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf.png"), 0,0, 32,32);
-        model.setPlayer(player);
-
-        Enemy demon = new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), 100, 200, 32, 32);
-        model.addEnemy(demon);
-
-    }
-
-    @Override
-    public void render () {
-
-        renderer.setView(camera);
-        renderer.render();
-
+        // Render process
         batch.begin();
-        batch.draw(img,10,10);
-        PlayerCharacter player = model.getPlayer();
-        player.render(this.batch);
-        Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
-                                    player.getWidth(), player.getHeight());
-        sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
-        //sprite
+
+        renderer.render();
+        model.getPlayer().render(this.batch);
         renderEnemies();
+
+        // Move camera
+        camera.position.x = model.getPlayer().getX();
+        camera.position.y = model.getPlayer().getY();
+        camera.update();
+        renderer.setView(camera);
+
         batch.end();
     }
 
-    @Override
-    public void dispose () {
-        batch.dispose();
-        img.dispose();
-    }
-
     public void renderEnemies() {
-
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
         }
-
     }
 
-
-/*    public void renderEnemies() {
-
-        for (Enemy e: model.getEnemies()) {
-            e.render(this.batch);
-        }
-
+    // Disposes variables from memory. (Used during shutdown)
+    public void dispose() {
+        map.dispose();
+        renderer.dispose();
+        batch.dispose();
     }
-*/
-
 }
 

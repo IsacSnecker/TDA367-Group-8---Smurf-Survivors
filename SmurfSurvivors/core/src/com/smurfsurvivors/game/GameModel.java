@@ -5,8 +5,9 @@ import com.smurfsurvivors.game.entity.*;
 
 import java.util.ArrayList;
 
-public class GameModel implements IGameModel{
+public class GameModel implements Observable{
 
+    private ArrayList<Observer> observerList;
     private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
 
@@ -15,23 +16,48 @@ public class GameModel implements IGameModel{
     public GameModel(){
         this.enemyList = new ArrayList<Enemy>();
         this.collisionHandler = new CollisionHandler();
+        this.observerList = new ArrayList<Observer>();
     }
 
+    public void init(){
+        initializeObservers();
+    }
+
+    @Override
+    public void initializeObservers() {
+        for (Observer o : observerList){
+            o.observerInit();
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer o: observerList){
+            o.observerUpdate();
+        }
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        observerList.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) { observerList.remove(o);}
 
     public PlayerCharacter getPlayer(){
         return this.player;
-    }
-    public void setPlayer(PlayerCharacter player) {
-        this.player = player;
     }
 
     public void addEnemy(Enemy enemy) {
         this.enemyList.add(enemy);
     }
 
+    public void setPlayer(PlayerCharacter player) { this.player = player; }
 
-    public void updatePlayerPosition(){
-        //player.updatePosition();
+
+    public void updatePlayerPosition(ArrayList<Integer> inputList){
+        player.updatePosition(inputList);
     }
 
     public void updateEnemyPositions(){
@@ -57,13 +83,15 @@ public class GameModel implements IGameModel{
     }
 
     public void update() {
-        updatePlayerPosition();
         updateEnemyPositions();
         updatePlayerHealth();
+        notifyObservers();
     }
 
     public ArrayList<Enemy> getEnemies() {
         return this.enemyList;
     }
+
+
 
 }

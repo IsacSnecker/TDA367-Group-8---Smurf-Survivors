@@ -1,4 +1,4 @@
 package com.smurfsurvivors.game;
 
-public interface IGameView {
+public class EnemyHandler {
 }
