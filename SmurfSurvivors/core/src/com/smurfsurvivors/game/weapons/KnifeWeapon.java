@@ -8,7 +8,7 @@ import com.smurfsurvivors.game.entity.Entity;
 public class KnifeWeapon extends PassiveWeapon{
 
     public KnifeWeapon(Vector2 _position){
-        super(_position, new Texture("Weapons/Knife.png"), 50f,50f, 500f, 10, 10, "Knife");
+        super(_position, new Texture("Weapons/knife.png"), 50f,50f, 500f, 10, 10, "Knife");
 
     }
 
