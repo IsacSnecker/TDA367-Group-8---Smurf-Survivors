@@ -15,7 +15,7 @@ public class GameModel implements Observable{
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
-    private EnemyHandler enemyHandler;
+    public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
     public GameModel(){
