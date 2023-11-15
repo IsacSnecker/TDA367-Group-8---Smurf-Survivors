@@ -15,7 +15,7 @@ public class GameModel implements Observable{
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
-    private EnemyHandler enemyHandler;
+    public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
     private Clock clock;
@@ -106,13 +106,15 @@ public class GameModel implements Observable{
     }
 
     public void update() {
-        updateEnemyPositions();
-        updatePlayerHealth();
-        if(getEnemies().size() > 0){
-            player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()),getNearestEnemy());
-            enemyProjectileCollision();
+        if(!isPaused){
+            updateEnemyPositions();
+            updatePlayerHealth();
+            if(getEnemies().size() > 0){
+                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()),getNearestEnemy());
+                enemyProjectileCollision();
+            }
+            enemyHandler.updateEnemies(player);
         }
-        enemyHandler.updateEnemies(player);
         notifyObservers();
     }
 
