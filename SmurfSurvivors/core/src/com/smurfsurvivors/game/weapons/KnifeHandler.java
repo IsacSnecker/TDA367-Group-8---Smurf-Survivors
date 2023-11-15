@@ -2,6 +2,7 @@ package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,18 +19,18 @@ public class KnifeHandler implements IHandler{
     long oldTime;
 
     public KnifeHandler(){
-        cooldown = 200f;
+        cooldown = 500f;
         Useable = true;
         oldTime = 0;
     }
 
-    public void updateProjectiles(Vector2 position, long currentTime){
+    public void updateProjectiles(Vector2 position, long currentTime, Entity entity){
         ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon knife : knifeList){
             if(calculateDistance(new Vector2(knife.position.x, knife.position.x), knife.originalPosition) > knife.attackRange){
                 knivesToRemove.add(knife);
             }
-            knife.update();
+            knife.moveTowardsEntity(entity);
         }
         knifeList.removeAll(knivesToRemove);
         if(Useable){
