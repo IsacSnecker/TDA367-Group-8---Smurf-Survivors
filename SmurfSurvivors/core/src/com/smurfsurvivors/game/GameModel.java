@@ -18,10 +18,16 @@ public class GameModel implements Observable{
     private EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
+    private Clock clock;
+
+    private Boolean isPaused = false;
+
     public GameModel(){
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
         enemyHandler = new EnemyHandler();
+        clock = new Clock();
+        clock.startClock();
         initializeObservers();
     }
     @Override
@@ -50,15 +56,31 @@ public class GameModel implements Observable{
         return this.player;
     }
 
+    public Clock getClock(){
+        return this.clock;
+    }
+
     public void addEnemy(Enemy enemy) {
         enemyHandler.addEnemy(enemy);
     }
 
     public void setPlayer(PlayerCharacter player) { this.player = player; }
 
+    public void togglePaused(){
+        isPaused = !isPaused;
+        if(isPaused){
+            clock.pauseClock();
+        }
+        else {
+            clock.resumeClock();
+        }
+    }
+
 
     public void updatePlayerPosition(ArrayList<Integer> inputList){
-        player.updatePosition(inputList);
+        if(!isPaused){
+            player.updatePosition(inputList);
+        }
     }
 
     public void updateEnemyPositions(){
@@ -84,11 +106,13 @@ public class GameModel implements Observable{
     }
 
     public void update() {
-        updateEnemyPositions();
-        updatePlayerHealth();
-        player.WHandler.projectilesTowardsEntity(getNearestEnemy());
-        enemyProjectileCollision();
-        enemyHandler.updateEnemies(player);
+        if(!isPaused){
+            updateEnemyPositions();
+            updatePlayerHealth();
+            player.WHandler.projectilesTowardsEntity(getNearestEnemy());
+            enemyProjectileCollision();
+            enemyHandler.updateEnemies(player);
+        }
         notifyObservers();
     }
 
