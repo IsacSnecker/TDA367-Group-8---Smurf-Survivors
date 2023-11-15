@@ -86,8 +86,10 @@ public class GameModel implements Observable{
     public void update() {
         updateEnemyPositions();
         updatePlayerHealth();
-        player.WHandler.projectilesTowardsEntity(getNearestEnemy());
-        enemyProjectileCollision();
+        if(getEnemies().size() > 0){
+            player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()),getNearestEnemy());
+            enemyProjectileCollision();
+        }
         enemyHandler.updateEnemies(player);
         notifyObservers();
     }
@@ -96,11 +98,12 @@ public class GameModel implements Observable{
         return enemyHandler.getEnemies();
     }
 
-    public Entity getNearestEnemy(){
-        Entity nearestEnemy = getEnemies().get(0);
-        for(Enemy enemy: getEnemies()){
-             if(calculateDistance(new Vector2(enemy.getX(), enemy.getY()), new Vector2(player.getX(), player.getY())) < calculateDistance(new Vector2(nearestEnemy.getX(), nearestEnemy.getY()), new Vector2(player.getX(), player.getY()))){
-                 nearestEnemy = enemy;
+    public Enemy getNearestEnemy(){
+        enemyList = getEnemies();
+        Enemy nearestEnemy = enemyList.get(0);
+        for(Enemy enemy: enemyList){
+            if(calculateDistance(new Vector2(enemy.getX(), enemy.getY()), new Vector2(player.getX(), player.getY())) < calculateDistance(new Vector2(nearestEnemy.getX(), nearestEnemy.getY()), new Vector2(player.getX(), player.getY()))){
+                nearestEnemy = enemy;
             }
         }
         return nearestEnemy;
@@ -111,7 +114,7 @@ public class GameModel implements Observable{
     public void enemyProjectileCollision(){
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
             for(Enemy enemy : getEnemies()){
-                if(projectile.getPositionRectangle().contains(enemy.getRectangle())){
+                if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
                     enemy.damageEntity(enemy);
                     player.WHandler.removeProjectile(projectile);
                 }
