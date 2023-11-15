@@ -32,17 +32,20 @@ public class GameController implements Observer {
         int inputDown = 0;
         int inputRight = 0;
         int inputLeft = 0;
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
             inputUp = 1;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
             inputDown = 1;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
             inputRight = 1;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
             inputLeft = 1;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            model.togglePaused();
         }
         model.updatePlayerPosition(new ArrayList<Integer>(Arrays.asList(inputUp, inputDown, inputRight, inputLeft)));
     }
