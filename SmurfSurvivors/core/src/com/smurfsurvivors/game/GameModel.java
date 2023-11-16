@@ -1,5 +1,7 @@
 package com.smurfsurvivors.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.entity.*;
@@ -20,9 +22,14 @@ public class GameModel implements Observable{
 
     private Clock clock;
 
+    private Music soundTrack;
+
     private Boolean isPaused = false;
 
     public GameModel(){
+        soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
+        soundTrack.setLooping(true); //
+        soundTrack.play(); //Should probably not be here
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
         enemyHandler = new EnemyHandler();

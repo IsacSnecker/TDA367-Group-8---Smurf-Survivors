@@ -70,7 +70,6 @@ public abstract class AbstractWeapon{
         setY(getY() + dy);
     }
 
-
     public float getX() {
         return position.x;
     }
