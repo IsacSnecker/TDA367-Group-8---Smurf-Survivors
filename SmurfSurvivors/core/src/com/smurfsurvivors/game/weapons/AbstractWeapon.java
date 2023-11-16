@@ -29,8 +29,7 @@ public abstract class AbstractWeapon{
         attackDamage = _attackDamage;
         weaponName = _weaponName;
     }
-    abstract void update();
-    public abstract void render(SpriteBatch batch);
+    abstract void update(Vector2 position);
     public void performAttack() {
     }
 
@@ -65,9 +64,42 @@ public abstract class AbstractWeapon{
         }
     }
 
+    public void moveTowardsPosition(Vector2 position){
+        float x = position.x;
+        float y = position.y;
+        if(x < getX() && y < getY()){
+            move(-velocity, -velocity);
+        }
+        else if(x < getX() && y > getY()){
+            move(-velocity, velocity);
+        }
+        else if(x > getX() && y < getY()){
+            move(velocity, -velocity);
+        }
+        else if(x > getX() && y > getY()) {
+            move(velocity, velocity);
+        }
+        else if(x > getX()){
+            move(velocity, 0);
+        }
+        else if(y > getY()){
+            move(0, velocity);
+        }
+        else if(x < getX()){
+            move(-velocity, 0);
+        }
+        else if(y < getY()){
+            move(0, -velocity);
+        }
+    }
+
     public void move(int dx, int dy){
         setX(getX() + dx);
         setY(getY() + dy);
+    }
+
+    public void render(SpriteBatch batch){
+        batch.draw(weaponTexture, position.x, position.y, width, height);
     }
 
     public float getX() {

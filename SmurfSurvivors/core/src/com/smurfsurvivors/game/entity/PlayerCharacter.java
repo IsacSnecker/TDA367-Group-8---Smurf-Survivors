@@ -2,10 +2,7 @@ package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.smurfsurvivors.game.weapons.KnifeHandler;
-import com.smurfsurvivors.game.weapons.PassiveWeapon;
-import com.smurfsurvivors.game.weapons.ActiveWeapon;
-import com.smurfsurvivors.game.weapons.WeaponHandler;
+import com.smurfsurvivors.game.weapons.*;
 
 
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height) {
         super(health, sprite, x, y, width, height);
         WHandler.addWeaponHandler(new KnifeHandler());
+        WHandler.addWeaponHandler(new MissileHandler());
     }
     //private
 
@@ -30,8 +28,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public void addAbility(ActiveWeapon ability){
         abilities.add(ability);
     }
-    public void usePassiveWeapon(Entity entity){
-        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()), entity);
+    public void usePassiveWeapon(Vector2 enemyPosition){
+        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()), enemyPosition);
     }
     public void useAbility(ActiveWeapon ability){
         ability.performAttack();
