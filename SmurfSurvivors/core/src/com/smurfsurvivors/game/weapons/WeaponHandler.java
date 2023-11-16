@@ -22,10 +22,10 @@ public class WeaponHandler {
         handlerList.add(handler);
     }
 
-    public void passiveWeaponUpdate(Vector2 position, Entity entity){
+    public void passiveWeaponUpdate(Vector2 position, Vector2 enemyPosition){
         long elapsedTime = TimeUtils.timeSinceMillis(startTime);
         for(IHandler handler : handlerList){
-            handler.updateProjectiles(position, elapsedTime, entity);
+            handler.updateProjectiles(position, elapsedTime, enemyPosition);
         }
     }
 
