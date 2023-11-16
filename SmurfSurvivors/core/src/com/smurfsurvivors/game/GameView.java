@@ -20,19 +20,15 @@ import com.smurfsurvivors.game.weapons.IHandler;
 public class GameView implements Observer {
 
     private GameModel model;
-
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-
     private SpriteBatch batch;
-
     private SpriteBatch hudBatch;
 
     public GameView(GameModel model) {
         this.model = model;
         gameViewInit();
-
     }
 
     public void gameViewInit() {

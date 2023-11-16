@@ -18,8 +18,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public WeaponHandler WHandler = new WeaponHandler();
 
-    public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height) {
-        super(health, sprite, x, y, width, height);
+    public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height, int speed) {
+        super(health, sprite, x, y, width, height, speed);
         WHandler.addWeaponHandler(new KnifeHandler());
     }
     //private

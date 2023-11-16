@@ -8,10 +8,10 @@ public class Enemy extends Creature{
     private int attackPower;
     private int speed;
 
-    public Enemy(int attackPower, int health, Texture sprite, int x, int y, int width, int height) {
-        super(health, sprite, x, y, width, height);
+    public Enemy(int attackPower, int health, Texture sprite, int x, int y, int width, int height, int speed) {
+        super(health, sprite, x, y, width, height, speed);
         this.attackPower = attackPower;
-        this.speed = 1;
+        this.speed = speed;
     }
     public void moveTowardsEntity(Entity entity){
         if(entity.getX() < getX() && entity.getY() < getY()){
