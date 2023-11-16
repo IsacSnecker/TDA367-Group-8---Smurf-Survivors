@@ -1,5 +1,7 @@
 package com.smurfsurvivors.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.entity.*;
@@ -18,10 +20,21 @@ public class GameModel implements Observable{
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
+    private Clock clock;
+
+    private Music soundTrack;
+
+    private Boolean isPaused = false;
+
     public GameModel(){
+        soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
+        soundTrack.setLooping(true); //
+        soundTrack.play(); //Should probably not be here
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
         enemyHandler = new EnemyHandler();
+        clock = new Clock();
+        clock.startClock();
         initializeObservers();
     }
     @Override
@@ -50,15 +63,31 @@ public class GameModel implements Observable{
         return this.player;
     }
 
+    public Clock getClock(){
+        return this.clock;
+    }
+
     public void addEnemy(Enemy enemy) {
         enemyHandler.addEnemy(enemy);
     }
 
     public void setPlayer(PlayerCharacter player) { this.player = player; }
 
+    public void togglePaused(){
+        isPaused = !isPaused;
+        if(isPaused){
+            clock.pauseClock();
+        }
+        else {
+            clock.resumeClock();
+        }
+    }
+
 
     public void updatePlayerPosition(ArrayList<Integer> inputList){
-        player.updatePosition(inputList);
+        if(!isPaused){
+            player.updatePosition(inputList);
+        }
     }
 
     public void updateEnemyPositions(){
