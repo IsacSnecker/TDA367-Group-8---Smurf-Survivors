@@ -6,39 +6,42 @@ import java.nio.file.Path;
 
 public class Enemy extends Creature{
     private int attackPower;
+    private int speed;
+
     public Enemy(int attackPower, int health, Texture sprite, int x, int y, int width, int height) {
         super(health, sprite, x, y, width, height);
         this.attackPower = attackPower;
+        this.speed = 1;
     }
     public void moveTowardsEntity(Entity entity){
         if(entity.getX() < getX() && entity.getY() < getY()){
-            move(-2, -2);
+            move(-speed, -speed);
         }
         else if(entity.getX() < getX() && entity.getY() > getY()){
-            move(-2, 2);
+            move(-speed, speed);
         }
         else if(entity.getX() > getX() && entity.getY() < getY()){
-            move(2, -2);
+            move(speed, -speed);
         }
         else if(entity.getX() > getX() && entity.getY() > getY()) {
-            move(2, 2);
+            move(speed, speed);
         }
         else if(entity.getX() > getX()){
-            move(2, 0);
+            move(speed, 0);
         }
         else if(entity.getY() > getY()){
-            move(0, 2);
+            move(0, speed);
         }
         else if(entity.getX() < getX()){
-            move(-2, 0);
+            move(-speed, 0);
         }
         else if(entity.getY() < getY()){
-            move(0, -2);
+            move(0, -speed);
         }
     }
 
-    public void damageEntity(HasHealth entity, int damage){
-        entity.decreaseHealth(damage);
+    public void damageEntity(HasHealth entity){
+        entity.decreaseHealth(attackPower);
     }
 
 }

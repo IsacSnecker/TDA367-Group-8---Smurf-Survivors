@@ -13,17 +13,19 @@ public abstract class AbstractWeapon{
     float width;
     float height;
     float attackRange;
+    int velocity;
     public int attackDamage;
     String weaponName;
     boolean removeMe = false;
 
-    public AbstractWeapon(Vector2 _position, Texture _weaponTexture, float _width, float _height, float _attackRange, int _attackDamage, String _weaponName){
+    public AbstractWeapon(Vector2 _position, Texture _weaponTexture, float _width, float _height, float _attackRange, int _velocity, int _attackDamage, String _weaponName){
         position = _position;
         originalPosition = new Vector2(_position.x, _position.y);
         weaponTexture = _weaponTexture;
         width = _width;
         height = _height;
         attackRange = _attackRange;
+        velocity = _velocity;
         attackDamage = _attackDamage;
         weaponName = _weaponName;
     }
@@ -38,28 +40,28 @@ public abstract class AbstractWeapon{
 
     public void moveTowardsEntity(Entity enemy){
         if(enemy.getX() < getX() && enemy.getY() < getY()){
-            move(-2, -2);
+            move(-velocity, -velocity);
         }
         else if(enemy.getX() < getX() && enemy.getY() > getY()){
-            move(-2, 2);
+            move(-velocity, velocity);
         }
         else if(enemy.getX() > getX() && enemy.getY() < getY()){
-            move(2, -2);
+            move(velocity, -velocity);
         }
         else if(enemy.getX() > getX() && enemy.getY() > getY()) {
-            move(2, 2);
+            move(velocity, velocity);
         }
         else if(enemy.getX() > getX()){
-            move(2, 0);
+            move(velocity, 0);
         }
         else if(enemy.getY() > getY()){
-            move(0, 2);
+            move(0, velocity);
         }
         else if(enemy.getX() < getX()){
-            move(-2, 0);
+            move(-velocity, 0);
         }
         else if(enemy.getY() < getY()){
-            move(0, -2);
+            move(0, -velocity);
         }
     }
 
@@ -67,7 +69,6 @@ public abstract class AbstractWeapon{
         setX(getX() + dx);
         setY(getY() + dy);
     }
-
 
     public float getX() {
         return position.x;

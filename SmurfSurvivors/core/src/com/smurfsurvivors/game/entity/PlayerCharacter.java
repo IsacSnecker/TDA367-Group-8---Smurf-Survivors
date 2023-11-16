@@ -2,6 +2,7 @@ package com.smurfsurvivors.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.weapons.KnifeHandler;
 import com.smurfsurvivors.game.weapons.PassiveWeapon;
 import com.smurfsurvivors.game.weapons.ActiveWeapon;
 import com.smurfsurvivors.game.weapons.WeaponHandler;
@@ -19,7 +20,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height) {
         super(health, sprite, x, y, width, height);
-        WHandler.giveKnife();
+        WHandler.addWeaponHandler(new KnifeHandler());
     }
     //private
 
@@ -29,8 +30,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public void addAbility(ActiveWeapon ability){
         abilities.add(ability);
     }
-    public void usePassiveWeapon(){
-        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()));
+    public void usePassiveWeapon(Entity entity){
+        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()), entity);
     }
     public void useAbility(ActiveWeapon ability){
         ability.performAttack();
@@ -43,25 +44,18 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public void updatePosition(ArrayList<Integer> inputList){
         if (inputList.get(0) == 1 && inputList.get(1) != 1){
-            this.setY(this.getY() + 4);
+            this.setY(this.getY() + 10);
         }
         if (inputList.get(1) == 1 && inputList.get(0) != 1){
-            this.setY(this.getY() - 4);
+            this.setY(this.getY() - 10);
         }
         if (inputList.get(2) == 1 && inputList.get(3) != 1){
-<<<<<<< Updated upstream
             this.setX(this.getX() + 10);
-        }
-        if (inputList.get(3) == 1 && inputList.get(2) != 1){
-            this.setX(this.getX() - 10);
-=======
-            this.setX(this.getX() + 4);
             this.setTexture(new Texture("Player/smurf-100x100-right.png"));
         }
         if (inputList.get(3) == 1 && inputList.get(2) != 1){
-            this.setX(this.getX() - 4);
+            this.setX(this.getX() - 10);
             this.setTexture(new Texture("Player/smurf-100x100.png"));
->>>>>>> Stashed changes
         }
     }
 }

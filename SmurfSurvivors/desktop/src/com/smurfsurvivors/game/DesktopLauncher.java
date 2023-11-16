@@ -17,11 +17,6 @@ public class DesktopLauncher {
 		Graphics.DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
 		config.setWindowedMode(dm.width, dm.height);
 
-		// MVC initialization
-		GameModel gameModel = GameModelFactory.createDefaultModel();
-		GameController gameController = new GameController(gameModel);
-		GameView gameView = new GameView(gameModel, gameController);
-
-		new Lwjgl3Application(gameController, config);
+		new Lwjgl3Application(new SmurfSurvivors(), config);
 	}
 }

@@ -1,6 +1,8 @@
 package com.smurfsurvivors.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,30 +17,40 @@ import com.smurfsurvivors.game.entity.PlayerCharacter;
 import com.smurfsurvivors.game.weapons.IHandler;
 
 
-public class GameView implements Observer{
+public class GameView implements Observer {
 
     private GameModel model;
-    private GameController controller;
 
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public GameView(GameModel model, GameController controller) {
-        this.model = model;
-        this.controller = controller;
+    private SpriteBatch batch;
 
-        model.addObserver(this);
+    private SpriteBatch hudBatch;
+
+    public GameView(GameModel model) {
+        this.model = model;
+        gameViewInit();
+
     }
 
-    SpriteBatch batch;
-    Texture img;
-
-    public void init() {
+    public void gameViewInit() {
+        observerInit();
+        batchInit();
         mapInit();
         rendererInit();
         cameraInit();
-        batchInit();
+    }
+
+
+    public void observerUpdate() {
+
+        renderFrame();
+    }
+
+    public void observerInit() {
+        model.addObserver(this);
     }
 
     private void cameraInit() {
@@ -62,35 +74,46 @@ public class GameView implements Observer{
 
     private void batchInit() {
         batch = new SpriteBatch();
+        hudBatch = new SpriteBatch();
     }
 
-    //@Override
-    public void update () {
-        renderer.setView(camera);
-        renderer.render();
+
+    private void renderFrame() {
+
+        // Clears screen
+        Gdx.gl.glClearColor( 1, 0, 0, 1 );
+        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+
+        // Render process
         batch.begin();
-        PlayerCharacter player = model.getPlayer();
-        player.render(this.batch);
-        renderPlayerProjectiles(player);
-        //Sprite sprite = new Sprite(player.getTexture(), player.getX(), player.getX(),
-        //        player.getWidth(), player.getHeight());
-        //sprite.setPosition(sprite.getX()/2, sprite.getY()/2);
-        //sprite
+        renderer.render();
+        model.getPlayer().render(this.batch);
         renderEnemies();
-        batch.end();
-    }
+        renderPlayerProjectiles(model.getPlayer());
 
-    //@Override
-    public void dispose () {
-        batch.dispose();
-        img.dispose();
+        // Move camera
+        camera.position.x = model.getPlayer().getX();
+        camera.position.y = model.getPlayer().getY();
+        camera.update();
+        renderer.setView(camera);
+        batch.end();
+
+        hudBatch.begin();
+        model.getClock().render(hudBatch);
+        hudBatch.end();
     }
 
     public void renderEnemies() {
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
         }
+    }
 
+    // Disposes variables from memory. (Used during shutdown)
+    public void dispose() {
+        map.dispose();
+        renderer.dispose();
+        batch.dispose();
     }
     public void renderPlayerProjectiles(PlayerCharacter player){
         for(IHandler weaponHandler : player.WHandler.getWeaponHandlers()){

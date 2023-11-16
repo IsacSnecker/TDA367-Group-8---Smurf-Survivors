@@ -15,35 +15,32 @@ public class GameModel implements Observable{
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
-    private EnemyHandler enemyHandler;
+    public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
+    private Clock clock;
+
+    private Boolean isPaused = false;
+
     public GameModel(){
-        this.enemyList = new ArrayList<Enemy>();
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
-    }
-
-    public void init(){
-        this.player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"), 0,0, 32,32);
         enemyHandler = new EnemyHandler();
-        enemyHandler.spawnDemon();
-        enemyHandler.spawnDemon();
-        enemyHandler.spawnDemon();
+        clock = new Clock();
+        clock.startClock();
         initializeObservers();
     }
-
     @Override
     public void initializeObservers() {
         for (Observer o : observerList){
-            o.init();
+            o.observerInit();
         }
     }
 
     @Override
     public void notifyObservers() {
         for (Observer o: observerList){
-            o.update();
+            o.observerUpdate();
         }
     }
 
@@ -52,21 +49,42 @@ public class GameModel implements Observable{
         observerList.add(o);
     }
 
+    @Override
+    public void removeObserver(Observer o) { observerList.remove(o);}
+
     public PlayerCharacter getPlayer(){
         return this.player;
     }
 
+    public Clock getClock(){
+        return this.clock;
+    }
+
     public void addEnemy(Enemy enemy) {
-        this.enemyList.add(enemy);
+        enemyHandler.addEnemy(enemy);
+    }
+
+    public void setPlayer(PlayerCharacter player) { this.player = player; }
+
+    public void togglePaused(){
+        isPaused = !isPaused;
+        if(isPaused){
+            clock.pauseClock();
+        }
+        else {
+            clock.resumeClock();
+        }
     }
 
 
     public void updatePlayerPosition(ArrayList<Integer> inputList){
-        player.updatePosition(inputList);
+        if(!isPaused){
+            player.updatePosition(inputList);
+        }
     }
 
     public void updateEnemyPositions(){
-        for (Enemy enemy : enemyList) {
+        for (Enemy enemy : getEnemies()) {
             enemy.moveTowardsEntity(player);
         }
     }
@@ -87,13 +105,16 @@ public class GameModel implements Observable{
         */
     }
 
-    public void update(ArrayList<Integer> inputList) {
-        updatePlayerPosition(inputList);
-        updateEnemyPositions();
-        updatePlayerHealth();
-        player.WHandler.projectilesTowardsEntity(getNearestEnemy());
-        enemyProjectileCollision();
-        enemyHandler.updateEnemies(player);
+    public void update() {
+        if(!isPaused){
+            updateEnemyPositions();
+            updatePlayerHealth();
+            if(getEnemies().size() > 0){
+                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()),getNearestEnemy());
+                enemyProjectileCollision();
+            }
+            enemyHandler.updateEnemies(player);
+        }
         notifyObservers();
     }
 
@@ -101,12 +122,12 @@ public class GameModel implements Observable{
         return enemyHandler.getEnemies();
     }
 
-
-    public Entity getNearestEnemy(){
-        Entity nearestEnemy = getEnemies().get(0);
-        for(Enemy enemy: getEnemies()){
-             if(calculateDistance(new Vector2(enemy.getX(), enemy.getY()), new Vector2(player.getX(), player.getY())) < calculateDistance(new Vector2(nearestEnemy.getX(), nearestEnemy.getY()), new Vector2(player.getX(), player.getY()))){
-                 nearestEnemy = enemy;
+    public Enemy getNearestEnemy(){
+        enemyList = getEnemies();
+        Enemy nearestEnemy = enemyList.get(0);
+        for(Enemy enemy: enemyList){
+            if(calculateDistance(new Vector2(enemy.getX(), enemy.getY()), new Vector2(player.getX(), player.getY())) < calculateDistance(new Vector2(nearestEnemy.getX(), nearestEnemy.getY()), new Vector2(player.getX(), player.getY()))){
+                nearestEnemy = enemy;
             }
         }
         return nearestEnemy;
@@ -117,8 +138,8 @@ public class GameModel implements Observable{
     public void enemyProjectileCollision(){
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
             for(Enemy enemy : getEnemies()){
-                if(projectile.getPositionRectangle().contains(enemy.getRectangle())){
-                    enemy.damageEntity(enemy, projectile.attackDamage);
+                if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
+                    enemy.damageEntity(enemy);
                     player.WHandler.removeProjectile(projectile);
                 }
             }
@@ -128,5 +149,4 @@ public class GameModel implements Observable{
     public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
         return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
     }
-
 }
