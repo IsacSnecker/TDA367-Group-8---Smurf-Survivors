@@ -9,39 +9,44 @@ import java.util.Random;
 
 public class EnemyFactory {
     Random rnd = new Random();
+    int spawnDistance = 1500;
+    int spawnRange = 2000;
     public EnemyFactory(){
 
     }
 
     public ArrayList<Enemy> makeDemons(int numDemons, int playerX, int playerY){
         ArrayList<Enemy> demons = new ArrayList<Enemy>();
-        int spawnDistance = 1500;
-        int spawnRange = 2000;
-
         for (int i = 0; i < numDemons; i++){
-            int[] spawns = chooseRandomSpawn(playerX, playerY, spawnDistance, spawnRange);
-            int spawnX = spawns[0];
-            int spawnY = spawns[1];
-            demons.add(new Demon(spawnX, spawnY));
+            int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
+            demons.add(new Demon(spawnCoordinates[0], spawnCoordinates[1]));
         }
         return demons;
     }
 
     public ArrayList<Enemy> makeGargamels(int numGargamels, int playerX, int playerY){
         ArrayList<Enemy> gargamels = new ArrayList<Enemy>();
-        int spawnDistance = 1500;
-        int spawnRange = 2000;
-
         for (int i = 0; i < numGargamels; i++){
-            int[] spawns = chooseRandomSpawn(playerX, playerY, spawnDistance, spawnRange);
-            int spawnX = spawns[0];
-            int spawnY = spawns[1];
-            gargamels.add(new Gargamel(spawnX, spawnY));
+            int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
+            gargamels.add(new Gargamel(spawnCoordinates[0], spawnCoordinates[1]));
         }
         return gargamels;
     }
 
-    public int[] chooseRandomSpawn(int playerX, int playerY, int spawnDistance, int spawnRange){
+    /*
+    public <T extends Enemy> ArrayList<T> makeEnemiesOfType(Class<T> type, int numEnemies, int playerX, int playerY) throws InstantiationException, IllegalAccessException {
+        ArrayList<T> enemies = new ArrayList<T>();
+        for (int i = 0; i < numEnemies; i++){
+            int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
+            T enemy = (T) type.newInstance();
+            enemy.setX(spawnCoordinates[0]);
+            enemy.setY(spawnCoordinates[1]);
+            enemies.add(enemy);
+        }
+        return enemies;
+    }*/
+
+    private int[] chooseSpawnCoordinates(int playerX, int playerY){
         int whichCoordinateOutside = rnd.nextInt(0, 4);
         int spawnX;
         int spawnY;
@@ -67,7 +72,6 @@ public class EnemyFactory {
                 spawnX = spawnDistance;
                 spawnY = spawnDistance;
         }
-
         int[] spawnCoordinates = new int[2];
         spawnCoordinates[0] = spawnX;
         spawnCoordinates[1] = spawnY;

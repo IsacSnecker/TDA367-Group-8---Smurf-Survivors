@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import java.nio.file.Path;
 
-public class Enemy extends Creature{
+public abstract class Enemy extends Creature{
     private int attackPower;
     private int speed;
 
