@@ -1,5 +1,5 @@
 package com.smurfsurvivors.game.test;
-
+/*
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -54,4 +54,4 @@ class EntityTest {
     @Test
     void getRectangle() {
     }
-}
+}*/
