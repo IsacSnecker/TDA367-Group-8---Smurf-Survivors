@@ -26,6 +26,8 @@ public class GameView implements Observer {
     private SpriteBatch batch;
     private SpriteBatch hudBatch;
 
+    private SpriteBatch hudBatch;
+
     public GameView(GameModel model) {
         this.model = model;
         gameViewInit();
