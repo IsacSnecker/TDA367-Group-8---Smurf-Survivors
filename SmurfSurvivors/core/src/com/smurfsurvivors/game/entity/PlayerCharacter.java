@@ -43,16 +43,25 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public void updatePosition(ArrayList<Integer> inputList){
         if (inputList.get(0) == 1 && inputList.get(1) != 1){
-            this.setY(this.getY() + 10);
+            this.setY(this.getY() + 4);
         }
         if (inputList.get(1) == 1 && inputList.get(0) != 1){
-            this.setY(this.getY() - 10);
+            this.setY(this.getY() - 4);
         }
         if (inputList.get(2) == 1 && inputList.get(3) != 1){
+<<<<<<< Updated upstream
             this.setX(this.getX() + 10);
         }
         if (inputList.get(3) == 1 && inputList.get(2) != 1){
             this.setX(this.getX() - 10);
+=======
+            this.setX(this.getX() + 4);
+            this.setTexture(new Texture("Player/smurf-100x100-right.png"));
+        }
+        if (inputList.get(3) == 1 && inputList.get(2) != 1){
+            this.setX(this.getX() - 4);
+            this.setTexture(new Texture("Player/smurf-100x100.png"));
+>>>>>>> Stashed changes
         }
     }
 }
