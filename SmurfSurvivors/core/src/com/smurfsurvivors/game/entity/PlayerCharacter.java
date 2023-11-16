@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
+
+    private int xp;
+    private int level;
+
+    private int maxHealth;
     private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
     private List<ActiveWeapon> abilities; //Should be List<Ability>
 
@@ -21,6 +26,9 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height) {
         super(health, sprite, x, y, width, height);
         WHandler.addWeaponHandler(new KnifeHandler());
+        this.xp = 0;
+        this.level = 1;
+        this.maxHealth = health;
     }
     //private
 
@@ -58,4 +66,17 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
             this.setTexture(new Texture("Player/smurf-100x100.png"));
         }
     }
+
+    public int getXP() {
+        return this.xp;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
+    }
+
 }

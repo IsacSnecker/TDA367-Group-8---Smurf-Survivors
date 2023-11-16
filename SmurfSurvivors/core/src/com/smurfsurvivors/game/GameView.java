@@ -29,6 +29,8 @@ public class GameView implements Observer {
 
     private SpriteBatch hudBatch;
 
+    private HUD hud;
+
     public GameView(GameModel model) {
         this.model = model;
         gameViewInit();
@@ -38,6 +40,7 @@ public class GameView implements Observer {
     public void gameViewInit() {
         observerInit();
         batchInit();
+        HUDInit();
         mapInit();
         rendererInit();
         cameraInit();
@@ -77,6 +80,10 @@ public class GameView implements Observer {
         hudBatch = new SpriteBatch();
     }
 
+    private void HUDInit() {
+        this.hud = new HUD(this.model.getClock(), model.getPlayer(), hudBatch);
+    }
+
 
     private void renderFrame() {
 
@@ -99,7 +106,7 @@ public class GameView implements Observer {
         batch.end();
 
         hudBatch.begin();
-        model.getClock().render(hudBatch);
+        hud.renderHUD();
         hudBatch.end();
     }
 
@@ -120,5 +127,6 @@ public class GameView implements Observer {
             weaponHandler.renderProjectiles(this.batch);
         }
     }
+
 }
 
