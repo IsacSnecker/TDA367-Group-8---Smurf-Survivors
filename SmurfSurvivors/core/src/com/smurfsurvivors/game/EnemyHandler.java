@@ -5,20 +5,31 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 
 public class EnemyHandler {
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     private EnemyFactory enemyFactory;
+    private boolean spawnReady;
+    private double spawnRate;
+    Random rnd = new Random();
 
     public EnemyHandler(){
         this.enemyFactory = new EnemyFactory();
+        this.spawnReady = true;
+        this.spawnRate = 2;
     }
 
     public void spawnDemons(int numDemons, int playerX, int playerY){
-        for (Enemy demon : enemyFactory.makeDemons(numDemons, playerX, playerY)){
-            enemyList.add(demon);
-        }
+        enemyList.addAll(enemyFactory.makeDemons(numDemons, playerX, playerY));
     }
+
+    public void spawnGargamels(int numGargamels, int playerX, int playerY){
+        enemyList.addAll(enemyFactory.makeGargamels(numGargamels, playerX, playerY));
+
+    }
+
     public void updateEnemies(PlayerCharacter player){
         ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
         for(Enemy enemy: enemyList){
@@ -32,6 +43,21 @@ public class EnemyHandler {
     }
     public ArrayList<Enemy> getEnemies(){
         return enemyList;
+    }
+
+    public void spawnNewEnemies(long seconds, int playerX, int playerY, double spawnRateMultiplier){
+        if (seconds % 10 != 0){
+            spawnReady = true;
+        }
+        if (seconds % 10 == 0 && spawnReady){
+            spawnDemons((int) spawnRate, playerX, playerY);
+            /*if (rnd.nextInt(0,2) == 1){
+                spawnGargamels((int) spawnRate / 2, playerX, playerY);
+            }*/
+            spawnGargamels(1, playerX, playerY);
+            spawnReady = false;
+            spawnRate = spawnRate * spawnRateMultiplier;
+        }
     }
 
     public void addEnemy(Enemy enemy){

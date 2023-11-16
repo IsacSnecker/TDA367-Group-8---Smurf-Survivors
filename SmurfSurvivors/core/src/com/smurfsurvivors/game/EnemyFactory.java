@@ -2,6 +2,7 @@ package com.smurfsurvivors.game;
 
 import com.smurfsurvivors.game.entity.Demon;
 import com.smurfsurvivors.game.entity.Enemy;
+import com.smurfsurvivors.game.entity.Gargamel;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,13 +18,27 @@ public class EnemyFactory {
         int spawnDistance = 1500;
         int spawnRange = 2000;
 
-        for (int i = 0; i < 1; i++){
+        for (int i = 0; i < numDemons; i++){
             int[] spawns = chooseRandomSpawn(playerX, playerY, spawnDistance, spawnRange);
             int spawnX = spawns[0];
             int spawnY = spawns[1];
             demons.add(new Demon(spawnX, spawnY));
         }
         return demons;
+    }
+
+    public ArrayList<Enemy> makeGargamels(int numGargamels, int playerX, int playerY){
+        ArrayList<Enemy> gargamels = new ArrayList<Enemy>();
+        int spawnDistance = 1500;
+        int spawnRange = 2000;
+
+        for (int i = 0; i < numGargamels; i++){
+            int[] spawns = chooseRandomSpawn(playerX, playerY, spawnDistance, spawnRange);
+            int spawnX = spawns[0];
+            int spawnY = spawns[1];
+            gargamels.add(new Gargamel(spawnX, spawnY));
+        }
+        return gargamels;
     }
 
     public int[] chooseRandomSpawn(int playerX, int playerY, int spawnDistance, int spawnRange){
