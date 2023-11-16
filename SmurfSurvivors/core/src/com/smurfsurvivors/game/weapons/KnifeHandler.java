@@ -19,7 +19,7 @@ public class KnifeHandler implements IHandler{
     long oldTime;
 
     public KnifeHandler(){
-        cooldown = 500f;
+        cooldown = 1000f;
         Useable = true;
         oldTime = 0;
     }
@@ -30,7 +30,7 @@ public class KnifeHandler implements IHandler{
             if(calculateDistance(new Vector2(knife.position.x, knife.position.x), knife.originalPosition) > knife.attackRange){
                 knivesToRemove.add(knife);
             }
-            knife.moveTowardsEntity(entity);
+            knife.move(knife.velocity, 0);
         }
         knifeList.removeAll(knivesToRemove);
         if(Useable){

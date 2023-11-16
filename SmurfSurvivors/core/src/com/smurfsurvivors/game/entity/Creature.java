@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Creature extends Entity implements HasHealth, Movable{
     private int health;
-
-    public Creature(int health, Texture sprite, int x, int y, int width, int height) {
+    private int speed;
+    public Creature(int health, Texture sprite, int x, int y, int width, int height, int speed) {
         super(sprite, x, y, width, height);
         this.health = health;
+        this.speed = speed;
     }
 
     public int getHealth(){
@@ -16,6 +17,7 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
     public void decreaseHealth(int amount){
         health -= amount;
     }
+    public int getSpeed(){ return speed; }
     public void move(int dx, int dy){
         setX(getX() + dx);
         setY(getY() + dy);

@@ -17,7 +17,7 @@ public class EnemyHandler {
     }
 
     public void spawnDemon(){
-        enemyList.add(new Enemy(100, 100, new Texture("Enemies/blueDemon.png"), rnd.nextInt(-5000, 5000), rnd.nextInt(-5000, 5000), 64, 64));
+        enemyList.add(new Demon( rnd.nextInt(-5000, 5000), rnd.nextInt(-5000, 5000)));
     }
     public void updateEnemies(PlayerCharacter player){
         ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
