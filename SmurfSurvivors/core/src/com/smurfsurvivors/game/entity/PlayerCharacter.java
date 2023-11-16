@@ -30,8 +30,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public void addAbility(ActiveWeapon ability){
         abilities.add(ability);
     }
-    public void usePassiveWeapon(){
-        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()));
+    public void usePassiveWeapon(Entity entity){
+        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()), entity);
     }
     public void useAbility(ActiveWeapon ability){
         ability.performAttack();

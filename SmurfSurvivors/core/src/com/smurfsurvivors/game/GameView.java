@@ -27,6 +27,8 @@ public class GameView implements Observer {
 
     private SpriteBatch batch;
 
+    private SpriteBatch hudBatch;
+
     public GameView(GameModel model) {
         this.model = model;
         gameViewInit();
@@ -70,7 +72,10 @@ public class GameView implements Observer {
         map = new TmxMapLoader().load("Map/TestMap/TestMap.tmx");
     }
 
-    private void batchInit() { batch = new SpriteBatch(); }
+    private void batchInit() {
+        batch = new SpriteBatch();
+        hudBatch = new SpriteBatch();
+    }
 
 
     private void renderFrame() {
@@ -84,14 +89,18 @@ public class GameView implements Observer {
         renderer.render();
         model.getPlayer().render(this.batch);
         renderEnemies();
+        renderPlayerProjectiles(model.getPlayer());
 
         // Move camera
         camera.position.x = model.getPlayer().getX();
         camera.position.y = model.getPlayer().getY();
         camera.update();
         renderer.setView(camera);
-
         batch.end();
+
+        hudBatch.begin();
+        model.getClock().render(hudBatch);
+        hudBatch.end();
     }
 
     public void renderEnemies() {
