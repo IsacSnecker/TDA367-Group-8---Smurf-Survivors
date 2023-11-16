@@ -2,6 +2,7 @@ package com.smurfsurvivors.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.entity.Demon;
 import com.smurfsurvivors.game.entity.Enemy;
+import com.smurfsurvivors.game.entity.Gargamel;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 import java.util.ArrayList;
@@ -18,14 +19,14 @@ public class EnemyHandler {
     public EnemyHandler(){
         this.enemyFactory = new EnemyFactory();
         this.spawnReady = true;
-        this.spawnRate = 2;
+        this.spawnRate = 5;
     }
 
     public void spawnDemons(int numDemons, int playerX, int playerY){
         enemyList.addAll(enemyFactory.makeDemons(numDemons, playerX, playerY));
     }
 
-    public void spawnGargamels(int numGargamels, int playerX, int playerY){
+    public void spawnGargamels(int numGargamels, int playerX, int playerY) {
         enemyList.addAll(enemyFactory.makeGargamels(numGargamels, playerX, playerY));
 
     }
@@ -41,6 +42,7 @@ public class EnemyHandler {
         }
         enemyList.removeAll(enemiesToRemove);
     }
+
     public ArrayList<Enemy> getEnemies(){
         return enemyList;
     }
