@@ -14,7 +14,7 @@ public abstract class GameModelFactory {
         PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"), 100,100, 100,100, 10);
         model.setPlayer(player);
         for(int i = 0; i < 50; i++){
-            model.enemyHandler.spawnDemon();
+            model.enemyHandler.spawnDemons(1, player.getX(), player.getY());
         }
 
         return model;

@@ -5,19 +5,19 @@ import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class EnemyHandler {
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-
-    Random rnd = new Random();
+    private EnemyFactory enemyFactory;
 
     public EnemyHandler(){
-
+        this.enemyFactory = new EnemyFactory();
     }
 
-    public void spawnDemon(){
-        enemyList.add(new Demon( rnd.nextInt(-5000, 5000), rnd.nextInt(-5000, 5000)));
+    public void spawnDemons(int numDemons, int playerX, int playerY){
+        for (Enemy demon : enemyFactory.makeDemons(numDemons, playerX, playerY)){
+            enemyList.add(demon);
+        }
     }
     public void updateEnemies(PlayerCharacter player){
         ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
