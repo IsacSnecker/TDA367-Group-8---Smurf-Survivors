@@ -117,7 +117,7 @@ public class GameModel implements Observable{
             updateEnemyPositions();
             updatePlayerHealth();
             if(getEnemies().size() > 0){
-                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()),getNearestEnemy());
+                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()), getPositionOfEntity(getNearestEnemy()));
                 enemyProjectileCollision();
             }
             enemyHandler.updateEnemies(player);
@@ -127,6 +127,10 @@ public class GameModel implements Observable{
 
     public ArrayList<Enemy> getEnemies() {
         return enemyHandler.getEnemies();
+    }
+
+    public Vector2 getPositionOfEntity(Entity entity){
+        return new Vector2(entity.getX(),entity.getY());
     }
 
     public Enemy getNearestEnemy(){
@@ -140,13 +144,11 @@ public class GameModel implements Observable{
         return nearestEnemy;
     }
 
-
-
     public void enemyProjectileCollision(){
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
             for(Enemy enemy : getEnemies()){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
-                    enemy.damageEntity(enemy);
+                    enemy.decreaseHealth(projectile.attackDamage);
                     player.WHandler.removeProjectile(projectile);
                 }
             }
