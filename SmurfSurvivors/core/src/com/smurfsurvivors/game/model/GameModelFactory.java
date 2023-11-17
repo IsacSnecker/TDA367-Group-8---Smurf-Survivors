@@ -1,6 +1,7 @@
 package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.smurfsurvivors.game.Difficulty;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 public abstract class GameModelFactory {
