@@ -1,8 +1,10 @@
 package com.smurfsurvivors.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.smurfsurvivors.game.controller.GameController;
+import com.smurfsurvivors.game.model.GameModel;
+import com.smurfsurvivors.game.model.GameModelFactory;
+import com.smurfsurvivors.game.view.GameView;
 
 public class SmurfSurvivors extends Game {
 
