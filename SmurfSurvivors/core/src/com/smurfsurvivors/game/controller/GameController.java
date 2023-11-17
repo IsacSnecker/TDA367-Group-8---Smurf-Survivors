@@ -1,13 +1,10 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.controller;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.smurfsurvivors.game.entity.Enemy;
-import com.smurfsurvivors.game.entity.PlayerCharacter;
+import com.smurfsurvivors.game.Observer;
+import com.smurfsurvivors.game.model.GameModel;
+import com.smurfsurvivors.game.view.GameView;
 
 import java.util.ArrayList;
 import java.util.Arrays;

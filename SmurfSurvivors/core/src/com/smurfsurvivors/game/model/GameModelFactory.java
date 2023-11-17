@@ -1,8 +1,6 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.smurfsurvivors.game.entity.Demon;
-import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
 
 public abstract class GameModelFactory {

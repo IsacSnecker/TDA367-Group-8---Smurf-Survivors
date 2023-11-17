@@ -1,19 +1,20 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.view;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.smurfsurvivors.game.model.GameModel;
+import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
+import com.smurfsurvivors.game.view.hud.HUD;
+import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.weapons.IHandler;
 
 
@@ -26,7 +27,7 @@ public class GameView implements Observer {
     private SpriteBatch batch;
     private SpriteBatch hudBatch;
 
-    private HUD hud;
+    private IHUD hud;
 
     public GameView(GameModel model) {
         this.model = model;
@@ -101,9 +102,11 @@ public class GameView implements Observer {
         renderer.setView(camera);
         batch.end();
 
+        // Render HUD
         hudBatch.begin();
         hud.renderHUD();
         hudBatch.end();
+
     }
 
     public void renderEnemies() {

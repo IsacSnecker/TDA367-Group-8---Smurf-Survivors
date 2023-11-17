@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model;
 
 import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.PlayerCharacter;

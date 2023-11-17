@@ -1,9 +1,10 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.entity.*;
 import com.smurfsurvivors.game.weapons.AbstractWeapon;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class GameModel implements Observable{
+public class GameModel implements Observable {
 
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
