@@ -20,14 +20,15 @@ public class GameModel implements Observable {
     private ArrayList<Enemy> enemyList;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
-
+    private Difficulty difficulty;
     private Clock clock;
 
     private Music soundTrack;
 
     private Boolean isPaused = false;
 
-    public GameModel(){
+    public GameModel(Difficulty difficulty){
+        this.difficulty = difficulty;
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
         soundTrack.setLooping(true); //
         soundTrack.play(); //Should probably not be here
@@ -121,7 +122,8 @@ public class GameModel implements Observable {
                 player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()), getPositionOfEntity(getNearestEnemy()));
                 enemyProjectileCollision();
             }
-            enemyHandler.updateEnemies(player);
+            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
+            enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
         }
         notifyObservers();
     }
