@@ -26,7 +26,6 @@ public class GameView implements Observer {
     private SpriteBatch batch;
     private SpriteBatch hudBatch;
 
-    private SpriteBatch hudBatch;
 
     public GameView(GameModel model) {
         this.model = model;
@@ -63,7 +62,7 @@ public class GameView implements Observer {
     }
 
     private void rendererInit() {
-        renderer = new OrthogonalTiledMapRenderer(this.map);
+        renderer = new OrthogonalTiledMapRenderer(this.map, 5);
     }
 
     private void mapInit() {
@@ -79,7 +78,7 @@ public class GameView implements Observer {
     private void renderFrame() {
 
         // Clears screen
-        Gdx.gl.glClearColor( 1, 0, 0, 1 );
+        Gdx.gl.glClearColor( 0.5f, 2, 0.1f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         // Render process

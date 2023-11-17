@@ -27,7 +27,7 @@ public class KnifeHandler implements IHandler{
     public void updateProjectiles(Vector2 position, long currentTime, Entity entity){
         ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon knife : knifeList){
-            if(calculateDistance(new Vector2(knife.position.x, knife.position.x), knife.originalPosition) > knife.attackRange){
+            if(calculateDistance(new Vector2(knife.position.x, knife.position.y), knife.originalPosition) > knife.attackRange){
                 knivesToRemove.add(knife);
             }
             knife.move(knife.velocity, 0);
