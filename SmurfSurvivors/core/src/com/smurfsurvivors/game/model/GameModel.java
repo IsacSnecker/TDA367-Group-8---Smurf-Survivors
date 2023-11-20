@@ -122,7 +122,7 @@ public class GameModel implements Observable {
                 player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()), getPositionOfEntity(getNearestEnemy()));
                 enemyProjectileCollision();
             }
-            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
+            //enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
         }
         notifyObservers();
