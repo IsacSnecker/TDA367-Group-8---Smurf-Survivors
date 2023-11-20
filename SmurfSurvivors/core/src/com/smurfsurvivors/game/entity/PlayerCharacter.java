@@ -10,15 +10,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
+
+    private int xp;
+    private int level;
+    private Texture spriteRight;
+    private Texture spriteLeft;
+    private int maxHealth;
     private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
     private List<ActiveWeapon> abilities; //Should be List<Ability>
 
     public WeaponHandler WHandler = new WeaponHandler();
 
-    public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height) {
-        super(health, sprite, x, y, width, height);
+    public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height, int speed) {
+        super(health, sprite, x, y, width, height, speed);
         WHandler.addWeaponHandler(new KnifeHandler());
         WHandler.addWeaponHandler(new MissileHandler());
+        this.xp = 0;
+        this.level = 1;
+        this.maxHealth = health;
+        this.spriteRight = new Texture("Player/smurf-100x100-right.png");
+        this.spriteLeft = new Texture("Player/smurf-100x100.png");
     }
     //private
 
@@ -49,11 +60,24 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         }
         if (inputList.get(2) == 1 && inputList.get(3) != 1){
             this.setX(this.getX() + 10);
-            this.setTexture(new Texture("Player/smurf-100x100-right.png"));
+            this.setTexture(this.spriteRight);
         }
         if (inputList.get(3) == 1 && inputList.get(2) != 1){
             this.setX(this.getX() - 10);
-            this.setTexture(new Texture("Player/smurf-100x100.png"));
+            this.setTexture(this.spriteLeft);
         }
     }
+
+    public int getXP() {
+        return this.xp;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
+    }
+
 }

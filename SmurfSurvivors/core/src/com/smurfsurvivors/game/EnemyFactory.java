@@ -42,7 +42,8 @@ public abstract  class EnemyFactory {
             enemies.add(enemy);
         }
         return enemies;
-    }*/
+    }
+    */
 
     private static int[] chooseSpawnCoordinates(int playerX, int playerY){
 
