@@ -44,7 +44,8 @@ public class EnemyFactory {
             enemies.add(enemy);
         }
         return enemies;
-    }*/
+    }
+    */
 
     private int[] chooseSpawnCoordinates(int playerX, int playerY){
         int whichCoordinateOutside = rnd.nextInt(0, 4);
