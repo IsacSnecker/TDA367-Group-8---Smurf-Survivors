@@ -53,8 +53,7 @@ public abstract class Entity {
     public void setY(int y) { this.y = y; }
 
     public void render(Batch batch) {
-        this.sprite = new Sprite(texture, 0, 0, width, height);
-        batch.draw(this.sprite, x - getWidth() / 2, y - getHeight() / 2);
+        batch.draw(this.texture, x - getWidth() / 2, y - getHeight() / 2);
     }
 
     public Rectangle getRectangle(){
