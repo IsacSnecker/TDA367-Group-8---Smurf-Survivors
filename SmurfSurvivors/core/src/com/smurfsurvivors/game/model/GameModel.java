@@ -1,9 +1,10 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.entity.*;
 import com.smurfsurvivors.game.weapons.AbstractWeapon;
 
@@ -12,21 +13,22 @@ import java.util.ArrayList;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class GameModel implements Observable{
+public class GameModel implements Observable {
 
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
     private ArrayList<Enemy> enemyList;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
-
+    private Difficulty difficulty;
     private Clock clock;
 
     private Music soundTrack;
 
     private Boolean isPaused = false;
 
-    public GameModel(){
+    public GameModel(Difficulty difficulty){
+        this.difficulty = difficulty;
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
         soundTrack.setLooping(true); //
         soundTrack.play(); //Should probably not be here
@@ -117,16 +119,21 @@ public class GameModel implements Observable{
             updateEnemyPositions();
             updatePlayerHealth();
             if(getEnemies().size() > 0){
-                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()),getNearestEnemy());
+                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()), getPositionOfEntity(getNearestEnemy()));
                 enemyProjectileCollision();
             }
-            enemyHandler.updateEnemies(player);
+            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
+            enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
         }
         notifyObservers();
     }
 
     public ArrayList<Enemy> getEnemies() {
         return enemyHandler.getEnemies();
+    }
+
+    public Vector2 getPositionOfEntity(Entity entity){
+        return new Vector2(entity.getX(),entity.getY());
     }
 
     public Enemy getNearestEnemy(){
@@ -140,13 +147,11 @@ public class GameModel implements Observable{
         return nearestEnemy;
     }
 
-
-
     public void enemyProjectileCollision(){
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
             for(Enemy enemy : getEnemies()){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
-                    enemy.damageEntity(enemy);
+                    enemy.decreaseHealth(projectile.attackDamage);
                     player.WHandler.removeProjectile(projectile);
                 }
             }

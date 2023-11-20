@@ -7,8 +7,10 @@ import com.smurfsurvivors.game.entity.Entity;
 import java.util.ArrayList;
 
 public interface IHandler {
+
+    public void spawnProjectile(Vector2 position);
     public ArrayList<AbstractWeapon> getProjectiles();
-    public void updateProjectiles(Vector2 position, long time, Entity entity);
+    public void updateProjectiles(Vector2 position, long time, Vector2 enemyPosition);
     public void renderProjectiles(SpriteBatch batch);
     public void removeProjectile(AbstractWeapon projectile);
 }

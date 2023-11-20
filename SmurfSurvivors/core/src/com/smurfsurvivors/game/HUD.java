@@ -46,13 +46,13 @@ public class HUD {
     }
 
     private void renderToolbar() {
-        hudBatch.draw(new Texture("UI/Toolbar/toolbarLeft.png"), Gdx.graphics.getWidth() / 2 - 80 * 4, 0, 104,80);
+        hudBatch.draw(new Texture("UI/Toolbar/toolbarLeft.png"), Gdx.graphics.getWidth() / 2 - 80 * 4, 0, 80,80);
 
         for (int i = 1; i <= 5; i++) {
-            hudBatch.draw(new Texture("UI/Toolbar/toolbarMid.png"), Gdx.graphics.getWidth() / 2 + 24 - 80 * 4 + 80 * i, 0, 80,80);
+            hudBatch.draw(new Texture("UI/Toolbar/toolbarMid.png"), Gdx.graphics.getWidth() / 2 - 80 * 4 + 80 * i, 0, 80,80);
         }
 
-        hudBatch.draw(new Texture("UI/Toolbar/toolbarRight.png"), Gdx.graphics.getWidth() / 2 + 24 + 80 * 2, 0, 104,80);
+        hudBatch.draw(new Texture("UI/Toolbar/toolbarRight.png"), Gdx.graphics.getWidth() / 2 + 80 * 2, 0, 80,80);
 
     }
 
