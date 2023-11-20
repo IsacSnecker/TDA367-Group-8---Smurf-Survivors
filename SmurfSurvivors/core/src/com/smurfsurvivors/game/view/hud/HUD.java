@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.smurfsurvivors.game.Clock;
 import com.smurfsurvivors.game.entity.PlayerCharacter;
-
 public class HUD implements IHUD {
 
     private HealthBar healthBar;
