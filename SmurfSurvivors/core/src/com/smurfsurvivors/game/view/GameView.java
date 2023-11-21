@@ -107,7 +107,7 @@ public class GameView implements Observer {
 
         // Render HUD
         hudBatch.begin();
-        hud.renderHUD();
+        hud.renderHUD(model.getPlayer().getHealth());
         hudBatch.end();
 
     }
