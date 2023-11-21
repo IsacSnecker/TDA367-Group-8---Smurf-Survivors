@@ -106,9 +106,11 @@ public class GameView implements Observer {
         batch.end();
 
         // Render HUD
+        /*
         hudBatch.begin();
         hud.renderHUD();
         hudBatch.end();
+         */
 
     }
 
