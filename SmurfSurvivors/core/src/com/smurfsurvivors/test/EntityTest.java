@@ -34,6 +34,8 @@ class EntityTest {
     @Test
     void getX() {
         Demon demon = new Demon(100,100);
+        demon.move(20,0);
+        assertEquals(demon.getX(), 120);
     }
 
     @Test
