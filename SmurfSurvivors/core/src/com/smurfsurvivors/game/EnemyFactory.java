@@ -7,15 +7,13 @@ import com.smurfsurvivors.game.entity.Gargamel;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class EnemyFactory {
-    Random rnd = new Random();
-    int spawnDistance = 1500;
-    int spawnRange = 2000;
-    public EnemyFactory(){
+public abstract  class EnemyFactory {
 
-    }
+    static Random rnd = new Random();
+    static int spawnDistance = 1500;
+    static int spawnRange = 2000;
 
-    public ArrayList<Enemy> makeDemons(int numDemons, int playerX, int playerY){
+    public static ArrayList<Enemy> makeDemons(int numDemons, int playerX, int playerY){
         ArrayList<Enemy> demons = new ArrayList<Enemy>();
         for (int i = 0; i < numDemons; i++){
             int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
@@ -24,7 +22,7 @@ public class EnemyFactory {
         return demons;
     }
 
-    public ArrayList<Enemy> makeGargamels(int numGargamels, int playerX, int playerY){
+    public static ArrayList<Enemy> makeGargamels(int numGargamels, int playerX, int playerY){
         ArrayList<Enemy> gargamels = new ArrayList<Enemy>();
         for (int i = 0; i < numGargamels; i++){
             int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
@@ -46,7 +44,8 @@ public class EnemyFactory {
         return enemies;
     }*/
 
-    private int[] chooseSpawnCoordinates(int playerX, int playerY){
+    private static int[] chooseSpawnCoordinates(int playerX, int playerY){
+
         int whichCoordinateOutside = rnd.nextInt(0, 4);
         int spawnX;
         int spawnY;
