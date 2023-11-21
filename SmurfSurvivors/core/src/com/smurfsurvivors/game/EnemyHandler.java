@@ -66,4 +66,7 @@ public class EnemyHandler {
     public void addEnemy(Enemy enemy){
         enemyList.add(enemy);
     }
+    public void removeEnemy(Enemy enemy){
+        enemyList.remove(enemy);
+    }
 }

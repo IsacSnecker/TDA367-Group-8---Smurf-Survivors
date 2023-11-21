@@ -15,9 +15,7 @@ public class HUD implements IHUD {
     private HealthBar healthBar;
     private XPBar xpBar;
     private Toolbar toolbar;
-
     private Batch hudBatch;
-
     private Clock clock;
 
     public HUD(Clock clock, PlayerCharacter playerCharacter, Batch hudBatch) {
@@ -29,8 +27,8 @@ public class HUD implements IHUD {
         this.FPS = new FPS(hudBatch);
     }
 
-    public void renderHUD() {
-        healthBar.render();
+    public void renderHUD(int currentHealth) {
+        healthBar.render(currentHealth);
         xpBar.render();
         toolbar.render();
         clock.render(hudBatch);

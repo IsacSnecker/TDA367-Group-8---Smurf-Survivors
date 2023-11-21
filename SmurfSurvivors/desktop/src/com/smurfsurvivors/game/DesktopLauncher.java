@@ -11,6 +11,7 @@ public class DesktopLauncher {
 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(90);
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		config.setTitle("SmurfSurvivors");
 
 		// Set resolution

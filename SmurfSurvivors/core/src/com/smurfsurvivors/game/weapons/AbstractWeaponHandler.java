@@ -1,5 +1,6 @@
 package com.smurfsurvivors.game.weapons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.entity.Entity;
@@ -10,7 +11,7 @@ import java.util.Collection;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class AbstractWeaponHandler {
+abstract class AbstractWeaponHandler implements IHandler{
 
     public interface List<E> extends Collection<E> {};
     ArrayList<AbstractWeapon> WeaponList = new ArrayList<AbstractWeapon> ();
@@ -57,9 +58,13 @@ public class AbstractWeaponHandler {
         return WeaponList;
     }
 
-    public void spawnProjectile(Vector2 position){}
+    public abstract void spawnProjectile(Vector2 position);
 
     public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
         return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
+    }
+
+    public void updateWeaponCooldown() {
+        cooldown = cooldown - (5f * Gdx.graphics.getDeltaTime());
     }
 }
