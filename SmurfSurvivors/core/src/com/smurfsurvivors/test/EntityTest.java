@@ -24,7 +24,7 @@ class EntityTest {
         System.out.println("Current Working Directory: " + currentDirectory);
 
         Gdx.gl = mock(GL20.class); // Use a mock GL20 object
-        // Other necessary mock setups
+
 
         HeadlessApplicationConfiguration config = new HeadlessApplicationConfiguration();
         new HeadlessApplication(new SmurfSurvivors(), config);
