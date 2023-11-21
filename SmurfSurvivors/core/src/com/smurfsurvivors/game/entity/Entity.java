@@ -15,7 +15,7 @@ public abstract class Entity {
     private final int width; //should width be final?
     private final int height; //should height be final?
 
-    public Entity(Texture sprite, int x, int y, int width, int height) {
+    public Entity(Texture sprite, float x, float y, int width, int height) {
         this.texture = sprite;
         position = new Vector2(x,y);
         this.width = width;
@@ -35,10 +35,10 @@ public abstract class Entity {
         this.texture = texture;
     }
 
-    public int getX() {
-        return (int)position.x;
+    public float getX() {
+        return position.x;
     }
-    public int getY(){ return (int)position.y;
+    public float getY(){ return position.y;
     }
     public int getWidth() {
         return width;
@@ -47,8 +47,8 @@ public abstract class Entity {
         return height;
     }
 
-    public void setX(int x) {  position.x = x; }
-    public void setY(int y) { position.y = y; }
+    public void setX(float x) {  position.x = x; }
+    public void setY(float y) { position.y = y; }
 
     public void render(Batch batch) {
         batch.draw(this.texture, position.x - getWidth() / 2, position.y - getHeight() / 2);

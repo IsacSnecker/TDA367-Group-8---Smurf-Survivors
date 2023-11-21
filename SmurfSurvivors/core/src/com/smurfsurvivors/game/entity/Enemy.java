@@ -6,37 +6,67 @@ import java.nio.file.Path;
 
 public abstract class Enemy extends Creature{
     private int attackPower;
-    private int speed;
+    private float speed;
 
-    public Enemy(int attackPower, int health, Texture sprite, int x, int y, int width, int height, int speed) {
-        super(health, sprite, x, y, width, height, speed);
+    public Enemy(int attackPower, int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
+        super(health, sprite, x, y, width, height, speed, direction);
         this.attackPower = attackPower;
         this.speed = speed;
     }
+
     public void moveTowardsEntity(Entity entity){
-        if(entity.getX() < getX() && entity.getY() < getY()){
-            move(-speed, -speed);
+        float differenceX = entity.getX() - getX();
+        float differenceY = entity.getY() - getY();
+        float dx = 0;
+        float dy = 0;
+        float radianDegree;
+        if(differenceX > 0 && differenceY > 0){
+            radianDegree = (float)Math.atan(differenceX/differenceY);
+            dx = (float)(Math.tan(radianDegree)*getSpeed());
+            dy = (float)(getSpeed()/Math.tan(radianDegree));
+            if(dx > getSpeed()){
+                dx = getSpeed();
+            }
+            if(dy > getSpeed()){
+                dy = getSpeed();
+            }
+            move(dx, dy);
         }
-        else if(entity.getX() < getX() && entity.getY() > getY()){
-            move(-speed, speed);
+        else if(differenceX > 0 && differenceY < 0){
+            radianDegree = (float)Math.atan(differenceX/-differenceY);
+            dx = (float)(Math.tan(radianDegree)*getSpeed());
+            dy = (float)(getSpeed()/Math.tan(radianDegree));
+            if(dx > getSpeed()){
+                dx = getSpeed();
+            }
+            if(dy > getSpeed()){
+                dy = getSpeed();
+            }
+            move(dx, -dy);
         }
-        else if(entity.getX() > getX() && entity.getY() < getY()){
-            move(speed, -speed);
+        else if(differenceX < 0 && differenceY > 0){
+            radianDegree = (float)Math.atan(-differenceX/differenceY);
+            dx = (float)(Math.tan(radianDegree)*getSpeed());
+            dy = (float)(getSpeed()/Math.tan(radianDegree));
+            if(dx > getSpeed()){
+                dx = getSpeed();
+            }
+            if(dy > getSpeed()){
+                dy = getSpeed();
+            }
+            move(-dx, dy);
         }
-        else if(entity.getX() > getX() && entity.getY() > getY()) {
-            move(speed, speed);
-        }
-        else if(entity.getX() > getX()){
-            move(speed, 0);
-        }
-        else if(entity.getY() > getY()){
-            move(0, speed);
-        }
-        else if(entity.getX() < getX()){
-            move(-speed, 0);
-        }
-        else if(entity.getY() < getY()){
-            move(0, -speed);
+        else if(differenceX < 0 && differenceY < 0){
+            radianDegree = (float)Math.atan(-differenceX/-differenceY);
+            dx = (float)(Math.tan(radianDegree)*getSpeed());
+            dy = (float)(getSpeed()/Math.tan(radianDegree));
+            if(dx > getSpeed()){
+                dx = getSpeed();
+            }
+            if(dy > getSpeed()){
+                dy = getSpeed();
+            }
+            move(-dx, -dy);
         }
     }
 
