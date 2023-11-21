@@ -55,7 +55,7 @@ public class EnemyHandler {
         if (seconds % 10 == 0 && spawnReady){
             spawnDemons((int) spawnRate, playerX, playerY);
             if (rnd.nextInt(0,2) == 1){
-                spawnGargamels((int) spawnRate / 2, playerX, playerY);
+                spawnGargamels((int) spawnRate / 4, playerX, playerY);
             }
 
             spawnReady = false;
