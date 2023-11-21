@@ -17,57 +17,45 @@ public abstract class Enemy extends Creature{
     public void moveTowardsEntity(Entity entity){
         float differenceX = entity.getX() - getX();
         float differenceY = entity.getY() - getY();
-        float dx = 0;
-        float dy = 0;
+        float dx;
+        float dy;
         float radianDegree;
         if(differenceX > 0 && differenceY > 0){
-            radianDegree = (float)Math.atan(differenceX/differenceY);
-            dx = (float)(Math.tan(radianDegree)*getSpeed());
-            dy = (float)(getSpeed()/Math.tan(radianDegree));
-            if(dx > getSpeed()){
-                dx = getSpeed();
-            }
-            if(dy > getSpeed()){
-                dy = getSpeed();
-            }
+            radianDegree = calculateRadianDegree(differenceX, differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
             move(dx, dy);
         }
         else if(differenceX > 0 && differenceY < 0){
-            radianDegree = (float)Math.atan(differenceX/-differenceY);
-            dx = (float)(Math.tan(radianDegree)*getSpeed());
-            dy = (float)(getSpeed()/Math.tan(radianDegree));
-            if(dx > getSpeed()){
-                dx = getSpeed();
-            }
-            if(dy > getSpeed()){
-                dy = getSpeed();
-            }
+            radianDegree = calculateRadianDegree(differenceX, -differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
             move(dx, -dy);
         }
         else if(differenceX < 0 && differenceY > 0){
-            radianDegree = (float)Math.atan(-differenceX/differenceY);
-            dx = (float)(Math.tan(radianDegree)*getSpeed());
-            dy = (float)(getSpeed()/Math.tan(radianDegree));
-            if(dx > getSpeed()){
-                dx = getSpeed();
-            }
-            if(dy > getSpeed()){
-                dy = getSpeed();
-            }
+            radianDegree = calculateRadianDegree(-differenceX, differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
             move(-dx, dy);
         }
         else if(differenceX < 0 && differenceY < 0){
-            radianDegree = (float)Math.atan(-differenceX/-differenceY);
-            dx = (float)(Math.tan(radianDegree)*getSpeed());
-            dy = (float)(getSpeed()/Math.tan(radianDegree));
-            if(dx > getSpeed()){
-                dx = getSpeed();
-            }
-            if(dy > getSpeed()){
-                dy = getSpeed();
-            }
+            radianDegree = calculateRadianDegree(-differenceX, -differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
             move(-dx, -dy);
         }
+    }
+
+    private float calculateRadianDegree(float differenceX, float differenceY){
+        return (float)Math.atan(differenceX/differenceY);
+    }
+
+    private float calculatedx(float radianDegree){
+        return (float)(Math.sin(radianDegree)*getSpeed());
+    }
+
+    private float calculatedy(float radianDegree){
+        return (float)(Math.cos(radianDegree)*getSpeed());
     }
 
     public void damageEntity(HasHealth entity){
