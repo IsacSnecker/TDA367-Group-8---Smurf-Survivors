@@ -1,5 +1,6 @@
 package com.smurfsurvivors.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.entity.Demon;
 import com.smurfsurvivors.game.entity.Enemy;
 import com.smurfsurvivors.game.entity.Gargamel;
