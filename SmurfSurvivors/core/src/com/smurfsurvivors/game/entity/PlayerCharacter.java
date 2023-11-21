@@ -60,37 +60,43 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
             dx =  calculateSpeedWhenDiagonal();
             dy =  calculateSpeedWhenDiagonal();
             move(dx, dy);
+            setDirection(1);
         }
         else if(inputList.get(0) == 1 && inputList.get(3) == 1){
             dx = calculateSpeedWhenDiagonal();
             dy = calculateSpeedWhenDiagonal();
             move(-dx, dy);
-
+            setDirection(7);
         }
         else if(inputList.get(2) == 1 && inputList.get(1) == 1){
             dx = calculateSpeedWhenDiagonal();
             dy = calculateSpeedWhenDiagonal();
             move(dx, -dy);
+            setDirection(3);
         }
         else if(inputList.get(2) == 1 && inputList.get(3) == 1){
             dx = calculateSpeedWhenDiagonal();
             dy = calculateSpeedWhenDiagonal();
             move(-dx, -dy);
-
+            setDirection(5);
         }
         else if (inputList.get(0) == 1 && inputList.get(2) != 1){
             this.setY(this.getY() + getSpeed());
+            setDirection(0);
         }
         else if (inputList.get(1) == 1 && inputList.get(3) != 1){
             this.setX(this.getX() + getSpeed());
             this.setTexture(this.spriteRight);
+            setDirection(1);
         }
         else if (inputList.get(2) == 1 && inputList.get(0) != 1){
             this.setY(this.getY() - getSpeed());
+            setDirection(2);
         }
         else if (inputList.get(3) == 1 && inputList.get(1) != 1){
             this.setX(this.getX() - getSpeed());
             this.setTexture(this.spriteLeft);
+            setDirection(3);
         }
     }
 

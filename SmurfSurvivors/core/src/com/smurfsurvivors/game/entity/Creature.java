@@ -24,6 +24,8 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
     public int getDirection(){
         return direction;
     }
+
+    public void setDirection(int direction){ this.direction = direction; }
     public float getSpeed(){ return speed; }
     public void move(float dx, float dy){
         setX(getX() + dx);
