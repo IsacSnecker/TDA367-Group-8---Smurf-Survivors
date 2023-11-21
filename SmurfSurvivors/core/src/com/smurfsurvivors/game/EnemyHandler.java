@@ -17,7 +17,7 @@ public class EnemyHandler {
     Random rnd = new Random();
 
     public EnemyHandler(){
-        this.enemyFactory = new EnemyFactory();
+        //this.enemyFactory = new EnemyFactory();
         this.spawnReady = true;
         this.spawnRate = 5;
     }
@@ -41,6 +41,7 @@ public class EnemyHandler {
             }
         }
         enemyList.removeAll(enemiesToRemove);
+        enemiesToRemove.clear();
     }
 
     public ArrayList<Enemy> getEnemies(){

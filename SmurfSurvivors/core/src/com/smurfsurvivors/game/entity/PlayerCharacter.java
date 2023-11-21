@@ -13,7 +13,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     private int xp;
     private int level;
-
+    private Texture spriteRight;
+    private Texture spriteLeft;
     private int maxHealth;
     private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
     private List<ActiveWeapon> abilities; //Should be List<Ability>
@@ -27,6 +28,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         this.xp = 0;
         this.level = 1;
         this.maxHealth = health;
+        this.spriteRight = new Texture("Player/smurf-100x100-right.png");
+        this.spriteLeft = new Texture("Player/smurf-100x100.png");
     }
     //private
 
@@ -37,7 +40,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         abilities.add(ability);
     }
     public void usePassiveWeapon(Vector2 enemyPosition){
-        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()), enemyPosition);
+        WHandler.passiveWeaponUpdate(getPosition(), enemyPosition);
     }
     public void useAbility(ActiveWeapon ability){
         ability.performAttack();
@@ -57,11 +60,11 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         }
         if (inputList.get(2) == 1 && inputList.get(3) != 1){
             this.setX(this.getX() + 10);
-            this.setTexture(new Texture("Player/smurf-100x100-right.png"));
+            this.setTexture(this.spriteRight);
         }
         if (inputList.get(3) == 1 && inputList.get(2) != 1){
             this.setX(this.getX() - 10);
-            this.setTexture(new Texture("Player/smurf-100x100.png"));
+            this.setTexture(this.spriteLeft);
         }
     }
 
