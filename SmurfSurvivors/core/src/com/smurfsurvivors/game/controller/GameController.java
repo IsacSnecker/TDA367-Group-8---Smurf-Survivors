@@ -44,7 +44,7 @@ public class GameController implements Observer {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             model.togglePaused();
         }
-        model.updatePlayerPosition(new ArrayList<Integer>(Arrays.asList(inputUp, inputDown, inputRight, inputLeft)));
+        model.updatePlayerPosition(new ArrayList<Integer>(Arrays.asList(inputUp, inputRight, inputDown, inputLeft)));
     }
 
     public void observerInit() {
