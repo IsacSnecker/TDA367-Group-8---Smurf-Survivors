@@ -20,10 +20,15 @@ public abstract class Enemy extends Creature{
         float dx = 0;
         float dy = 0;
         float radianDegree;
-        /*if(differenceX > 0 && differenceY > 0){
+        if(differenceX > 0 && differenceY > 0){
             radianDegree = (float)Math.atan(differenceY/differenceX);
-            dx = Math.sin(radianDegree*di)
-        }*/
+            System.out.println(getSpeed());
+            dx = (float)(Math.tan(radianDegree)*getSpeed());
+            dy = (float)(getSpeed()/Math.tan(radianDegree));
+            move(dx, dy);
+            System.out.println(dx);
+            System.out.println(dy);
+        }
 
         /*if(entity.getX() < getX() && entity.getY() < getY()){
             move(-speed, -speed);

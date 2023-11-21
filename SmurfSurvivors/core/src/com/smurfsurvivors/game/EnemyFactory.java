@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class EnemyFactory {
     Random rnd = new Random();
-    int spawnDistance = 1500;
+    int spawnDistance = 200;
     int spawnRange = 2000;
     public EnemyFactory(){
 
