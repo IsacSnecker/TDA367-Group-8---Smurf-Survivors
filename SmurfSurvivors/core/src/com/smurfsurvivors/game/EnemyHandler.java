@@ -41,6 +41,7 @@ public class EnemyHandler {
             }
         }
         enemyList.removeAll(enemiesToRemove);
+        enemiesToRemove.clear();
     }
 
     public ArrayList<Enemy> getEnemies(){

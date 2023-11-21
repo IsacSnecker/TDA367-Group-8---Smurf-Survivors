@@ -33,6 +33,7 @@ public class AbstractWeaponHandler {
             Weapon.update(enemyPosition);
         }
         WeaponList.removeAll(knivesToRemove);
+        knivesToRemove.clear();
         if(useable){
             spawnProjectile(position);
             useable = false;

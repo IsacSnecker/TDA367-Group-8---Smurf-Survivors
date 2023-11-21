@@ -120,10 +120,10 @@ public class GameModel implements Observable {
             updatePlayerHealth();
 
             if(!getEnemies().isEmpty()){
-                player.WHandler.passiveWeaponUpdate(new Vector2(player.getX(),player.getY()), getPositionOfEntity(getNearestEnemy()));
+                player.usePassiveWeapon(getNearestEnemyPosition());
                 enemyProjectileCollision();
             }
-            //enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
+            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
         }
 
@@ -134,19 +134,15 @@ public class GameModel implements Observable {
         return enemyHandler.getEnemies();
     }
 
-    public Vector2 getPositionOfEntity(Entity entity){
-        return new Vector2(entity.getX(),entity.getY());
-    }
-
-    public Enemy getNearestEnemy(){
+    public Vector2 getNearestEnemyPosition(){
         enemyList = getEnemies();
         Enemy nearestEnemy = enemyList.get(0);
         for(Enemy enemy: enemyList){
-            if(calculateDistance(new Vector2(enemy.getX(), enemy.getY()), new Vector2(player.getX(), player.getY())) < calculateDistance(new Vector2(nearestEnemy.getX(), nearestEnemy.getY()), new Vector2(player.getX(), player.getY()))){
+            if(calculateDistance(enemy.getPosition(), player.getPosition()) < calculateDistance(nearestEnemy.getPosition(), player.getPosition())){
                 nearestEnemy = enemy;
             }
         }
-        return nearestEnemy;
+        return nearestEnemy.getPosition();
     }
 
     public void enemyProjectileCollision(){

@@ -40,7 +40,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         abilities.add(ability);
     }
     public void usePassiveWeapon(Vector2 enemyPosition){
-        WHandler.passiveWeaponUpdate(new Vector2(getX(),getY()), enemyPosition);
+        WHandler.passiveWeaponUpdate(getPosition(), enemyPosition);
     }
     public void useAbility(ActiveWeapon ability){
         ability.performAttack();
