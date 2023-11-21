@@ -3,6 +3,7 @@ package com.smurfsurvivors.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -26,6 +27,8 @@ public class GameView implements Observer {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private SpriteBatch hudBatch;
+
+    private BitmapFont font = new BitmapFont();
 
     private IHUD hud;
 
