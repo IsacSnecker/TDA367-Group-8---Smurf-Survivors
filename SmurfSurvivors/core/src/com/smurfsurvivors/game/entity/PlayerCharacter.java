@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.Math.*;
+
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
 
     private int xp;
@@ -21,8 +23,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public WeaponHandler WHandler = new WeaponHandler();
 
-    public PlayerCharacter(int health, Texture sprite, int x, int y, int width, int height, int speed) {
-        super(health, sprite, x, y, width, height, speed);
+    public PlayerCharacter(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
+        super(health, sprite, x, y, width, height, speed, direction);
         WHandler.addWeaponHandler(new KnifeHandler());
         WHandler.addWeaponHandler(new MissileHandler());
         this.xp = 0;
@@ -52,20 +54,48 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     }
 
     public void updatePosition(ArrayList<Integer> inputList){
-        if (inputList.get(0) == 1 && inputList.get(1) != 1){
-            this.setY(this.getY() + 10);
+        float dx = 0;
+        float dy = 0;
+        if(inputList.get(0) == 1 && inputList.get(1) == 1){
+            dx =  calculateSpeedWhenDiagonal();
+            dy =  calculateSpeedWhenDiagonal();
+            move(dx, dy);
         }
-        if (inputList.get(1) == 1 && inputList.get(0) != 1){
-            this.setY(this.getY() - 10);
+        else if(inputList.get(0) == 1 && inputList.get(3) == 1){
+            dx = calculateSpeedWhenDiagonal();
+            dy = calculateSpeedWhenDiagonal();
+            move(-dx, dy);
+
         }
-        if (inputList.get(2) == 1 && inputList.get(3) != 1){
-            this.setX(this.getX() + 10);
+        else if(inputList.get(2) == 1 && inputList.get(1) == 1){
+            dx = calculateSpeedWhenDiagonal();
+            dy = calculateSpeedWhenDiagonal();
+            move(dx, -dy);
+        }
+        else if(inputList.get(2) == 1 && inputList.get(3) == 1){
+            dx = calculateSpeedWhenDiagonal();
+            dy = calculateSpeedWhenDiagonal();
+            move(-dx, -dy);
+
+        }
+        else if (inputList.get(0) == 1 && inputList.get(2) != 1){
+            this.setY(this.getY() + getSpeed());
+        }
+        else if (inputList.get(1) == 1 && inputList.get(3) != 1){
+            this.setX(this.getX() + getSpeed());
             this.setTexture(this.spriteRight);
         }
-        if (inputList.get(3) == 1 && inputList.get(2) != 1){
-            this.setX(this.getX() - 10);
+        else if (inputList.get(2) == 1 && inputList.get(0) != 1){
+            this.setY(this.getY() - getSpeed());
+        }
+        else if (inputList.get(3) == 1 && inputList.get(1) != 1){
+            this.setX(this.getX() - getSpeed());
             this.setTexture(this.spriteLeft);
         }
+    }
+
+    private float calculateSpeedWhenDiagonal(){
+        return (float)sqrt(pow(getSpeed(), 2.0)/2);
     }
 
     public int getXP() {

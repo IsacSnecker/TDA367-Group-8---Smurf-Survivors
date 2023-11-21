@@ -22,11 +22,11 @@ public class EnemyHandler {
         this.spawnRate = 5;
     }
 
-    public void spawnDemons(int numDemons, int playerX, int playerY){
+    public void spawnDemons(int numDemons, float playerX, float playerY){
         enemyList.addAll(enemyFactory.makeDemons(numDemons, playerX, playerY));
     }
 
-    public void spawnGargamels(int numGargamels, int playerX, int playerY) {
+    public void spawnGargamels(int numGargamels, float playerX, float playerY) {
         enemyList.addAll(enemyFactory.makeGargamels(numGargamels, playerX, playerY));
 
     }
@@ -48,7 +48,7 @@ public class EnemyHandler {
         return enemyList;
     }
 
-    public void spawnNewEnemies(long seconds, int playerX, int playerY, double spawnRateMultiplier){
+    public void spawnNewEnemies(long seconds, float playerX, float playerY, double spawnRateMultiplier){
         if (seconds % 10 != 0){
             spawnReady = true;
         }
