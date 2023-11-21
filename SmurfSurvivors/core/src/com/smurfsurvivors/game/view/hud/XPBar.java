@@ -7,18 +7,21 @@ public class XPBar {
 
     private int level;
     private int xp;
-
     private Batch hudBatch;
+    private Texture barEmptyTexture;
+    private Texture xpBarFullTexture;
 
     public XPBar(int level, int xp, Batch hudBatch) {
         this.level = level;
         this.xp = xp;
         this.hudBatch = hudBatch;
+        this.barEmptyTexture = new Texture("UI/barEmpty.png");
+        this.xpBarFullTexture = new Texture("UI/xpBarFull.png");
     }
 
     public void render() {
-            hudBatch.draw(new Texture("UI/barEmpty.png"), 0, 40, 200, 40);
-            hudBatch.draw(new Texture("UI/xpBarFull.png"),0, 40, this.xp, 40);
+            hudBatch.draw(barEmptyTexture, 0, 40, 200, 40);
+            hudBatch.draw(xpBarFullTexture,0, 40, this.xp, 40);
     }
 
 }
