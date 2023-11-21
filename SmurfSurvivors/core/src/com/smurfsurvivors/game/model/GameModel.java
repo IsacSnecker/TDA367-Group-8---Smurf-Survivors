@@ -17,7 +17,6 @@ public class GameModel implements Observable {
 
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
-    private ArrayList<Enemy> enemyList;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
     private Difficulty difficulty;
@@ -121,6 +120,8 @@ public class GameModel implements Observable {
 
             if(!getEnemies().isEmpty()){
                 player.usePassiveWeapon(getNearestEnemyPosition());
+                player.WHandler.updateWeaponCooldowns();
+                enemyPlayerCollision();
                 enemyProjectileCollision();
             }
             enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
@@ -135,7 +136,7 @@ public class GameModel implements Observable {
     }
 
     public Vector2 getNearestEnemyPosition(){
-        enemyList = getEnemies();
+        ArrayList<Enemy> enemyList = getEnemies();
         Enemy nearestEnemy = enemyList.get(0);
         for(Enemy enemy: enemyList){
             if(calculateDistance(enemy.getPosition(), player.getPosition()) < calculateDistance(nearestEnemy.getPosition(), player.getPosition())){
@@ -153,6 +154,44 @@ public class GameModel implements Observable {
                     player.WHandler.removeProjectile(projectile);
                 }
             }
+        }
+    }
+
+    public void enemyPlayerCollision(){
+        ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+        for(Enemy enemy : getEnemies()){
+            if(enemy.getRectangle().overlaps(player.getRectangle())){
+                player.decreaseHealth(10);
+                int distanceMultiplier = 4;
+                if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
+                    player.move(-player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
+                }
+                else if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y > enemy.getPosition().y){
+                    player.move(-player.getSpeed() * distanceMultiplier, player.getSpeed() * distanceMultiplier);
+                }
+                else if(player.getPosition().x > enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
+                    player.move(player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
+                }
+                else if(player.getPosition().x > enemy.getPosition().x && player.getPosition().y > enemy.getPosition().y){
+                    player.move(player.getSpeed() * distanceMultiplier, player.getSpeed() * distanceMultiplier);
+                }
+                else if(player.getPosition().x > enemy.getPosition().x){
+                    player.move(player.getSpeed() * distanceMultiplier, 0);
+                }
+                else if(player.getPosition().y > enemy.getPosition().y){
+                    player.move(0, player.getSpeed() * distanceMultiplier);
+                }
+                else if(player.getPosition().x < enemy.getPosition().x){
+                    player.move(-player.getSpeed() * distanceMultiplier, 0);
+                }
+                else if(player.getPosition().y < enemy.getPosition().y){
+                    player.move(0, -player.getSpeed() * distanceMultiplier);
+                }
+                enemiesToRemove.add(enemy);
+            }
+        }
+        for(Enemy enemy : enemiesToRemove){
+            enemyHandler.removeEnemy(enemy);
         }
     }
 

@@ -2,6 +2,6 @@ package com.smurfsurvivors.game.view.hud;
 
 public interface IHUD {
 
-     void renderHUD();
+     void renderHUD(int health);
 
 }

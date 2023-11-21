@@ -20,10 +20,9 @@ public class HealthBar  {
     }
 
 
-    public void render() {
+    public void render(int _currentHealth) {
+        currentHealth = _currentHealth;
         hudBatch.draw(barEmptyTexture, 0, 0, maxHealth * 2, 40);
         hudBatch.draw(healthBarFullTexture, 0, 0, currentHealth * 2, 40);
     }
-
-
 }

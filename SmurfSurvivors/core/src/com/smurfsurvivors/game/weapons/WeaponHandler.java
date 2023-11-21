@@ -54,4 +54,9 @@ public class WeaponHandler {
         }
     }
 
+    public void updateWeaponCooldowns(){
+        for(IHandler handler : handlerList){
+            handler.updateWeaponCooldown();
+        }
+    }
 }
