@@ -17,33 +17,26 @@ public abstract class Enemy extends Creature{
     public void moveTowardsEntity(Entity entity){
         float differenceX = entity.getX() - getX();
         float differenceY = entity.getY() - getY();
-        float dx;
-        float dy;
-        float radianDegree;
+
         if(differenceX > 0 && differenceY > 0){
-            radianDegree = calculateRadianDegree(differenceX, differenceY);
-            dx = calculatedx(radianDegree);
-            dy = calculatedy(radianDegree);
-            move(dx, dy);
+            calculateDirectionAndMove(differenceX, differenceY, 1, 1);
         }
         else if(differenceX > 0 && differenceY < 0){
-            radianDegree = calculateRadianDegree(differenceX, -differenceY);
-            dx = calculatedx(radianDegree);
-            dy = calculatedy(radianDegree);
-            move(dx, -dy);
+            calculateDirectionAndMove(differenceX, differenceY, 1, -1);
         }
         else if(differenceX < 0 && differenceY > 0){
-            radianDegree = calculateRadianDegree(-differenceX, differenceY);
-            dx = calculatedx(radianDegree);
-            dy = calculatedy(radianDegree);
-            move(-dx, dy);
+            calculateDirectionAndMove(differenceX, differenceY, -1, 1);
         }
         else if(differenceX < 0 && differenceY < 0){
-            radianDegree = calculateRadianDegree(-differenceX, -differenceY);
-            dx = calculatedx(radianDegree);
-            dy = calculatedy(radianDegree);
-            move(-dx, -dy);
+            calculateDirectionAndMove(differenceX, differenceY, -1, -1);
         }
+    }
+
+    private void calculateDirectionAndMove(float differenceX, float differenceY, int signX, int signY){
+        float radianDegree = calculateRadianDegree(signX*differenceX, signY*differenceY);
+        float dx = calculatedx(radianDegree);
+        float dy = calculatedy(radianDegree);
+        move(signX*dx, signY*dy);
     }
 
     private float calculateRadianDegree(float differenceX, float differenceY){
