@@ -39,17 +39,13 @@ public abstract class Enemy extends Creature{
         move(signX*dx, signY*dy);
     }
 
-    private float calculateRadianDegree(float differenceX, float differenceY){
-        return (float)Math.atan(differenceX/differenceY);
-    }
+    private float calculateRadianDegree(float differenceX, float differenceY){ return (float)Math.atan(differenceX/differenceY); }
 
     private float calculatedx(float radianDegree){
         return (float)(Math.sin(radianDegree)*getSpeed());
     }
 
-    private float calculatedy(float radianDegree){
-        return (float)(Math.cos(radianDegree)*getSpeed());
-    }
+    private float calculatedy(float radianDegree){ return (float)(Math.cos(radianDegree)*getSpeed()); }
 
     public void damageEntity(HasHealth entity){
         entity.decreaseHealth(attackPower);
