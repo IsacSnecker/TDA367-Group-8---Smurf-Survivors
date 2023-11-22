@@ -47,7 +47,6 @@ public abstract  class EnemyFactory {
     */
 
     private static int[] chooseSpawnCoordinates(float _playerX, float _playerY){
-
         int whichCoordinateOutside = rnd.nextInt(0, 4);
         int spawnX;
         int spawnY;
