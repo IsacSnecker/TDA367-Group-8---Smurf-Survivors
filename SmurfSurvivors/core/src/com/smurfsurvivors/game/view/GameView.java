@@ -3,6 +3,7 @@ package com.smurfsurvivors.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -72,7 +73,7 @@ public class GameView implements Observer {
     }
 
     private void mapInit() {
-        map = new TmxMapLoader().load("Map/TestMap/TestMap.tmx");
+        map = new TmxMapLoader().load("Map/TestMap/smurfsurvivors500x500-map.tmx");
     }
 
     private void batchInit() {

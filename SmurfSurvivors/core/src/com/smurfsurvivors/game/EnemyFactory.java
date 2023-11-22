@@ -19,8 +19,6 @@ public abstract  class EnemyFactory {
         for (int i = 0; i < numDemons; i++){
             int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
             demons.add(new Demon(spawnCoordinates[0], spawnCoordinates[1]));
-            System.out.println(spawnCoordinates[0]);
-            System.out.println(spawnCoordinates[1]);
         }
         return demons;
     }
