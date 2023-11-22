@@ -103,6 +103,10 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         return (float)sqrt(pow(getSpeed(), 2.0)/2);
     }
 
+    public void addXP(int amount) {
+        this.xp += amount;
+    }
+
     public int getXP() {
         return this.xp;
     }

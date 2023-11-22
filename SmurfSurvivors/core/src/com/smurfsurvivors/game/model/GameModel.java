@@ -27,16 +27,20 @@ public class GameModel implements Observable {
     private Boolean isPaused = false;
 
     public GameModel(Difficulty difficulty){
+
         this.difficulty = difficulty;
+        this.collisionHandler = new CollisionHandler();
+        this.observerList = new ArrayList<Observer>();
+        this.enemyHandler = new EnemyHandler();
+
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
         soundTrack.setLooping(true); //
         soundTrack.play(); //Should probably not be here
-        this.collisionHandler = new CollisionHandler();
-        this.observerList = new ArrayList<Observer>();
-        enemyHandler = new EnemyHandler();
-        clock = new Clock();
+
+        this.clock = new Clock();
         clock.startClock();
         initializeObservers();
+
     }
     @Override
     public void initializeObservers() {
@@ -68,10 +72,6 @@ public class GameModel implements Observable {
         return this.clock;
     }
 
-    public void addEnemy(Enemy enemy) {
-        enemyHandler.addEnemy(enemy);
-    }
-
     public void setPlayer(PlayerCharacter player) { this.player = player; }
 
     public void togglePaused(){
@@ -98,8 +98,8 @@ public class GameModel implements Observable {
     }
 
     public void updatePlayerHealth(){
-        /*
-        for (Enemy enemy : enemyList){
+
+     /*   for (Enemy enemy : enemyList){
             if (collisionHandler.isCollision(player, enemy)){
                 player.decreaseHealth();
             }
@@ -114,7 +114,9 @@ public class GameModel implements Observable {
     }
 
     public void update() {
+
         if(!isPaused){
+
             updateEnemyPositions();
             updatePlayerHealth();
 
@@ -126,6 +128,7 @@ public class GameModel implements Observable {
             }
             enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
+
         }
 
         notifyObservers();
