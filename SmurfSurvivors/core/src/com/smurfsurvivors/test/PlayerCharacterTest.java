@@ -21,14 +21,14 @@ class PlayerCharacterTest extends LibGDXTest {
 
     @Test
     void addXP() {
-        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"),0,0,32,32,40);
+        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"),0,0,32,32,40, 0);
         player.addXP(100);
         assertEquals(100, player.getXP());
     }
 
     @Test
     void getXP() {
-        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"),0,0,32,32,40);
+        PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"),0,0,32,32,40, 0);
         player.addXP(120);
         assertEquals(120, player.getXP());
     }
@@ -39,14 +39,14 @@ class PlayerCharacterTest extends LibGDXTest {
 
     @Test
     void getMaxHealth() {
-        PlayerCharacter player = new PlayerCharacter(132, new Texture("Player/smurf-100x100.png"),0,0,32,32,40);
+        PlayerCharacter player = new PlayerCharacter(132, new Texture("Player/smurf-100x100.png"),0,0,32,32,40, 0);
         player.decreaseHealth(120);
         assertEquals(132, player.getMaxHealth());
     }
 
     @Test
     void getHealth() {
-        PlayerCharacter player = new PlayerCharacter(132, new Texture("Player/smurf-100x100.png"),0,0,32,32,40);
+        PlayerCharacter player = new PlayerCharacter(132, new Texture("Player/smurf-100x100.png"),0,0,32,32,40, 0);
         player.decreaseHealth(32);
         assertEquals(100,player.getHealth());
     }
