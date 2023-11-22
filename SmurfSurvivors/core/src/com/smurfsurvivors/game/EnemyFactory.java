@@ -19,6 +19,8 @@ public abstract  class EnemyFactory {
         for (int i = 0; i < numDemons; i++){
             int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
             demons.add(new Demon(spawnCoordinates[0], spawnCoordinates[1]));
+            System.out.println(spawnCoordinates[0]);
+            System.out.println(spawnCoordinates[1]);
         }
         return demons;
     }
@@ -57,19 +59,19 @@ public abstract  class EnemyFactory {
         switch(whichCoordinateOutside) {
             case 0:
                 spawnX = rnd.nextInt(playerX - spawnDistance - spawnRange, playerX - spawnDistance);
-                spawnY = rnd.nextInt(-spawnDistance, spawnDistance);
+                spawnY = rnd.nextInt(playerY - spawnDistance, playerY + spawnDistance);
                 break;
             case 1:
                 spawnX = rnd.nextInt(playerX + spawnDistance, playerX + spawnDistance + spawnRange);
-                spawnY = rnd.nextInt(-spawnDistance, spawnDistance);
+                spawnY = rnd.nextInt(playerY - spawnDistance, playerY + spawnDistance);
                 break;
             case 2:
                 spawnY = rnd.nextInt(playerY - spawnDistance - spawnRange, playerY - spawnDistance);
-                spawnX = rnd.nextInt(-spawnDistance, spawnDistance);
+                spawnX = rnd.nextInt(playerX - spawnDistance, playerX + spawnDistance);
                 break;
             case 3:
                 spawnY = rnd.nextInt(playerY + spawnDistance, playerY + spawnDistance + spawnRange);
-                spawnX = rnd.nextInt(-spawnDistance, spawnDistance);
+                spawnX = rnd.nextInt(playerX - spawnDistance, playerX + spawnDistance);
                 break;
             default:
                 spawnX = spawnDistance;

@@ -11,23 +11,21 @@ import java.util.Random;
 
 public class EnemyHandler {
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-    private EnemyFactory enemyFactory;
     private boolean spawnReady;
     private double spawnRate;
     Random rnd = new Random();
 
     public EnemyHandler(){
-        //this.enemyFactory = new EnemyFactory();
         this.spawnReady = true;
         this.spawnRate = 5;
     }
 
     public void spawnDemons(int numDemons, float playerX, float playerY){
-        enemyList.addAll(enemyFactory.makeDemons(numDemons, playerX, playerY));
+        enemyList.addAll(EnemyFactory.makeDemons(numDemons, playerX, playerY));
     }
 
     public void spawnGargamels(int numGargamels, float playerX, float playerY) {
-        enemyList.addAll(enemyFactory.makeGargamels(numGargamels, playerX, playerY));
+        enemyList.addAll(EnemyFactory.makeGargamels(numGargamels, playerX, playerY));
 
     }
 
