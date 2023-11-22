@@ -8,7 +8,6 @@ public class Gargamel extends Enemy{
     public Gargamel(int x, int y) {
         super(100, 100, gargamelTexture, x, y, 150, 150, 2);
     }
-
     public void performAttack(){
 
     }

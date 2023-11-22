@@ -68,6 +68,10 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         }
     }
 
+    public void addXP(int amount) {
+        this.xp += amount;
+    }
+
     public int getXP() {
         return this.xp;
     }
