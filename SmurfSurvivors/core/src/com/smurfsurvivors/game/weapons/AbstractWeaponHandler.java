@@ -17,20 +17,22 @@ abstract class AbstractWeaponHandler implements IHandler{
     float cooldown;
     boolean useable;
     long oldTime;
+    WeaponInformationHandler weaponInformationHandler;
 
-    public AbstractWeaponHandler(float _cooldown){
+    public AbstractWeaponHandler(float _cooldown, WeaponInformationHandler weaponInformationHandler){
         cooldown = _cooldown;
         useable = true;
         oldTime = 0;
+        this.weaponInformationHandler = weaponInformationHandler;
     }
 
-    public void updateProjectiles(Vector2 position, long currentTime, Vector2 enemyPosition, int playerDirection){
+    public void updateProjectiles(Vector2 position, long currentTime){
         ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon Weapon : WeaponList){
             if(calculateDistance(new Vector2(Weapon.position.x, Weapon.position.y), Weapon.originalPosition) > Weapon.attackRange){
                 knivesToRemove.add(Weapon);
             }
-            Weapon.update(enemyPosition, playerDirection);
+            updateProjectile(Weapon);
         }
         WeaponList.removeAll(knivesToRemove);
         knivesToRemove.clear();
@@ -42,6 +44,8 @@ abstract class AbstractWeaponHandler implements IHandler{
             useable = true;
         }
     }
+
+    public abstract void updateProjectile(AbstractWeapon Weapon);
 
     public void renderProjectiles(SpriteBatch batch){
         for(AbstractWeapon Weapon : WeaponList){

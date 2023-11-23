@@ -122,7 +122,8 @@ public class GameModel implements Observable {
             updatePlayerHealth();
 
             if(!getEnemies().isEmpty()){
-                player.usePassiveWeapon(getNearestEnemyPosition());
+                player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
+                player.usePassiveWeapon();
                 player.WHandler.updateWeaponCooldowns();
                 enemyPlayerCollision();
                 enemyProjectileCollision();
@@ -140,6 +141,10 @@ public class GameModel implements Observable {
     }
 
     public Vector2 getNearestEnemyPosition(){
+        return getNearestEnemy().getPosition();
+    }
+
+    public Enemy getNearestEnemy(){
         ArrayList<Enemy> enemyList = getEnemies();
         Enemy nearestEnemy = enemyList.get(0);
         for(Enemy enemy: enemyList){
@@ -147,7 +152,7 @@ public class GameModel implements Observable {
                 nearestEnemy = enemy;
             }
         }
-        return nearestEnemy.getPosition();
+        return nearestEnemy;
     }
 
     public void enemyProjectileCollision(){

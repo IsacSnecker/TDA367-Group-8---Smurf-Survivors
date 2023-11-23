@@ -9,9 +9,8 @@ public interface IHandler {
 
     void spawnProjectile(Vector2 position);
     ArrayList<AbstractWeapon> getProjectiles();
-    void updateProjectiles(Vector2 position, long time, Vector2 enemyPosition, int playerDirection);
+    void updateProjectiles(Vector2 position, long time);
     void renderProjectiles(SpriteBatch batch);
     void removeProjectile(AbstractWeapon projectile);
-
     void updateWeaponCooldown();
 }
