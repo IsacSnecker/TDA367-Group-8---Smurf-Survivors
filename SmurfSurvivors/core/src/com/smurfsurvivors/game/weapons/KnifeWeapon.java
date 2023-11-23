@@ -9,8 +9,23 @@ public class KnifeWeapon extends PassiveWeapon{
 
     }
 
-    public void update(Vector2 enemyPosition){
-        move(velocity,0);
+    public void update(Vector2 enemyPosition, int playerDirection) {
+        if (playerDirection == 0) {
+            move(0, velocity);
+        } else if (playerDirection == 1) {
+            move(velocity, velocity);
+        } else if (playerDirection == 2) {
+            move(velocity, 0);
+        } else if (playerDirection == 3) {
+            move(velocity, -velocity);
+        } else if (playerDirection == 4) {
+            move(0, -velocity);
+        } else if (playerDirection == 5) {
+            move(-velocity, -velocity);
+        } else if (playerDirection == 6) {
+            move(-velocity, 0);
+        } else if (playerDirection == 7) {
+            move(-velocity, velocity);
+        }
+        }
     }
-
-}

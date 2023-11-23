@@ -9,7 +9,7 @@ public class MissileWeapon extends PassiveWeapon{
         super(_position, weaponTexture, 50f,100f, 1500f, 20, 200, "Missile");
     }
 
-    void update(Vector2 enemyPosition) {
+    void update(Vector2 enemyPosition, int enemyDirection){
         moveTowardsPosition(enemyPosition);
     }
 }

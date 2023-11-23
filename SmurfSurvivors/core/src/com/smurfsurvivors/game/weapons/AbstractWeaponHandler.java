@@ -3,7 +3,6 @@ package com.smurfsurvivors.game.weapons;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.smurfsurvivors.game.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,13 +24,13 @@ abstract class AbstractWeaponHandler implements IHandler{
         oldTime = 0;
     }
 
-    public void updateProjectiles(Vector2 position, long currentTime, Vector2 enemyPosition){
+    public void updateProjectiles(Vector2 position, long currentTime, Vector2 enemyPosition, int playerDirection){
         ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon Weapon : WeaponList){
             if(calculateDistance(new Vector2(Weapon.position.x, Weapon.position.y), Weapon.originalPosition) > Weapon.attackRange){
                 knivesToRemove.add(Weapon);
             }
-            Weapon.update(enemyPosition);
+            Weapon.update(enemyPosition, playerDirection);
         }
         WeaponList.removeAll(knivesToRemove);
         knivesToRemove.clear();

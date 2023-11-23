@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MissileHandler extends AbstractWeaponHandler implements IHandler{
     public MissileHandler(){
-        super(5000f);
+        super(1000f);
     }
 
     public static Texture weaponTexture = new Texture("Weapons/missile.png");
