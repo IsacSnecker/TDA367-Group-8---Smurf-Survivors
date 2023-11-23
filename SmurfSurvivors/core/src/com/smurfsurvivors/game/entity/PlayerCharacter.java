@@ -42,6 +42,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         abilities.add(ability);
     }
     public void usePassiveWeapon(Vector2 enemyPosition){
+        WHandler.updatePlayerDirection(getDirection());
         WHandler.passiveWeaponUpdate(getPosition(), enemyPosition);
     }
     public void useAbility(ActiveWeapon ability){
@@ -82,12 +83,12 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         else if (inputList.get(1) == 1 && inputList.get(3) != 1){
             move(getSpeed(), 0);
             this.setTexture(this.spriteRight);
-            setDirection(1);
+            setDirection(2);
         }
         else if (inputList.get(3) == 1 && inputList.get(1) != 1){
             move(-getSpeed(), 0);
             this.setTexture(this.spriteLeft);
-            setDirection(3);
+            setDirection(6);
         }
         else if (inputList.get(2) == 1 && inputList.get(0) != 1){
             move(0, -getSpeed());

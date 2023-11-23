@@ -10,6 +10,8 @@ import java.util.Collection;
 
 public class WeaponHandler {
     long startTime;
+    int playerDirection = 1;
+
     public interface List<E> extends Collection<E>{};
 
     ArrayList<IHandler> handlerList = new ArrayList<IHandler>();
@@ -25,7 +27,7 @@ public class WeaponHandler {
     public void passiveWeaponUpdate(Vector2 position, Vector2 enemyPosition){
         long elapsedTime = TimeUtils.timeSinceMillis(startTime);
         for(IHandler handler : handlerList){
-            handler.updateProjectiles(position, elapsedTime, enemyPosition);
+            handler.updateProjectiles(position, elapsedTime, enemyPosition, playerDirection);
         }
     }
 
@@ -58,5 +60,9 @@ public class WeaponHandler {
         for(IHandler handler : handlerList){
             handler.updateWeaponCooldown();
         }
+    }
+
+    public void updatePlayerDirection(int direction) {
+        playerDirection = direction;
     }
 }

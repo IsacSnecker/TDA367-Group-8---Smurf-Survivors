@@ -29,7 +29,7 @@ public abstract class AbstractWeapon{
         attackDamage = _attackDamage;
         weaponName = _weaponName;
     }
-    abstract void update(Vector2 position);
+    abstract void update(Vector2 position, int playerDirection);
     public void performAttack() {
     }
 
@@ -65,35 +65,50 @@ public abstract class AbstractWeapon{
     }
 
     public void moveTowardsPosition(Vector2 position){
-        float x = position.x;
-        float y = position.y;
-        if(x < getX() && y < getY()){
-            move(-velocity, -velocity);
+        float differenceX = position.x - getX();
+        float differenceY = position.y - getY();
+        float dx;
+        float dy;
+        float radianDegree;
+        if(differenceX > 0 && differenceY > 0){
+            radianDegree = calculateRadianDegree(differenceX, differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
+            move(dx, dy);
         }
-        else if(x < getX() && y > getY()){
-            move(-velocity, velocity);
+        else if(differenceX > 0 && differenceY < 0){
+            radianDegree = calculateRadianDegree(differenceX, -differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
+            move(dx, -dy);
         }
-        else if(x > getX() && y < getY()){
-            move(velocity, -velocity);
+        else if(differenceX < 0 && differenceY > 0){
+            radianDegree = calculateRadianDegree(-differenceX, differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
+            move(-dx, dy);
         }
-        else if(x > getX() && y > getY()) {
-            move(velocity, velocity);
-        }
-        else if(x > getX()){
-            move(velocity, 0);
-        }
-        else if(y > getY()){
-            move(0, velocity);
-        }
-        else if(x < getX()){
-            move(-velocity, 0);
-        }
-        else if(y < getY()){
-            move(0, -velocity);
+        else if(differenceX < 0 && differenceY < 0){
+            radianDegree = calculateRadianDegree(-differenceX, -differenceY);
+            dx = calculatedx(radianDegree);
+            dy = calculatedy(radianDegree);
+            move(-dx, -dy);
         }
     }
 
-    public void move(int dx, int dy){
+    private float calculateRadianDegree(float differenceX, float differenceY){
+        return (float)Math.atan(differenceX/differenceY);
+    }
+
+    private float calculatedx(float radianDegree){
+        return (float)(Math.sin(radianDegree)*velocity);
+    }
+
+    private float calculatedy(float radianDegree){
+        return (float)(Math.cos(radianDegree)*velocity);
+    }
+
+    public void move(float dx, float dy){
         setX(getX() + dx);
         setY(getY() + dy);
     }
