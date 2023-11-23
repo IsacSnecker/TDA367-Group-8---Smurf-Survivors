@@ -4,12 +4,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class KnifeWeapon extends PassiveWeapon{
 
-    public KnifeWeapon(Vector2 _position, Texture weaponTexture){
+    int playerDirection;
+    public KnifeWeapon(Vector2 _position, Texture weaponTexture, int playerDirection){
         super(_position, weaponTexture, 50f,50f, 500f, 20, 50, "Knife");
+        this.playerDirection = playerDirection;
 
     }
 
-    public void update(Vector2 enemyPosition, int playerDirection) {
+    public void update() {
         if (playerDirection == 0) {
             move(0, velocity);
         } else if (playerDirection == 1) {

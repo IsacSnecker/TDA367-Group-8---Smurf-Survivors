@@ -29,7 +29,7 @@ public abstract class AbstractWeapon{
         attackDamage = _attackDamage;
         weaponName = _weaponName;
     }
-    abstract void update(Vector2 position, int playerDirection);
+    abstract void update();
     public void performAttack() {
     }
 

@@ -22,11 +22,12 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     private List<ActiveWeapon> abilities; //Should be List<Ability>
 
     public WeaponHandler WHandler = new WeaponHandler();
+    public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
 
     public PlayerCharacter(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
         super(health, sprite, x, y, width, height, speed, direction);
-        WHandler.addWeaponHandler(new KnifeHandler());
-        WHandler.addWeaponHandler(new MissileHandler());
+        WHandler.addWeaponHandler(new KnifeHandler(weaponInformationHandler));
+        WHandler.addWeaponHandler(new MissileHandler(weaponInformationHandler));
         this.xp = 0;
         this.level = 1;
         this.maxHealth = health;
@@ -41,9 +42,9 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public void addAbility(ActiveWeapon ability){
         abilities.add(ability);
     }
-    public void usePassiveWeapon(Vector2 enemyPosition){
+    public void usePassiveWeapon(){
         WHandler.updatePlayerDirection(getDirection());
-        WHandler.passiveWeaponUpdate(getPosition(), enemyPosition);
+        WHandler.passiveWeaponUpdate(getPosition());
     }
     public void useAbility(ActiveWeapon ability){
         ability.performAttack();
