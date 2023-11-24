@@ -6,6 +6,7 @@ public abstract class Enemy extends Creature{
     private int attackPower;
     private float speed;
     private int xpGive;
+    private boolean isDead = false;
 
     public Enemy(int attackPower, int health, Texture sprite, float x, float y, int width, int height, float speed, int direction, int xpGive) {
         super(health, sprite, x, y, width, height, speed, direction);
@@ -51,6 +52,14 @@ public abstract class Enemy extends Creature{
 
     public void damageEntity(HasHealth entity){
         entity.decreaseHealth(attackPower);
+    }
+
+    public boolean getIsDead(){
+        return isDead;
+    }
+
+    public void setIsDead(boolean isDead){
+        this.isDead = isDead;
     }
 
 }

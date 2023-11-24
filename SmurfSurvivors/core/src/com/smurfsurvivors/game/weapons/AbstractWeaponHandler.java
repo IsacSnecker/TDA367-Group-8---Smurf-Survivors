@@ -18,6 +18,7 @@ abstract class AbstractWeaponHandler implements IHandler{
     boolean useable;
     long oldTime;
     WeaponInformationHandler weaponInformationHandler;
+    public ArrayList<AbstractWeapon> weaponsToRemove = new ArrayList<AbstractWeapon>();
 
     public AbstractWeaponHandler(float _cooldown, WeaponInformationHandler weaponInformationHandler){
         cooldown = _cooldown;
@@ -27,15 +28,14 @@ abstract class AbstractWeaponHandler implements IHandler{
     }
 
     public void updateProjectiles(Vector2 position, long currentTime){
-        ArrayList<AbstractWeapon> knivesToRemove = new ArrayList<AbstractWeapon>();
         for(AbstractWeapon Weapon : WeaponList){
             if(calculateDistance(new Vector2(Weapon.position.x, Weapon.position.y), Weapon.originalPosition) > Weapon.attackRange){
-                knivesToRemove.add(Weapon);
+                weaponsToRemove.add(Weapon);
             }
             updateProjectile(Weapon);
         }
-        WeaponList.removeAll(knivesToRemove);
-        knivesToRemove.clear();
+        WeaponList.removeAll(weaponsToRemove);
+        weaponsToRemove.clear();
         if(useable){
             spawnProjectile(position);
             useable = false;
