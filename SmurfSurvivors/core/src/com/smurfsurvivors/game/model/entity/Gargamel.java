@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.entity;
+package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 

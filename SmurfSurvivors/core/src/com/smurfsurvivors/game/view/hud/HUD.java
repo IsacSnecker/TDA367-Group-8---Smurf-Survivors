@@ -1,13 +1,8 @@
 package com.smurfsurvivors.game.view.hud;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.smurfsurvivors.game.Clock;
-import com.smurfsurvivors.game.entity.PlayerCharacter;
-
-import java.awt.*;
+import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 public class HUD implements IHUD {
 

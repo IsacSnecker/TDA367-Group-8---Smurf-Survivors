@@ -2,10 +2,11 @@ package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.*;
-import com.smurfsurvivors.game.entity.*;
+import com.smurfsurvivors.game.model.entity.*;
+import com.smurfsurvivors.game.model.entity.Enemy;
+import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.weapons.AbstractWeapon;
 
 import java.util.ArrayList;

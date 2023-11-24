@@ -2,8 +2,6 @@ package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.smurfsurvivors.game.entity.Entity;
-import sun.security.x509.AVA;
 
 import java.util.ArrayList;
 import java.util.Collection;

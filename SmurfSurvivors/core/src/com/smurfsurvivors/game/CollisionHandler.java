@@ -1,6 +1,6 @@
 package com.smurfsurvivors.game;
 
-import com.smurfsurvivors.game.entity.*;
+import com.smurfsurvivors.game.model.entity.*;
 
 public class CollisionHandler {
 
