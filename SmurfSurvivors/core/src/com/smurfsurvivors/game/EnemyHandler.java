@@ -1,9 +1,6 @@
 package com.smurfsurvivors.game;
-import com.badlogic.gdx.graphics.Texture;
-import com.smurfsurvivors.game.entity.Demon;
-import com.smurfsurvivors.game.entity.Enemy;
-import com.smurfsurvivors.game.entity.Gargamel;
-import com.smurfsurvivors.game.entity.PlayerCharacter;
+import com.smurfsurvivors.game.model.entity.Enemy;
+import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,7 +14,7 @@ public class EnemyHandler {
 
     public EnemyHandler(){
         this.spawnReady = true;
-        this.spawnRate = 5;
+        this.spawnRate = 50;
     }
 
     public void spawnDemons(int numDemons, float playerX, float playerY){

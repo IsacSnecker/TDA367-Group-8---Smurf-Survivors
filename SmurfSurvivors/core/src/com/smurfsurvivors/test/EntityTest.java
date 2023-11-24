@@ -1,13 +1,7 @@
 package com.smurfsurvivors.test;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.headless.HeadlessApplication;
-import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
-import com.smurfsurvivors.game.SmurfSurvivors;
-import com.smurfsurvivors.game.entity.Demon;
-import org.junit.jupiter.api.BeforeAll;
+import com.smurfsurvivors.game.model.entity.Demon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

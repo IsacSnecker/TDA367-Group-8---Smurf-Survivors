@@ -1,9 +1,8 @@
 package com.smurfsurvivors.game;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.smurfsurvivors.game.entity.Demon;
-import com.smurfsurvivors.game.entity.Enemy;
-import com.smurfsurvivors.game.entity.Gargamel;
+import com.smurfsurvivors.game.model.entity.Demon;
+import com.smurfsurvivors.game.model.entity.Enemy;
+import com.smurfsurvivors.game.model.entity.Gargamel;
 
 import java.util.ArrayList;
 import java.util.Random;

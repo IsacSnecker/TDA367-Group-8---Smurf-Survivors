@@ -1,14 +1,17 @@
-package com.smurfsurvivors.game.entity;
+package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Creature extends Entity implements HasHealth, Movable{
     private int health;
+
+    private int maxHealth;
     private int direction;
     private float speed;
     public Creature(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
         super(sprite, x, y, width, height);
         this.health = health;
+        this.maxHealth = health;
         this.speed = speed;
         this.direction = direction;
 
@@ -17,6 +20,20 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
     public int getHealth(){
         return health;
     }
+
+    public void addHealth(int amount) {
+
+        this.health += amount;
+
+        if (health > maxHealth) this.health = maxHealth;
+
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
+    }
+
+
     public void decreaseHealth(int amount){
         health -= amount;
     }

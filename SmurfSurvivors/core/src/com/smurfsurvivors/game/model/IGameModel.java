@@ -1,7 +1,7 @@
 package com.smurfsurvivors.game.model;
 
-import com.smurfsurvivors.game.entity.Enemy;
-import com.smurfsurvivors.game.entity.PlayerCharacter;
+import com.smurfsurvivors.game.model.entity.Enemy;
+import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 import java.util.ArrayList;
 
