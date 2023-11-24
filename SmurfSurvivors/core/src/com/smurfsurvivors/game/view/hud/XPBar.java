@@ -22,6 +22,6 @@ public class XPBar {
     public void render(int _xp, int levelCap) {
         xp = _xp;
         hudBatch.draw(barEmptyTexture, 0, 40, 200, 40);
-        hudBatch.draw(xpBarFullTexture,0, 40, (int)((float)this.xp * (float)(200/levelCap)), 40);
+        hudBatch.draw(xpBarFullTexture,0, 40, (int)((float)this.xp * (float)(200.0/(float)levelCap)), 40);
     }
 }
