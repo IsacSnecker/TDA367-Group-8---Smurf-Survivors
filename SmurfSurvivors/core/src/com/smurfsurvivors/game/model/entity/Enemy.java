@@ -5,12 +5,16 @@ import com.badlogic.gdx.graphics.Texture;
 public abstract class Enemy extends Creature{
     private int attackPower;
     private float speed;
+    private int xpGive;
 
-    public Enemy(int attackPower, int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
+    public Enemy(int attackPower, int health, Texture sprite, float x, float y, int width, int height, float speed, int direction, int xpGive) {
         super(health, sprite, x, y, width, height, speed, direction);
         this.attackPower = attackPower;
         this.speed = speed;
+        this.xpGive = xpGive;
     }
+
+    public int getXpGive(){ return xpGive; }
 
     public void moveTowardsEntity(Entity entity){
         float differenceX = entity.getX() - getX();

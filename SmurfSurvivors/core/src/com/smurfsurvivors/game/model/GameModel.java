@@ -159,6 +159,12 @@ public class GameModel implements Observable {
             for(Enemy enemy : getEnemies()){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
                     enemy.decreaseHealth(projectile.attackDamage);
+                    if (enemy.getHealth() <= 0){
+                        boolean levelUp = player.addXP(enemy.getXpGive());
+                        if(levelUp){
+                            //do sum
+                        }
+                    }
                     player.WHandler.removeProjectile(projectile);
                 }
             }

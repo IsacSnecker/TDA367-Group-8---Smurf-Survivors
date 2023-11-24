@@ -69,7 +69,7 @@ public class GameView implements Observer {
     }
 
     private void mapInit() {
-        map = new TmxMapLoader().load("Map/TestMap/TestMap.tmx");
+        map = new TmxMapLoader().load("Map/TestMap/smurfsurvivors500x500-map.tmx");
     }
 
     private void batchInit() {
@@ -103,11 +103,9 @@ public class GameView implements Observer {
         batch.end();
 
         // Render HUD
-
         hudBatch.begin();
-        hud.renderHUD();
+        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap());
         hudBatch.end();
-
 
     }
 
