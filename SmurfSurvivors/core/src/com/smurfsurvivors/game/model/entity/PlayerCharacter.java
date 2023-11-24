@@ -27,8 +27,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public PlayerCharacter(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
         super(health, sprite, x, y, width, height, speed, direction);
         WHandler.addWeaponHandler(new KnifeHandler(weaponInformationHandler));
-        //WHandler.addWeaponHandler(new MissileHandler(weaponInformationHandler));
-        //WHandler.addWeaponHandler(new MagicHandler(weaponInformationHandler));
         this.xp = 0;
         this.level = 1;
         this.levelCap = 100;
@@ -38,9 +36,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     }
     //private
 
-    public void addPassiveWeapon(PassiveWeapon passiveWeapon){
-        passiveWeapons.add(passiveWeapon);
-    }
     public void addAbility(ActiveWeapon ability){
         abilities.add(ability);
     }
