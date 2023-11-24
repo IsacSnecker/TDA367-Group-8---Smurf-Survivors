@@ -28,9 +28,7 @@ public class GameView implements Observer {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private SpriteBatch hudBatch;
-
     private BitmapFont font = new BitmapFont();
-
     private IHUD hud;
 
     public GameView(GameModel model) {
@@ -47,9 +45,7 @@ public class GameView implements Observer {
         cameraInit();
     }
 
-
     public void observerUpdate() {
-
         renderFrame();
     }
 
@@ -125,11 +121,11 @@ public class GameView implements Observer {
         renderer.dispose();
         batch.dispose();
     }
+
     public void renderPlayerProjectiles(PlayerCharacter player){
         for(IHandler weaponHandler : player.WHandler.getWeaponHandlers()){
             weaponHandler.renderProjectiles(this.batch);
         }
     }
-
 }
 

@@ -132,7 +132,6 @@ public class GameModel implements Observable {
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
 
         }
-
         notifyObservers();
     }
 
