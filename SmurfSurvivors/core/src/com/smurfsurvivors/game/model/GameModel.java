@@ -7,10 +7,10 @@ import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import com.smurfsurvivors.game.weapons.AbstractWeapon;
-import com.smurfsurvivors.game.weapons.MagicHandler;
-import com.smurfsurvivors.game.weapons.MissileHandler;
-import com.smurfsurvivors.game.weapons.WeaponInformationHandler;
+import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.MagicHandler;
+import com.smurfsurvivors.game.model.weapons.MissileHandler;
+import com.smurfsurvivors.game.model.weapons.WeaponInformationHandler;
 import org.lwjgl.Sys;
 
 import java.util.ArrayList;
