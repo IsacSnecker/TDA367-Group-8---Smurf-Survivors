@@ -74,6 +74,10 @@ public class GameModel implements Observable {
         return this.clock;
     }
 
+    public Boolean getIsPaused(){
+        return this.isPaused;
+    }
+
     public void setPlayer(PlayerCharacter player) { this.player = player; }
 
     public void togglePaused(){

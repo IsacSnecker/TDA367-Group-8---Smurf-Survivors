@@ -29,6 +29,7 @@ public class GameView implements Observer {
     private SpriteBatch hudBatch;
     private BitmapFont font = new BitmapFont();
     private IHUD hud;
+    private PauseMenu pause;
 
     public GameView(GameModel model) {
         this.model = model;
@@ -74,6 +75,7 @@ public class GameView implements Observer {
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
+        pause = new PauseMenu();
     }
 
     private void HUDInit() {
@@ -84,8 +86,8 @@ public class GameView implements Observer {
     private void renderFrame() {
 
         // Clears screen
-        Gdx.gl.glClearColor( 1, 0, 0, 1 );
-        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         // Render process
         batch.begin();
@@ -105,7 +107,9 @@ public class GameView implements Observer {
         hudBatch.begin();
         hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap());
         hudBatch.end();
-
+        if (model.getIsPaused()){
+            pause.render();
+        }
     }
 
     public void renderEnemies() {
