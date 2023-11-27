@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 public class PauseMenu {
     Stage stage;
     Button quitButton;
+    Button settingsButton;
+    Button resumeButton;
 
 
     public PauseMenu(){
@@ -30,7 +32,22 @@ public class PauseMenu {
                 System.exit(0);
             }
         });
+        settingsButton = new TextButton("SETTINGS",skin);
+        settingsButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        settingsButton.setPosition(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10);
+        settingsButton.addListener(new InputListener(){
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                //Settings
+            }
+        });
         stage.addActor(quitButton);
+        stage.addActor(settingsButton);
+        //stage.addActor(resumeButton);
     }
 
     public void render(){
