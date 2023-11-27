@@ -14,7 +14,7 @@ public class EnemyHandler {
 
     public EnemyHandler(){
         this.spawnReady = true;
-        this.spawnRate = 50;
+        this.spawnRate = 4;
     }
 
     public void spawnDemons(int numDemons, float playerX, float playerY){
@@ -33,6 +33,7 @@ public class EnemyHandler {
                 enemy.moveTowardsEntity(player);
             } else {
                 enemiesToRemove.add(enemy);
+                enemy.setIsDead(true);
             }
         }
         enemyList.removeAll(enemiesToRemove);
@@ -52,7 +53,6 @@ public class EnemyHandler {
             if (rnd.nextInt(0,2) == 1){
                 spawnGargamels((int) spawnRate / 4, playerX, playerY);
             }
-
             spawnReady = false;
             spawnRate = spawnRate * spawnRateMultiplier;
         }

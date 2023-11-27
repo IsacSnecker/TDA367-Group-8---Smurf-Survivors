@@ -8,6 +8,9 @@ import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.weapons.MagicHandler;
+import com.smurfsurvivors.game.weapons.MissileHandler;
+import com.smurfsurvivors.game.weapons.WeaponInformationHandler;
 
 import java.util.ArrayList;
 
@@ -35,7 +38,7 @@ public class GameModel implements Observable {
         this.enemyHandler = new EnemyHandler();
 
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
-        soundTrack.setLooping(true); //
+        soundTrack.setLooping(true);
         soundTrack.play(); //Should probably not be here
 
         this.clock = new Clock();
@@ -99,7 +102,6 @@ public class GameModel implements Observable {
     }
 
     public void updatePlayerHealth(){
-
      /*   for (Enemy enemy : enemyList){
             if (collisionHandler.isCollision(player, enemy)){
                 player.decreaseHealth();
@@ -115,12 +117,9 @@ public class GameModel implements Observable {
     }
 
     public void update() {
-
         if(!isPaused){
-
             updateEnemyPositions();
             updatePlayerHealth();
-
             if(!getEnemies().isEmpty()){
                 player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
                 player.usePassiveWeapon();
@@ -130,7 +129,6 @@ public class GameModel implements Observable {
             }
             enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
-
         }
         notifyObservers();
     }
@@ -161,8 +159,11 @@ public class GameModel implements Observable {
                     enemy.decreaseHealth(projectile.attackDamage);
                     if (enemy.getHealth() <= 0){
                         boolean levelUp = player.addXP(enemy.getXpGive());
-                        if(levelUp){
-                            //do sum
+                        if(levelUp && player.getLevel() == 5){
+                            player.WHandler.addWeaponHandler(new MissileHandler(player.getWeaponInformationHandler()));
+                        }
+                        if(levelUp && player.getLevel() == 10){
+                            player.WHandler.addWeaponHandler(new MagicHandler(player.getWeaponInformationHandler()));
                         }
                     }
                     player.WHandler.removeProjectile(projectile);

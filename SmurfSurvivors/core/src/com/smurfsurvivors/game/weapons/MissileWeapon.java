@@ -11,12 +11,16 @@ public class MissileWeapon extends PassiveWeapon{
     Enemy nearestEnemy;
 
     public MissileWeapon(Vector2 _position, Texture weaponTexture, Enemy nearestEnemy){
-        super(_position, weaponTexture, 50f,100f, 1500f, 20, 200, "Missile");
+        super(_position, weaponTexture, 50f,100f, 1200f, 20, 200, "Missile");
         this.nearestEnemy = nearestEnemy;
 
     }
 
     void update(){
         moveTowardsPosition(nearestEnemy.getPosition());
+    }
+
+    public Enemy getEnemy(){
+        return nearestEnemy;
     }
 }
