@@ -45,9 +45,22 @@ public class PauseMenu {
                 //Settings
             }
         });
+        resumeButton = new TextButton("RESUME",skin);
+        resumeButton.setSize(2 * Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        resumeButton.setPosition((Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5)/2,(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10)/2);
+        resumeButton.addListener(new InputListener(){
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                //Resume
+            }
+        });
         stage.addActor(quitButton);
         stage.addActor(settingsButton);
-        //stage.addActor(resumeButton);
+        stage.addActor(resumeButton);
     }
 
     public void render(){
