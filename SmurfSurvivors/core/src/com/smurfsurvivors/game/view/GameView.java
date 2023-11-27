@@ -21,7 +21,7 @@ import com.smurfsurvivors.game.model.entity.Food;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
-import com.smurfsurvivors.game.weapons.IHandler;
+import com.smurfsurvivors.game.model.weapons.IHandler;
 
 import java.util.LinkedList;
 
