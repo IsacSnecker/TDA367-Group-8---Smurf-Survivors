@@ -30,6 +30,7 @@ public class GameView implements Observer {
     private SpriteBatch hudBatch;
     private BitmapFont font = new BitmapFont();
     private IHUD hud;
+    private PauseMenu pause;
 
     public GameView(GameModel model) {
         this.model = model;
@@ -75,6 +76,7 @@ public class GameView implements Observer {
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
+        pause = new PauseMenu();
     }
 
     private void HUDInit() {
@@ -106,6 +108,8 @@ public class GameView implements Observer {
         hudBatch.begin();
         hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap());
         hudBatch.end();
+
+        pause.render();
 
     }
 
