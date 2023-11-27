@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

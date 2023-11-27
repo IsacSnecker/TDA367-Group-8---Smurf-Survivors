@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;

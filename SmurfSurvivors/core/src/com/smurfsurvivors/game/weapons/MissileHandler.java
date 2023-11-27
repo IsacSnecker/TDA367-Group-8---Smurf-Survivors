@@ -16,7 +16,6 @@ public class MissileHandler extends AbstractWeaponHandler implements IHandler{
         WeaponList.add(new MissileWeapon(position, weaponTexture, weaponInformationHandler.getNearestEnemy()));
     }
 
-
     public void updateProjectile(AbstractWeapon Weapon){
         Weapon.update();
         if(Weapon instanceof MagicWeapon){

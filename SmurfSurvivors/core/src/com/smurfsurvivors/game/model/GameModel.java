@@ -12,7 +12,6 @@ import com.smurfsurvivors.game.weapons.MagicHandler;
 import com.smurfsurvivors.game.weapons.MissileHandler;
 import com.smurfsurvivors.game.weapons.WeaponInformationHandler;
 
-
 import java.util.ArrayList;
 
 import static java.lang.Math.pow;
