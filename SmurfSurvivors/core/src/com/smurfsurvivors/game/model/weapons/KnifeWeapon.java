@@ -1,12 +1,14 @@
-package com.smurfsurvivors.game.weapons;
-import com.badlogic.gdx.graphics.Texture;
+package com.smurfsurvivors.game.model.weapons;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-public class KnifeWeapon extends PassiveWeapon{
+public class KnifeWeapon extends PassiveWeapon {
 
     int playerDirection;
-    public KnifeWeapon(Vector2 _position, Texture weaponTexture, int playerDirection){
-        super(_position, weaponTexture, 50f,50f, 500f, 20, 50, "Knife");
+
+    public KnifeWeapon(Vector2 _position, TextureRegion weaponTexture, int playerDirection) {
+        super(_position, weaponTexture, 50f, 50f, 500f, 20, 50, "Knife");
         this.playerDirection = playerDirection;
 
     }
@@ -29,5 +31,12 @@ public class KnifeWeapon extends PassiveWeapon{
         } else if (playerDirection == 7) {
             move(-velocity, velocity);
         }
-        }
     }
+
+    @Override
+    public void render(SpriteBatch batch){
+        batch.draw(weaponTexture, position.x, position.y, width, height, 100, 100, 1,1,180);
+    }
+
+    }
+

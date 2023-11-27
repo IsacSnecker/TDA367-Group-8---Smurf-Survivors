@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.weapons;
+package com.smurfsurvivors.game.model.weapons;
 
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Enemy;

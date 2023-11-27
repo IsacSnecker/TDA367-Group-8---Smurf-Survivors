@@ -4,13 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.*;
-import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import com.smurfsurvivors.game.weapons.AbstractWeapon;
-import com.smurfsurvivors.game.weapons.MagicHandler;
-import com.smurfsurvivors.game.weapons.MissileHandler;
-import com.smurfsurvivors.game.weapons.WeaponInformationHandler;
+import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.MagicHandler;
+import com.smurfsurvivors.game.model.weapons.MissileHandler;
 
 import java.util.ArrayList;
 
@@ -178,6 +176,7 @@ public class GameModel implements Observable {
             if(enemy.getRectangle().overlaps(player.getRectangle())){
                 player.decreaseHealth(10);
                 int distanceMultiplier = 4;
+                /*
                 if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
                     player.move(-player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
                 }
@@ -202,6 +201,7 @@ public class GameModel implements Observable {
                 else if(player.getPosition().y < enemy.getPosition().y){
                     player.move(0, -player.getSpeed() * distanceMultiplier);
                 }
+                */
                 enemiesToRemove.add(enemy);
             }
         }
