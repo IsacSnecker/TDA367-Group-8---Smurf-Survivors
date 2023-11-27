@@ -63,6 +63,8 @@ public class PauseMenu {
         stage.addActor(resumeButton);
     }
 
+    //public void input();
+
     public void render(){
         stage.act();
         stage.draw();
