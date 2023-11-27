@@ -17,6 +17,7 @@ import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
+import com.smurfsurvivors.game.view.pauseMenu.PauseMenu;
 import com.smurfsurvivors.game.weapons.IHandler;
 
 
@@ -28,6 +29,8 @@ public class GameView implements Observer {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private SpriteBatch hudBatch;
+    private SpriteBatch pauseBatch;
+    private PauseMenu pause;
 
     private BitmapFont font = new BitmapFont();
 
@@ -56,8 +59,8 @@ public class GameView implements Observer {
     public void observerInit() {
         model.addObserver(this);
     }
-
     private void cameraInit() {
+
         this.camera = new OrthographicCamera();
 
         camera.viewportWidth = 1920;
@@ -79,6 +82,8 @@ public class GameView implements Observer {
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
+        pauseBatch = new SpriteBatch();
+        pause = new PauseMenu(pauseBatch);
     }
 
     private void HUDInit() {
@@ -110,6 +115,10 @@ public class GameView implements Observer {
         hudBatch.begin();
         hud.renderHUD(model.getPlayer().getHealth());
         hudBatch.end();
+
+        if(model.getIsPaused()) {
+            pause.render();
+        }
 
     }
 

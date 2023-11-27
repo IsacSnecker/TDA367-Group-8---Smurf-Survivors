@@ -2,7 +2,7 @@ package com.smurfsurvivors.game.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.smurfsurvivors.game.entity.Enemy;
+import com.smurfsurvivors.game.model.entity.Enemy;
 
 import java.util.Vector;
 
