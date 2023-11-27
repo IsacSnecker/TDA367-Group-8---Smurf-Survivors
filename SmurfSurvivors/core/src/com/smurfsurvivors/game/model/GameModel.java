@@ -4,10 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.*;
-import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import com.smurfsurvivors.game.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
 
 import java.util.ArrayList;
 

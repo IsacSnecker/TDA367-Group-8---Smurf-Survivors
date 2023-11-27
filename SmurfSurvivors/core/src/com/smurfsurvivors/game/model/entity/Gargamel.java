@@ -6,7 +6,7 @@ public class Gargamel extends Enemy{
 
     static Texture gargamelTexture = new Texture("Enemies/gargamel-150x150.png");
     public Gargamel(int x, int y) {
-        super(100, 100, gargamelTexture, x, y, 150, 150, 2, 0);
+        super(100, 400, gargamelTexture, x, y, 150, 150, 2, 0);
     }
     public void performAttack(){
 

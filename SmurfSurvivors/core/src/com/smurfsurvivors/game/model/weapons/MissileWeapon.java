@@ -1,10 +1,8 @@
-package com.smurfsurvivors.game.weapons;
+package com.smurfsurvivors.game.model.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.smurfsurvivors.game.entity.Enemy;
-
-import java.util.Vector;
+import com.smurfsurvivors.game.model.entity.Enemy;
 
 public class MissileWeapon extends PassiveWeapon{
 

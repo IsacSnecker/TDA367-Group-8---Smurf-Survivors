@@ -14,7 +14,7 @@ public class EnemyHandler {
 
     public EnemyHandler(){
         this.spawnReady = true;
-        this.spawnRate = 50;
+        this.spawnRate = 10;
     }
 
     public void spawnDemons(int numDemons, float playerX, float playerY){
