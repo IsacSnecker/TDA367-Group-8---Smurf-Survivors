@@ -21,6 +21,7 @@ public class XPBar {
         this.width = 200;
     }
 
+
     public void render(int _xp, int levelCap) {
         xp = _xp;
         hudBatch.draw(barEmptyTexture, 0, 40, width, 40);
