@@ -34,7 +34,7 @@ public class GameModel implements Observable {
         this.enemyHandler = new EnemyHandler();
 
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
-        soundTrack.setLooping(true); //
+        soundTrack.setLooping(true);
         soundTrack.play(); //Should probably not be here
 
         this.clock = new Clock();
@@ -98,7 +98,6 @@ public class GameModel implements Observable {
     }
 
     public void updatePlayerHealth(){
-
      /*   for (Enemy enemy : enemyList){
             if (collisionHandler.isCollision(player, enemy)){
                 player.decreaseHealth();
@@ -114,12 +113,9 @@ public class GameModel implements Observable {
     }
 
     public void update() {
-
         if(!isPaused){
-
             updateEnemyPositions();
             updatePlayerHealth();
-
             if(!getEnemies().isEmpty()){
                 player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
                 player.usePassiveWeapon();
@@ -129,7 +125,6 @@ public class GameModel implements Observable {
             }
             enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
-
         }
 
         notifyObservers();

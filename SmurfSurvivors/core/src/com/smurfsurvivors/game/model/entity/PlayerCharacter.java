@@ -90,7 +90,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         }
         else if (inputList.get(2) == 1 && inputList.get(0) != 1){
             move(0, -getSpeed());
-            setDirection(2);
+            setDirection(4);
         }
         else if (inputList.get(0) == 1 && inputList.get(2) != 1){
             move(0, getSpeed());
