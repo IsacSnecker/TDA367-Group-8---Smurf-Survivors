@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.view.GameView;
+import com.smurfsurvivors.game.view.PauseMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,11 +19,10 @@ public class GameController implements Observer {
         this.model = model;
         this.view = view;
         controllerInit();
+        //PauseMenu pause = new PauseMenu();
     }
 
-    public void controllerInit() {
-        observerInit();
-    }
+    public void controllerInit() { observerInit();}
 
     private void getInput() {
         int inputUp = 0;

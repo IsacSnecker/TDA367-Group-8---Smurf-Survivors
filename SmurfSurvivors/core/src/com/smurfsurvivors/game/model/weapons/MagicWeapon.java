@@ -1,13 +1,11 @@
-package com.smurfsurvivors.game.weapons;
+package com.smurfsurvivors.game.model.weapons;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-
-import java.util.Vector;
 
 public class MagicWeapon extends PassiveWeapon{
     private final Vector2 nearestEnemyPosition;
-    public MagicWeapon(Vector2 _position, Texture weaponTexture, Vector2 nearestEnemyPosition){
+    public MagicWeapon(Vector2 _position, TextureRegion weaponTexture, Vector2 nearestEnemyPosition){
         super(_position, weaponTexture, 100, 100, 5000f, 20,70,"Magic");
         this.nearestEnemyPosition = nearestEnemyPosition;
     }

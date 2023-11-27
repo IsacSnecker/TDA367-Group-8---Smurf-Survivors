@@ -1,7 +1,8 @@
-package com.smurfsurvivors.game.weapons;
+package com.smurfsurvivors.game.model.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Entity;
@@ -9,7 +10,7 @@ import com.smurfsurvivors.game.model.entity.Entity;
 public abstract class AbstractWeapon{
     Vector2 position;
     Vector2 originalPosition;
-    public Texture weaponTexture;
+    public TextureRegion weaponTexture;
     float width;
     float height;
     float attackRange;
@@ -18,7 +19,7 @@ public abstract class AbstractWeapon{
     String weaponName;
     boolean removeMe = false;
 
-    public AbstractWeapon(Vector2 _position, Texture _weaponTexture, float _width, float _height, float _attackRange, int _velocity, int _attackDamage, String _weaponName){
+    public AbstractWeapon(Vector2 _position, TextureRegion _weaponTexture, float _width, float _height, float _attackRange, int _velocity, int _attackDamage, String _weaponName){
         position = _position;
         originalPosition = new Vector2(_position.x, _position.y);
         weaponTexture = _weaponTexture;
@@ -114,7 +115,7 @@ public abstract class AbstractWeapon{
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(weaponTexture, position.x, position.y, width, height);
+        batch.draw(weaponTexture, position.x, position.y, width, height, width, height, 1,1,180);
     }
 
     public float getX() {

@@ -1,6 +1,7 @@
-package com.smurfsurvivors.game.weapons;
+package com.smurfsurvivors.game.model.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class MagicHandler extends AbstractWeaponHandler implements IHandler{
@@ -8,7 +9,7 @@ public class MagicHandler extends AbstractWeaponHandler implements IHandler{
         super(1000f, weaponInformationHandler);
     }
 
-    public static Texture weaponTexture = new Texture("Weapons/magicprojectile.png");
+    public static TextureRegion weaponTexture = new TextureRegion(new Texture("Weapons/magicprojectile.png"));
 
     @Override
     public void spawnProjectile(Vector2 position) {
