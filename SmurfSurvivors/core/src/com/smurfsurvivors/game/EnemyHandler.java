@@ -33,6 +33,7 @@ public class EnemyHandler {
                 enemy.moveTowardsEntity(player);
             } else {
                 enemiesToRemove.add(enemy);
+                enemy.setIsDead(true);
             }
         }
         enemyList.removeAll(enemiesToRemove);

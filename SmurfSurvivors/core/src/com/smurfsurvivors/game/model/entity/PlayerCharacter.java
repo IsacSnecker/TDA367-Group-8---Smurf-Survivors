@@ -18,6 +18,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     private Texture spriteLeft;
     private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
     private List<ActiveWeapon> abilities; //Should be List<Ability>
+    private int levelCap;
+    private float levelCapMultiplier;
 
     public WeaponHandler WHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
@@ -25,17 +27,15 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public PlayerCharacter(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
         super(health, sprite, x, y, width, height, speed, direction);
         WHandler.addWeaponHandler(new KnifeHandler(weaponInformationHandler));
-        WHandler.addWeaponHandler(new MissileHandler(weaponInformationHandler));
         this.xp = 0;
         this.level = 1;
+        this.levelCap = 100;
+        this.levelCapMultiplier = (float) 1.10;
         this.spriteRight = new Texture("Player/smurf-100x100-right.png");
         this.spriteLeft = new Texture("Player/smurf-100x100.png");
     }
     //private
 
-    public void addPassiveWeapon(PassiveWeapon passiveWeapon){
-        passiveWeapons.add(passiveWeapon);
-    }
     public void addAbility(ActiveWeapon ability){
         abilities.add(ability);
     }
@@ -102,8 +102,15 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         return (float)sqrt(pow(getSpeed(), 2.0)/2);
     }
 
-    public void addXP(int amount) {
+    public boolean addXP(int amount) {
         this.xp += amount;
+        if (xp >= levelCap){
+            xp -= levelCap;
+            level += 1;
+            levelCap = (int)((float) levelCap * levelCapMultiplier);
+            return true;
+        }
+        return false;
     }
 
     public int getXP() {
@@ -114,6 +121,9 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         return this.level;
     }
 
+    public int getLevelCap() {
+        return this.levelCap;
+    }
 
-
+    public WeaponInformationHandler getWeaponInformationHandler() { return weaponInformationHandler; }
 }
