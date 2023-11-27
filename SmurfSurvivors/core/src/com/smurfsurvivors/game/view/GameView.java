@@ -11,13 +11,19 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.smurfsurvivors.game.EntityFactory;
+import com.smurfsurvivors.game.FoodHandler;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.model.entity.Enemy;
+import com.smurfsurvivors.game.model.entity.Entity;
+import com.smurfsurvivors.game.model.entity.Food;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.weapons.IHandler;
+
+import java.util.LinkedList;
 
 
 public class GameView implements Observer {
@@ -92,6 +98,7 @@ public class GameView implements Observer {
         batch.begin();
         renderer.render();
         model.getPlayer().render(this.batch);
+        renderFoods(model.getFoods());
         renderEnemies();
         renderPlayerProjectiles(model.getPlayer());
 
@@ -112,6 +119,12 @@ public class GameView implements Observer {
     public void renderEnemies() {
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
+        }
+    }
+
+    public void renderFoods(LinkedList<Food> entityList) {
+        for (Food f: entityList) {
+            f.render(batch);
         }
     }
 

@@ -12,7 +12,7 @@ class FoodTest extends LibGDXTest {
     @Test
     void getHealth() {
         PlayerCharacter player = new PlayerCharacter(100, new Texture("Player/smurf-100x100.png"), 0,0,100,100, 10, 0);
-        Food food = new Food(200);
+        Food food = new Food(200, 0, 0, 10, 10);
 
     }
 }

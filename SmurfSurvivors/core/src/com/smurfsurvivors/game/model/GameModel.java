@@ -11,8 +11,10 @@ import com.smurfsurvivors.game.weapons.AbstractWeapon;
 import com.smurfsurvivors.game.weapons.MagicHandler;
 import com.smurfsurvivors.game.weapons.MissileHandler;
 import com.smurfsurvivors.game.weapons.WeaponInformationHandler;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -23,6 +25,9 @@ public class GameModel implements Observable {
     private PlayerCharacter player;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
+
+    private FoodHandler foodHandler;
+
     private Difficulty difficulty;
     private Clock clock;
 
@@ -36,12 +41,14 @@ public class GameModel implements Observable {
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
         this.enemyHandler = new EnemyHandler();
+        this.foodHandler = new FoodHandler(500, this);
+        this.clock = new Clock();
 
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
         soundTrack.setLooping(true);
         soundTrack.play(); //Should probably not be here
 
-        this.clock = new Clock();
+
         clock.startClock();
         initializeObservers();
 
@@ -117,6 +124,7 @@ public class GameModel implements Observable {
     }
 
     public void update() {
+
         if(!isPaused){
             updateEnemyPositions();
             updatePlayerHealth();
@@ -126,6 +134,7 @@ public class GameModel implements Observable {
                 player.WHandler.updateWeaponCooldowns();
                 enemyPlayerCollision();
                 enemyProjectileCollision();
+                foodHandler.update();
             }
             enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
             enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
@@ -136,6 +145,8 @@ public class GameModel implements Observable {
     public ArrayList<Enemy> getEnemies() {
         return enemyHandler.getEnemies();
     }
+
+    public LinkedList<Food> getFoods() {return foodHandler.getFoods();}
 
     public Vector2 getNearestEnemyPosition(){
         return getNearestEnemy().getPosition();
