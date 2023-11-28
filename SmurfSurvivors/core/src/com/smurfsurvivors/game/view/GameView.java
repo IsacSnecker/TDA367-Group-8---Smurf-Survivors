@@ -111,7 +111,7 @@ public class GameView implements Observer {
 
         // Render HUD
         hudBatch.begin();
-        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap());
+        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel());
         hudBatch.end();
 
     }

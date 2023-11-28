@@ -11,7 +11,7 @@ public class WeaponHandler {
     int playerDirection = 1;
     public interface List<E> extends Collection<E>{};
     ArrayList<IHandler> handlerList = new ArrayList<IHandler>();
-    WeaponInformationHandler weaponInformationHandler;
+    public WeaponInformationHandler weaponInformationHandler;
 
     public WeaponHandler(){
         startTime = TimeUtils.millis();
@@ -20,6 +20,15 @@ public class WeaponHandler {
 
     public void addWeaponHandler(IHandler handler){
         handlerList.add(handler);
+    }
+    public void addKnifeHandler(){
+        handlerList.add(new KnifeHandler(weaponInformationHandler));
+    }
+    public void addMagicHandler(){
+        handlerList.add(new MagicHandler(weaponInformationHandler));
+    }
+    public void addMissileHandler(){
+        handlerList.add(new MissileHandler(weaponInformationHandler));
     }
 
     public void passiveWeaponUpdate(Vector2 position){

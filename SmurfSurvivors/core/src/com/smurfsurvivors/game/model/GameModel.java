@@ -129,7 +129,7 @@ public class GameModel implements Observable {
             updateEnemyPositions();
             updatePlayerHealth();
             if(!getEnemies().isEmpty()){
-                player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
+                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
                 player.usePassiveWeapon();
                 player.WHandler.updateWeaponCooldowns();
                 enemyPlayerCollision();
@@ -167,17 +167,25 @@ public class GameModel implements Observable {
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
             for(Enemy enemy : getEnemies()){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
-                    enemy.decreaseHealth(projectile.attackDamage);
-                    if (enemy.getHealth() <= 0){
-                        boolean levelUp = player.addXP(enemy.getXpGive());
-                        if(levelUp && player.getLevel() == 5){
-                            player.WHandler.addWeaponHandler(new MissileHandler(player.getWeaponInformationHandler()));
+                    if(!projectile.getHitEntities().contains(enemy)){
+                        projectile.getHitEntities().add(enemy);
+                        enemy.decreaseHealth(projectile.attackDamage);
+                        if (enemy.getHealth() <= 0){
+                            boolean levelUp = player.addXP(enemy.getXpGive());
+                            if(levelUp && player.getLevel() == 5){
+                                player.WHandler.addMissileHandler();
+                            }
+                            if(levelUp && player.getLevel() == 10){
+                                player.WHandler.addMagicHandler();
+                            }
                         }
-                        if(levelUp && player.getLevel() == 10){
-                            player.WHandler.addWeaponHandler(new MagicHandler(player.getWeaponInformationHandler()));
+                        if(projectile.getPassThrough() == 0){
+                            player.WHandler.removeProjectile(projectile);
+                        }
+                        else{
+                            projectile.setPassThrough(projectile.getPassThrough() - 1);
                         }
                     }
-                    player.WHandler.removeProjectile(projectile);
                 }
             }
         }
@@ -188,30 +196,8 @@ public class GameModel implements Observable {
         for(Enemy enemy : getEnemies()){
             if(enemy.getRectangle().overlaps(player.getRectangle())){
                 player.decreaseHealth(10);
-                int distanceMultiplier = 4;
-                if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
-                    player.move(-player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y > enemy.getPosition().y){
-                    player.move(-player.getSpeed() * distanceMultiplier, player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x > enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
-                    player.move(player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x > enemy.getPosition().x && player.getPosition().y > enemy.getPosition().y){
-                    player.move(player.getSpeed() * distanceMultiplier, player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x > enemy.getPosition().x){
-                    player.move(player.getSpeed() * distanceMultiplier, 0);
-                }
-                else if(player.getPosition().y > enemy.getPosition().y){
-                    player.move(0, player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x < enemy.getPosition().x){
-                    player.move(-player.getSpeed() * distanceMultiplier, 0);
-                }
-                else if(player.getPosition().y < enemy.getPosition().y){
-                    player.move(0, -player.getSpeed() * distanceMultiplier);
+                if(player.getHealth() <= 0){
+                    killPlayer();
                 }
                 enemiesToRemove.add(enemy);
             }
@@ -219,6 +205,9 @@ public class GameModel implements Observable {
         for(Enemy enemy : enemiesToRemove){
             enemyHandler.removeEnemy(enemy);
         }
+    }
+
+    public void killPlayer(){
     }
 
     public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
