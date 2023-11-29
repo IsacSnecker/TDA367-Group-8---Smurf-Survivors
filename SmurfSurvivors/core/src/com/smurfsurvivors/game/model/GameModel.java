@@ -104,6 +104,10 @@ public class GameModel implements Observable {
         soundTrack.setVolume(musicVolume);
     }
 
+
+    public Difficulty getDifficulty(){
+        return this.difficulty;
+    }
     public void setDifficulty(Difficulty difficulty){
         this.difficulty = difficulty;
     }
