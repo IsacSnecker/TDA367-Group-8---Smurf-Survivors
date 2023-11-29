@@ -26,6 +26,9 @@ public class SmurfSurvivors extends Game {
     @Override
     public void render() {
         gameModel.update();
+        if(gameModel.getGameOver()){
+            create();
+        }
     }
     @Override
     public void dispose() {

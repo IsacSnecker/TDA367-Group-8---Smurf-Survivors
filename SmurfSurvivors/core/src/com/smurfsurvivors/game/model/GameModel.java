@@ -35,6 +35,8 @@ public class GameModel implements Observable {
 
     private Boolean isPaused = true;
 
+    private Boolean isGameOver = false;
+
     public GameModel(Difficulty difficulty){
 
         this.difficulty = difficulty;
@@ -47,7 +49,7 @@ public class GameModel implements Observable {
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
         soundTrack.setLooping(true);
         soundTrack.play(); //Should probably not be here
-        soundTrack.setVolume(0.7f);
+        soundTrack.setVolume(0.7f);//
 
 
         clock.startClock();
@@ -145,6 +147,9 @@ public class GameModel implements Observable {
         if(!isPaused){
             updateEnemyPositions();
             updatePlayerHealth();
+            if(player.getHealth() <= 0){
+                gameOver();
+            }
             if(!getEnemies().isEmpty()){
                 player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
                 player.usePassiveWeapon();
@@ -178,6 +183,15 @@ public class GameModel implements Observable {
             }
         }
         return nearestEnemy;
+    }
+
+    private void gameOver(){
+        togglePaused();
+        this.isGameOver = true;
+    }
+
+    public Boolean getGameOver() {
+        return isGameOver;
     }
 
     public void enemyProjectileCollision(){
