@@ -8,6 +8,8 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
     private int maxHealth;
     private int direction;
     private float speed;
+    private boolean isHurt = false;
+
     public Creature(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
         super(sprite, x, y, width, height);
         this.health = health;
@@ -36,6 +38,7 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
     public void increaseHealth(int amount) { health += amount; }
     public void decreaseHealth(int amount){
         health -= amount;
+        isHurt = true;
     }
 
     public int getDirection(){
@@ -48,5 +51,12 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
         setX(getX() + dx);
         setY(getY() + dy);
     }
+    public boolean getIsHurt() {
+        return isHurt;
+    }
+    public void setHurt(boolean hurt) {
+        isHurt = hurt;
+    }
     //public abstract void performAttack();
+
 }

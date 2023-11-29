@@ -7,7 +7,6 @@ public class Demon extends Enemy{
     public Demon(float x, float y) {
         super(100, 100, demonTexture, x, y, 128, 128, 1, 0, 10);
     }
-
     public void performAttack(){
 
     }
