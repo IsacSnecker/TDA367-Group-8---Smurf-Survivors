@@ -33,7 +33,7 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
         return this.maxHealth;
     }
 
-
+    public void increaseHealth(int amount) { health += amount; }
     public void decreaseHealth(int amount){
         health -= amount;
     }
