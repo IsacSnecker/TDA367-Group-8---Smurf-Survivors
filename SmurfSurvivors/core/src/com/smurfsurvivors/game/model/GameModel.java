@@ -13,6 +13,7 @@ import com.smurfsurvivors.game.model.weapons.MissileHandler;
 import com.smurfsurvivors.game.model.weapons.WeaponInformationHandler;
 import org.lwjgl.Sys;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -40,7 +41,7 @@ public class GameModel implements Observable {
         this.difficulty = difficulty;
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
-        this.enemyHandler = new EnemyHandler();
+        this.enemyHandler = new EnemyHandler(this);
         this.foodHandler = new FoodHandler(500, this);
         this.clock = new Clock();
 
@@ -103,7 +104,7 @@ public class GameModel implements Observable {
     }
 
     public void updateEnemyPositions(){
-        for (Enemy enemy : getEnemies()) {
+        for (Enemy enemy : enemyHandler.getEnemies()) {
             enemy.moveTowardsEntity(player);
         }
     }
@@ -128,8 +129,8 @@ public class GameModel implements Observable {
         if(!isPaused){
             updateEnemyPositions();
             updatePlayerHealth();
-            if(!getEnemies().isEmpty()){
-                player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
+            if(!enemyHandler.getEnemies().isEmpty()){
+                player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), enemyHandler.getNearestEnemyPosition(), enemyHandler.getNearestEnemy());
                 player.usePassiveWeapon();
                 player.WHandler.updateWeaponCooldowns();
                 enemyPlayerCollision();
@@ -142,30 +143,13 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemyHandler.getEnemies();
-    }
 
-    public LinkedList<Food> getFoods() {return foodHandler.getFoods();}
 
-    public Vector2 getNearestEnemyPosition(){
-        return getNearestEnemy().getPosition();
-    }
 
-    public Enemy getNearestEnemy(){
-        ArrayList<Enemy> enemyList = getEnemies();
-        Enemy nearestEnemy = enemyList.get(0);
-        for(Enemy enemy: enemyList){
-            if(calculateDistance(enemy.getPosition(), player.getPosition()) < calculateDistance(nearestEnemy.getPosition(), player.getPosition())){
-                nearestEnemy = enemy;
-            }
-        }
-        return nearestEnemy;
-    }
 
     public void enemyProjectileCollision(){
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
-            for(Enemy enemy : getEnemies()){
+            for(Enemy enemy : enemyHandler.getEnemies()){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
                     enemy.decreaseHealth(projectile.attackDamage);
                     if (enemy.getHealth() <= 0){
@@ -185,7 +169,7 @@ public class GameModel implements Observable {
 
     public void enemyPlayerCollision(){
         ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
-        for(Enemy enemy : getEnemies()){
+        for(Enemy enemy : enemyHandler.getEnemies()){
             if(enemy.getRectangle().overlaps(player.getRectangle())){
                 player.decreaseHealth(10);
                 int distanceMultiplier = 4;
@@ -221,7 +205,13 @@ public class GameModel implements Observable {
         }
     }
 
-    public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
-        return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
+    public LinkedList<Food> getFoods() {
+        return foodHandler.getFoods();
     }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemyHandler.getEnemies();
+    }
+
+
 }

@@ -1,20 +1,29 @@
 package com.smurfsurvivors.game;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 
 public class EnemyHandler {
+
+    GameModel model;
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     private boolean spawnReady;
     private double spawnRate;
     Random rnd = new Random();
 
-    public EnemyHandler(){
+    public EnemyHandler(GameModel model){
         this.spawnReady = true;
         this.spawnRate = 4;
+        this.model = model;
     }
 
     public void spawnDemons(int numDemons, float playerX, float playerY){
@@ -56,6 +65,25 @@ public class EnemyHandler {
             spawnReady = false;
             spawnRate = spawnRate * spawnRateMultiplier;
         }
+    }
+
+    public Enemy getNearestEnemy(){
+        ArrayList<Enemy> enemyList = getEnemies();
+        Enemy nearestEnemy = enemyList.get(0);
+        for(Enemy enemy: enemyList){
+            if(calculateDistance(enemy.getPosition(), model.getPlayer().getPosition()) < calculateDistance(nearestEnemy.getPosition(), model.getPlayer().getPosition())){
+                nearestEnemy = enemy;
+            }
+        }
+        return nearestEnemy;
+    }
+
+    public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
+        return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
+    }
+
+    public Vector2 getNearestEnemyPosition(){
+        return getNearestEnemy().getPosition();
     }
 
     public void addEnemy(Enemy enemy){
