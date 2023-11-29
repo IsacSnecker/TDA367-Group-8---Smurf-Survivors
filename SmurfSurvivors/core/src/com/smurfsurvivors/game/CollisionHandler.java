@@ -1,7 +1,11 @@
 package com.smurfsurvivors.game;
 
+import com.badlogic.gdx.Gdx;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
+import org.lwjgl.Sys;
+import java.util.Iterator;
+import java.util.List;
 
 import java.util.ArrayList;
 
@@ -10,15 +14,12 @@ public class CollisionHandler {
     private EnemyHandler enemyHandler;
     private FoodHandler foodHandler;
 
-    public CollisionHandler(){
-
-    }
-
-    public void init(PlayerCharacter player, EnemyHandler enemyHandler, FoodHandler foodhandler){
+    public CollisionHandler(PlayerCharacter player, EnemyHandler enemyHandler, FoodHandler foodHandler){
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
     }
+
 
     public void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies){
         for(AbstractWeapon projectile : projectiles){
@@ -65,16 +66,19 @@ public class CollisionHandler {
         }
     }
 
-    public void handleFoodCollision(ArrayList<Food> foods){
+    public void handleFoodCollision(){
         ArrayList<Food> foodsToRemove = new ArrayList<Food>();
-        for(Food food : foods){
+
+        for(Food food : foodHandler.getFoods()){
             if(food.getRectangle().overlaps(player.getRectangle())){
+                System.out.println("FOOD");
                 player.addHealth(10);
+                food.getSoundEffect().play();
                 foodsToRemove.add(food);
             }
         }
-        /*for(Food food : foodsToRemove){
+        for(Food food : foodsToRemove) {
             foodHandler.removeFood(food);
-        }*/
+        }
     }
 }

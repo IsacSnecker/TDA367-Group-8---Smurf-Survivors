@@ -15,19 +15,16 @@ public class FoodHandler  {
     private int maxFoodCount;
     private int foodCount;
 
-    private GameModel model;
-
     private ArrayList<Food> foodList = new ArrayList<>();
 
-    public FoodHandler(int maxFoodCount, GameModel model) {
+    public FoodHandler(int maxFoodCount) {
         this.maxFoodCount = maxFoodCount;
         this.foodCount = 0;
-        this.model = model;
     }
 
 
     public void update() {
-        updateFood(model.getPlayer().getX(), model.getPlayer().getY());
+        updateFood();
     }
 
     public void removeFood(Food food) {
@@ -42,7 +39,7 @@ public class FoodHandler  {
         return this.foodList;
     }
 
-    private void updateFood(float playerX, float playerY) {
+    private void updateFood() {
 
         Random random = new Random();
 

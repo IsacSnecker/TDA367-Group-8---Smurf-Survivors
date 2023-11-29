@@ -40,16 +40,14 @@ public class GameModel implements Observable {
     public GameModel(Difficulty difficulty){
 
         this.difficulty = difficulty;
-        this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
         this.enemyHandler = new EnemyHandler();
         this.clock = new Clock();
-        this.foodHandler = new FoodHandler(100, this);
 
 
-        soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
+        soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Music/Hallonsaft.mp3")); //
         soundTrack.setLooping(true);
-        soundTrack.play(); //Should probably not be here
+        //soundTrack.play(); //Should probably not be here
         soundTrack.setVolume(0.7f);
 
 
@@ -57,6 +55,14 @@ public class GameModel implements Observable {
         initializeObservers();
 
     }
+
+    public void init(PlayerCharacter player){
+        this.enemyHandler = new EnemyHandler();
+        this.foodHandler = new FoodHandler(500);
+        this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler);
+        setPlayer(player);
+    }
+
     @Override
     public void initializeObservers() {
         for (Observer o : observerList){
@@ -79,13 +85,7 @@ public class GameModel implements Observable {
     @Override
     public void removeObserver(Observer o) { observerList.remove(o);}
 
-    public void init(PlayerCharacter player){
-        setPlayer(player);
-        initCollisionHandler(player);
-    }
-    private void initCollisionHandler(PlayerCharacter player){
-        collisionHandler.init(player, enemyHandler, foodHandler);
-    }
+
     public PlayerCharacter getPlayer(){
         return this.player;
     }
@@ -135,7 +135,7 @@ public class GameModel implements Observable {
     }
 
     public void playerFoodCollision(){
-        collisionHandler.handleFoodCollision(foodHandler.getFoods());
+        collisionHandler.handleFoodCollision();
     }
 
     public void update() {
