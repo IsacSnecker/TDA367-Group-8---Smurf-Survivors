@@ -35,6 +35,8 @@ public class GameModel implements Observable {
 
     private Boolean isPaused = true;
 
+    private Boolean isGameOver = false;
+
     public GameModel(Difficulty difficulty){
 
         this.difficulty = difficulty;
@@ -139,6 +141,9 @@ public class GameModel implements Observable {
     public void update() {
         if(!isPaused){
             updateEnemyPositions();
+            if(player.getHealth() <= 0){
+                setIsGameOver();
+            }
             if(!getEnemies().isEmpty()){
                 player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
                 player.usePassiveWeapon();
@@ -183,7 +188,11 @@ public class GameModel implements Observable {
         collisionHandler.handleIfCollision(getEnemies());
     }
 
-    public void killPlayer(){
+    public void setIsGameOver(){
+        this.isGameOver = true;
+    }
+    public boolean getIsGameOver(){
+        return this.isGameOver;
     }
 
     public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
