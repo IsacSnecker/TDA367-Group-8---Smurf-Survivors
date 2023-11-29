@@ -3,6 +3,7 @@ package com.smurfsurvivors.game.model.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -18,15 +19,10 @@ public abstract class Entity {
 
     public Entity(Texture sprite, float x, float y, int width, int height) {
         this.texture = sprite;
+        this.sprite = new Sprite(texture, 0, 0, width, height);
         position = new Vector2(x,y);
         this.width = width;
         this.height = height;
-        entityInit();
-    }
-
-    private void entityInit() {
-        this.sprite = new Sprite(texture, 0, 0, width, height);
-        sprite.scale(100);
     }
 
     public Texture getTexture() {
@@ -52,24 +48,25 @@ public abstract class Entity {
     public void setY(float y) { position.y = y; }
 
     public void render(Batch batch) {
-        //batch.draw(this.texture, position.x - getWidth() / 2, position.y - getHeight() / 2);
-
-        //batch.draw(this.texture, this.position.x, this.position.y,
-        //this.width, this.height, 0, 0, 100, 100);
-
-        batch.draw(this.texture, this.position.x, this.position.y,
-                this.width, this.height);
-
-        //int srcWidth, int srcHeight, boolean flipX, boolean flipY)
+        sprite.setPosition(this.position.x, this.position.y);
+        batch.setColor(1,1,1,1);
+        sprite.draw(batch);
 
     }
+    public void showHit(){
+        sprite.setColor(1,0,0,1);
 
+    }
     public Rectangle getRectangle(){
         return new Rectangle(position.x, position.y, width, height);
     }
 
     public Vector2 getPosition(){
         return position;
+    }
+
+    public Sprite getSprite(){
+        return sprite;
     }
 
 }

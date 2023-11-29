@@ -43,33 +43,6 @@ public abstract class AbstractWeapon{
         return new Rectangle(position.x, position.y, width, height);
     }
 
-    public void moveTowardsEntity(Entity enemy){
-        if(enemy.getX() < getX() && enemy.getY() < getY()){
-            move(-velocity, -velocity);
-        }
-        else if(enemy.getX() < getX() && enemy.getY() > getY()){
-            move(-velocity, velocity);
-        }
-        else if(enemy.getX() > getX() && enemy.getY() < getY()){
-            move(velocity, -velocity);
-        }
-        else if(enemy.getX() > getX() && enemy.getY() > getY()) {
-            move(velocity, velocity);
-        }
-        else if(enemy.getX() > getX()){
-            move(velocity, 0);
-        }
-        else if(enemy.getY() > getY()){
-            move(0, velocity);
-        }
-        else if(enemy.getX() < getX()){
-            move(-velocity, 0);
-        }
-        else if(enemy.getY() < getY()){
-            move(0, -velocity);
-        }
-    }
-
     public void moveTowardsPosition(Vector2 position){
         float differenceX = position.x - getX();
         float differenceY = position.y - getY();

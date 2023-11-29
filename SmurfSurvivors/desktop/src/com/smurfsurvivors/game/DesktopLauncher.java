@@ -16,7 +16,7 @@ public class DesktopLauncher {
 
 		// Set resolution
 		Graphics.DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
-		config.setWindowedMode(dm.width, dm.height);
+		config.setFullscreenMode(dm);
 
 		new Lwjgl3Application(new SmurfSurvivors(), config);
 	}

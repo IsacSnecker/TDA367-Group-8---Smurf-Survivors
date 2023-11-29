@@ -186,6 +186,16 @@ public class GameModel implements Observable {
 
     public void enemyPlayerCollision(){
         collisionHandler.handleIfCollision(getEnemies());
+        ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+        for(Enemy enemy : getEnemies()){
+            if(enemy.getRectangle().overlaps(player.getRectangle())){
+                player.decreaseHealth(10);
+                enemiesToRemove.add(enemy);
+            }
+        }
+        for(Enemy enemy : enemiesToRemove){
+            enemyHandler.removeEnemy(enemy);
+        }
     }
 
     public void setIsGameOver(){

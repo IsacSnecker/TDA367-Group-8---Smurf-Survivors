@@ -1,6 +1,7 @@
 package com.smurfsurvivors.game.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -143,6 +144,11 @@ public class GameView implements Observer {
     public void renderEnemies() {
         for (Enemy e: model.getEnemies()) {
             e.render(this.batch);
+            Color redColor = new Color(1,0,0,1);
+            if(e.getIsHurt()){
+                e.showHit();
+                e.setHurt(false);
+            }
         }
     }
 
