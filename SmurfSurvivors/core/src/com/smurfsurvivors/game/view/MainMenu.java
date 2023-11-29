@@ -19,7 +19,7 @@ public class MainMenu {
     public boolean isOpen = true;
     public MainMenu(Stage stage){
         this.stage = stage;
-        Texture backgroundTexture = new Texture("BackgroundTextures/smurfarna.png");
+        Texture backgroundTexture = new Texture("BackgroundTextures/MenuScreen.png");
         backgroundImage = new Image(backgroundTexture);
         backgroundImage.setBounds(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         Skin skin = new Skin(Gdx.files.internal("Skins/skin/uiskin.json"));
