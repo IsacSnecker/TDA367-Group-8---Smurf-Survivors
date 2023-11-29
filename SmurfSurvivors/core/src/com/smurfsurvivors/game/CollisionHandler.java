@@ -1,22 +1,80 @@
 package com.smurfsurvivors.game;
 
 import com.smurfsurvivors.game.model.entity.*;
+import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
+
+import java.util.ArrayList;
 
 public class CollisionHandler {
+    private PlayerCharacter player;
+    private EnemyHandler enemyHandler;
+    private FoodHandler foodHandler;
 
     public CollisionHandler(){
 
     }
 
-    /*
-    public void isCollision(PlayerCharacter player, Enemy enemy){
-        //if collision return true otherwise false
+    public void init(PlayerCharacter player, EnemyHandler enemyHandler, FoodHandler foodhandler){
+        this.player = player;
+        this.enemyHandler = enemyHandler;
+        this.foodHandler = foodHandler;
     }
-    */
 
-    /*
-    public void isCollision(PlayerCharacter player, Food food){
-        //if collision return true otherwise false
+    public void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies){
+        for(AbstractWeapon projectile : projectiles){
+            for(Enemy enemy : enemies){
+                if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
+                    if(!projectile.getHitEntities().contains(enemy)){
+                        projectile.getHitEntities().add(enemy);
+                        enemy.decreaseHealth(projectile.attackDamage);
+                        if (enemy.getHealth() <= 0){
+                            boolean levelUp = player.addXP(enemy.getXpGive());
+                            if(levelUp && player.getLevel() == 5){
+                                player.WHandler.addMissileHandler();
+                            }
+                            if(levelUp && player.getLevel() == 10){
+                                player.WHandler.addMagicHandler();
+                            }
+                        }
+                        if(projectile.getPassThrough() == 0){
+                            player.WHandler.removeProjectile(projectile);
+                        }
+                        else{
+                            projectile.setPassThrough(projectile.getPassThrough() - 1);
+                        }
+                    }
+                }
+            }
+        }
+
     }
-    */
+
+    public void handleIfCollision(ArrayList<Enemy> enemies){
+        ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+        for(Enemy enemy : enemies){
+            if(enemy.getRectangle().overlaps(player.getRectangle())){
+                player.decreaseHealth(10);
+                if(player.getHealth() <= 0){
+                    //killPlayer();
+                }
+                enemiesToRemove.add(enemy);
+            }
+        }
+        for(Enemy enemy : enemiesToRemove){
+            enemyHandler.removeEnemy(enemy);
+        }
+    }
+
+    public void handleFoodCollision(ArrayList<Food> foods){
+        ArrayList<Food> foodsToRemove = new ArrayList<Food>();
+        for(Food food : foods){
+            if(food.getRectangle().overlaps(player.getRectangle())){
+                player.addHealth(10);
+                foodsToRemove.add(food);
+            }
+        }
+        /*for(Food food : foodsToRemove){
+            foodHandler.removeFood(food);
+        }*/
+    }
 }

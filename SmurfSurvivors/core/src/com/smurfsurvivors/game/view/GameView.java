@@ -23,6 +23,7 @@ import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.model.weapons.IHandler;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -145,7 +146,7 @@ public class GameView implements Observer {
         }
     }
 
-    public void renderFoods(LinkedList<Food> entityList) {
+    public void renderFoods(ArrayList<Food> entityList) {
         for (Food f: entityList) {
             f.render(batch);
         }

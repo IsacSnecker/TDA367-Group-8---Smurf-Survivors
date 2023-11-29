@@ -6,6 +6,7 @@ import com.smurfsurvivors.game.model.entity.Food;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import org.lwjgl.Sys;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class FoodHandler  {
 
     private GameModel model;
 
-    private LinkedList<Food> foodList = new LinkedList<>();
+    private ArrayList<Food> foodList = new ArrayList<>();
 
     public FoodHandler(int maxFoodCount, GameModel model) {
         this.maxFoodCount = maxFoodCount;
@@ -29,7 +30,7 @@ public class FoodHandler  {
         updateFood(model.getPlayer().getX(), model.getPlayer().getY());
     }
 
-    private void removeFood(Food food) {
+    public void removeFood(Food food) {
         foodList.remove(food);
     }
 
@@ -37,7 +38,7 @@ public class FoodHandler  {
         foodList.add(food);
     }
 
-    public LinkedList<Food> getFoods() {
+    public ArrayList<Food> getFoods() {
         return this.foodList;
     }
 
