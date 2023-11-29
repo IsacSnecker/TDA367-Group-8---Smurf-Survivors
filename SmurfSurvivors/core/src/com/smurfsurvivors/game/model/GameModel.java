@@ -13,7 +13,6 @@ import com.smurfsurvivors.game.model.weapons.MissileHandler;
 import com.smurfsurvivors.game.model.weapons.WeaponInformationHandler;
 import org.lwjgl.Sys;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -34,20 +33,21 @@ public class GameModel implements Observable {
 
     private Music soundTrack;
 
-    private Boolean isPaused = false;
+    private Boolean isPaused = true;
 
     public GameModel(Difficulty difficulty){
 
         this.difficulty = difficulty;
         this.collisionHandler = new CollisionHandler();
         this.observerList = new ArrayList<Observer>();
-        this.enemyHandler = new EnemyHandler(this);
+        this.enemyHandler = new EnemyHandler();
         this.foodHandler = new FoodHandler(500, this);
         this.clock = new Clock();
 
         soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Hallonsaft.mp3")); //
         soundTrack.setLooping(true);
         soundTrack.play(); //Should probably not be here
+        soundTrack.setVolume(0.7f);
 
 
         clock.startClock();
@@ -84,6 +84,10 @@ public class GameModel implements Observable {
         return this.clock;
     }
 
+    public Boolean getIsPaused(){
+        return this.isPaused;
+    }
+
     public void setPlayer(PlayerCharacter player) { this.player = player; }
 
     public void togglePaused(){
@@ -96,6 +100,18 @@ public class GameModel implements Observable {
         }
     }
 
+    public void setMusicVolume(float musicVolume){
+        soundTrack.setVolume(musicVolume);
+    }
+
+
+    public Difficulty getDifficulty(){
+        return this.difficulty;
+    }
+    public void setDifficulty(Difficulty difficulty){
+        this.difficulty = difficulty;
+    }
+
 
     public void updatePlayerPosition(ArrayList<Integer> inputList){
         if(!isPaused){
@@ -104,7 +120,7 @@ public class GameModel implements Observable {
     }
 
     public void updateEnemyPositions(){
-        for (Enemy enemy : enemyHandler.getEnemies()) {
+        for (Enemy enemy : getEnemies()) {
             enemy.moveTowardsEntity(player);
         }
     }
@@ -129,8 +145,8 @@ public class GameModel implements Observable {
         if(!isPaused){
             updateEnemyPositions();
             updatePlayerHealth();
-            if(!enemyHandler.getEnemies().isEmpty()){
-                player.weaponInformationHandler.updateWeaponInformation(player.getDirection(), enemyHandler.getNearestEnemyPosition(), enemyHandler.getNearestEnemy());
+            if(!getEnemies().isEmpty()){
+                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
                 player.usePassiveWeapon();
                 player.WHandler.updateWeaponCooldowns();
                 enemyPlayerCollision();
@@ -143,25 +159,50 @@ public class GameModel implements Observable {
         notifyObservers();
     }
 
+    public ArrayList<Enemy> getEnemies() {
+        return enemyHandler.getEnemies();
+    }
 
+    public LinkedList<Food> getFoods() {return foodHandler.getFoods();}
 
+    public Vector2 getNearestEnemyPosition(){
+        return getNearestEnemy().getPosition();
+    }
 
+    public Enemy getNearestEnemy(){
+        ArrayList<Enemy> enemyList = getEnemies();
+        Enemy nearestEnemy = enemyList.get(0);
+        for(Enemy enemy: enemyList){
+            if(calculateDistance(enemy.getPosition(), player.getPosition()) < calculateDistance(nearestEnemy.getPosition(), player.getPosition())){
+                nearestEnemy = enemy;
+            }
+        }
+        return nearestEnemy;
+    }
 
     public void enemyProjectileCollision(){
         for(AbstractWeapon projectile : player.WHandler.getProjectiles()){
-            for(Enemy enemy : enemyHandler.getEnemies()){
+            for(Enemy enemy : getEnemies()){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
-                    enemy.decreaseHealth(projectile.attackDamage);
-                    if (enemy.getHealth() <= 0){
-                        boolean levelUp = player.addXP(enemy.getXpGive());
-                        if(levelUp && player.getLevel() == 5){
-                            player.WHandler.addWeaponHandler(new MissileHandler(player.getWeaponInformationHandler()));
+                    if(!projectile.getHitEntities().contains(enemy)){
+                        projectile.getHitEntities().add(enemy);
+                        enemy.decreaseHealth(projectile.attackDamage);
+                        if (enemy.getHealth() <= 0){
+                            boolean levelUp = player.addXP(enemy.getXpGive());
+                            if(levelUp && player.getLevel() == 5){
+                                player.WHandler.addMissileHandler();
+                            }
+                            if(levelUp && player.getLevel() == 10){
+                                player.WHandler.addMagicHandler();
+                            }
                         }
-                        if(levelUp && player.getLevel() == 10){
-                            player.WHandler.addWeaponHandler(new MagicHandler(player.getWeaponInformationHandler()));
+                        if(projectile.getPassThrough() == 0){
+                            player.WHandler.removeProjectile(projectile);
+                        }
+                        else{
+                            projectile.setPassThrough(projectile.getPassThrough() - 1);
                         }
                     }
-                    player.WHandler.removeProjectile(projectile);
                 }
             }
         }
@@ -169,33 +210,11 @@ public class GameModel implements Observable {
 
     public void enemyPlayerCollision(){
         ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
-        for(Enemy enemy : enemyHandler.getEnemies()){
+        for(Enemy enemy : getEnemies()){
             if(enemy.getRectangle().overlaps(player.getRectangle())){
                 player.decreaseHealth(10);
-                int distanceMultiplier = 4;
-                if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
-                    player.move(-player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x < enemy.getPosition().x && player.getPosition().y > enemy.getPosition().y){
-                    player.move(-player.getSpeed() * distanceMultiplier, player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x > enemy.getPosition().x && player.getPosition().y < enemy.getPosition().y){
-                    player.move(player.getSpeed() * distanceMultiplier, -player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x > enemy.getPosition().x && player.getPosition().y > enemy.getPosition().y){
-                    player.move(player.getSpeed() * distanceMultiplier, player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x > enemy.getPosition().x){
-                    player.move(player.getSpeed() * distanceMultiplier, 0);
-                }
-                else if(player.getPosition().y > enemy.getPosition().y){
-                    player.move(0, player.getSpeed() * distanceMultiplier);
-                }
-                else if(player.getPosition().x < enemy.getPosition().x){
-                    player.move(-player.getSpeed() * distanceMultiplier, 0);
-                }
-                else if(player.getPosition().y < enemy.getPosition().y){
-                    player.move(0, -player.getSpeed() * distanceMultiplier);
+                if(player.getHealth() <= 0){
+                    killPlayer();
                 }
                 enemiesToRemove.add(enemy);
             }
@@ -205,13 +224,10 @@ public class GameModel implements Observable {
         }
     }
 
-    public LinkedList<Food> getFoods() {
-        return foodHandler.getFoods();
+    public void killPlayer(){
     }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemyHandler.getEnemies();
+    public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
+        return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
     }
-
-
 }
