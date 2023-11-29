@@ -91,18 +91,21 @@ public class GameController implements Observer {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.setDifficulty(DifficultyFactory.createEasyDifficulty());
+                System.out.println(model.getDifficulty());
             }
         });
         this.view.settingsMenu.difficultyNormalButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.setDifficulty(DifficultyFactory.createNormalDifficulty());
+                System.out.println(model.getDifficulty());
             }
         });
         this.view.settingsMenu.difficultyHardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.setDifficulty(DifficultyFactory.createHardDifficulty());
+                System.out.println(model.getDifficulty());
             }
         });
         this.view.settingsMenu.volumeSlider.addListener(new ChangeListener() {
