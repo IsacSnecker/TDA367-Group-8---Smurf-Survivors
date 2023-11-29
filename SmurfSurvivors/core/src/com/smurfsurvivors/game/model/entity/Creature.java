@@ -2,7 +2,8 @@ package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public abstract class Creature extends Entity implements HasHealth, Movable{
+public abstract class Creature extends Entity implements HasHealth, Movable {
+
     private int health;
 
     private int maxHealth;
@@ -57,6 +58,4 @@ public abstract class Creature extends Entity implements HasHealth, Movable{
     public void setHurt(boolean hurt) {
         isHurt = hurt;
     }
-    //public abstract void performAttack();
-
 }

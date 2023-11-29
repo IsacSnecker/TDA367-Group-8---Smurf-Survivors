@@ -11,8 +11,6 @@ public class Food extends Entity {
 
     private int health;
 
-    private final Sound soundEffect = Gdx.audio.newSound(new FileHandle("Sounds/Music/SoundsFX/HealthPickUp.wav"));
-
 
     static Texture foodTexture = new Texture("Items/health.png");
 
@@ -32,10 +30,6 @@ public class Food extends Entity {
 
     public void render(Batch batch) {
         batch.draw(foodTexture, getX(), getY());
-    }
-
-    public Sound getSoundEffect() {
-        return this.soundEffect;
     }
 
 }
