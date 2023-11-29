@@ -79,7 +79,7 @@ public class GameView implements Observer {
     }
 
     private void rendererInit() {
-        renderer = new OrthogonalTiledMapRenderer(this.map, 5);
+        renderer = new OrthogonalTiledMapRenderer(this.map);
     }
 
     private void mapInit() {
