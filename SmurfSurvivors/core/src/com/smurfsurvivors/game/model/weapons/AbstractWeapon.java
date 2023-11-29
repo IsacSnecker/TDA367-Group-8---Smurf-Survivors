@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Entity;
 
+import java.util.ArrayList;
+
 public abstract class AbstractWeapon{
     Vector2 position;
     Vector2 originalPosition;
@@ -18,8 +20,10 @@ public abstract class AbstractWeapon{
     public int attackDamage;
     String weaponName;
     boolean removeMe = false;
+    private int passThrough;
+    private ArrayList<Entity> hitEntities = new ArrayList<Entity>();
 
-    public AbstractWeapon(Vector2 _position, TextureRegion _weaponTexture, float _width, float _height, float _attackRange, int _velocity, int _attackDamage, String _weaponName){
+    public AbstractWeapon(Vector2 _position, TextureRegion _weaponTexture, float _width, float _height, float _attackRange, int _velocity, int _attackDamage, int _passThrough, String _weaponName){
         position = _position;
         originalPosition = new Vector2(_position.x, _position.y);
         weaponTexture = _weaponTexture;
@@ -29,6 +33,7 @@ public abstract class AbstractWeapon{
         velocity = _velocity;
         attackDamage = _attackDamage;
         weaponName = _weaponName;
+        passThrough = _passThrough;
     }
     abstract void update();
     public void performAttack() {
@@ -172,5 +177,21 @@ public abstract class AbstractWeapon{
 
     public void setWeaponName(String weaponName) {
         this.weaponName = weaponName;
+    }
+
+    public int getPassThrough() {
+        return passThrough;
+    }
+
+    public void setPassThrough(int passThrough) {
+        this.passThrough = passThrough;
+    }
+
+    public void addHitEntity(Entity entity){
+        hitEntities.add(entity);
+    }
+
+    public ArrayList<Entity> getHitEntities(){
+        return hitEntities;
     }
 }

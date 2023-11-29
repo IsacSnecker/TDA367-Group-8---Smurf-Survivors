@@ -22,9 +22,9 @@ public class HUD implements IHUD {
         this.FPS = new FPS(hudBatch);
     }
 
-    public void renderHUD(int currentHealth, int currentXp, int levelCap) {
+    public void renderHUD(int currentHealth, int currentXp, int levelCap, int playerLevel) {
         healthBar.render(currentHealth);
-        xpBar.render(currentXp, levelCap);
+        xpBar.render(currentXp, levelCap, playerLevel);
         toolbar.render();
         clock.render(hudBatch);
         FPS.render();

@@ -10,12 +10,13 @@ public class FPS {
 
     private GlyphLayout glyphLayout;
     private Batch batch;
+    BitmapFont font = new BitmapFont();
+
     public FPS(Batch _batch){
         batch = _batch;
     }
 
     public void render(){
-        BitmapFont font = new BitmapFont();
         font.draw(batch, "FPS=" + Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
     }
 }

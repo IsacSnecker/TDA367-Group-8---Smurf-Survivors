@@ -11,9 +11,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
     private Texture texture; //Should probably not be final
-
     private Sprite sprite;
-
     private Vector2 position;
     private final int width; //should width be final?
     private final int height; //should height be final?
@@ -42,8 +40,7 @@ public abstract class Entity {
     public float getX() {
         return position.x;
     }
-    public float getY(){ return position.y;
-    }
+    public float getY(){ return position.y;}
     public int getWidth() {
         return width;
     }

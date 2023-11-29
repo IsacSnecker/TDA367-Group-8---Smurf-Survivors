@@ -7,7 +7,7 @@ import com.smurfsurvivors.game.model.entity.Gargamel;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract  class EnemyFactory {
+public abstract class EnemyFactory {
 
     static Random rnd = new Random();
     static int spawnDistance = 1500;

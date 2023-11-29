@@ -36,6 +36,14 @@ public class GameView implements Observer {
     private SpriteBatch hudBatch;
     private BitmapFont font = new BitmapFont();
     private IHUD hud;
+    public Stage pauseStage;
+    public PauseMenu pause;
+    public Stage settingsStage;
+
+    public SettingsMenu settingsMenu;
+
+    public Stage mainStage;
+    public MainMenu mainMenu;
 
     public GameView(GameModel model) {
         this.model = model;
@@ -71,7 +79,7 @@ public class GameView implements Observer {
     }
 
     private void rendererInit() {
-        renderer = new OrthogonalTiledMapRenderer(this.map);
+        renderer = new OrthogonalTiledMapRenderer(this.map, 5);
     }
 
     private void mapInit() {
@@ -81,6 +89,12 @@ public class GameView implements Observer {
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
+        pauseStage = new Stage();
+        pause = new PauseMenu(pauseStage);
+        settingsStage = new Stage();
+        settingsMenu = new SettingsMenu(settingsStage);
+        mainStage = new Stage();
+        mainMenu = new MainMenu(mainStage);
     }
 
     private void HUDInit() {
@@ -91,7 +105,7 @@ public class GameView implements Observer {
     private void renderFrame() {
 
         // Clears screen
-        Gdx.gl.glClearColor( 1, 0, 0, 1 );
+        Gdx.gl.glClearColor( 0.5f, 2, 0.1f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         // Render process
@@ -111,9 +125,18 @@ public class GameView implements Observer {
 
         // Render HUD
         hudBatch.begin();
-        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap());
+        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel());
         hudBatch.end();
 
+        if(model.getIsPaused()) {
+            pauseStage.draw();
+        }
+        if(settingsMenu.open) {
+            settingsMenu.render();
+        }
+        if(mainMenu.isOpen) {
+            mainMenu.render();
+        }
     }
 
     public void renderEnemies() {
