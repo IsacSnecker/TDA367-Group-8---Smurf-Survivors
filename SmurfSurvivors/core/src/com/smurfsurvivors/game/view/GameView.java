@@ -36,8 +36,14 @@ public class GameView implements Observer {
     private SpriteBatch hudBatch;
     private BitmapFont font = new BitmapFont();
     private IHUD hud;
+    public Stage pauseStage;
+    public PauseMenu pause;
+    public Stage settingsStage;
 
-    private PauseMenu pause;
+    public SettingsMenu settingsMenu;
+
+    public Stage mainStage;
+    public MainMenu mainMenu;
 
     public GameView(GameModel model) {
         this.model = model;
@@ -83,7 +89,12 @@ public class GameView implements Observer {
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        pause = new PauseMenu();
+        pauseStage = new Stage();
+        pause = new PauseMenu(pauseStage);
+        settingsStage = new Stage();
+        settingsMenu = new SettingsMenu(settingsStage);
+        mainStage = new Stage();
+        mainMenu = new MainMenu(mainStage);
     }
 
     private void HUDInit() {
@@ -118,7 +129,13 @@ public class GameView implements Observer {
         hudBatch.end();
 
         if(model.getIsPaused()) {
-            pause.render();
+            pauseStage.draw();
+        }
+        if(settingsMenu.open) {
+            settingsMenu.render();
+        }
+        if(mainMenu.isOpen) {
+            mainMenu.render();
         }
     }
 

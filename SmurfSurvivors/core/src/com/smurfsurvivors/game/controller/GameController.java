@@ -2,6 +2,12 @@ package com.smurfsurvivors.game.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.smurfsurvivors.game.DifficultyFactory;
 import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.view.GameView;
@@ -19,6 +25,7 @@ public class GameController implements Observer {
         this.model = model;
         this.view = view;
         controllerInit();
+        buttonsInit();
         //PauseMenu pause = new PauseMenu();
     }
 
@@ -42,6 +49,13 @@ public class GameController implements Observer {
             inputLeft = 1;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            if(!model.getIsPaused()){
+                Gdx.input.setInputProcessor(view.pauseStage);
+            }
+            else{
+                Gdx.input.setInputProcessor(null);
+            }
+            view.settingsMenu.open = false;
             model.togglePaused();
         }
         model.updatePlayerPosition(new ArrayList<Integer>(Arrays.asList(inputUp, inputRight, inputDown, inputLeft)));
@@ -49,6 +63,82 @@ public class GameController implements Observer {
 
     public void observerInit() {
         model.addObserver(this);
+    }
+
+    public void buttonsInit() {
+        Gdx.input.setInputProcessor(view.mainStage);
+        this.view.pause.quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.exit(0);
+            }
+        });
+        this.view.pause.settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.input.setInputProcessor(view.settingsStage);
+                view.settingsMenu.open = true;
+            }
+        });
+        this.view.pause.resumeButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.input.setInputProcessor(null);
+                model.togglePaused();
+            }
+        });
+        this.view.settingsMenu.difficultyEasyButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.setDifficulty(DifficultyFactory.createEasyDifficulty());
+            }
+        });
+        this.view.settingsMenu.difficultyNormalButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.setDifficulty(DifficultyFactory.createNormalDifficulty());
+            }
+        });
+        this.view.settingsMenu.difficultyHardButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                model.setDifficulty(DifficultyFactory.createHardDifficulty());
+            }
+        });
+        this.view.settingsMenu.volumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                model.setMusicVolume(view.settingsMenu.volumeSlider.getValue()/100);
+            }
+        });
+        this.view.settingsMenu.quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.exit(0);
+            }
+        });
+        this.view.mainMenu.quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.exit(0);
+            }
+        });
+        this.view.mainMenu.settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.input.setInputProcessor(view.settingsStage);
+                view.mainMenu.isOpen = false;
+                view.settingsMenu.open = true;
+            }
+        });
+        this.view.mainMenu.startButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.input.setInputProcessor(null);
+                view.mainMenu.isOpen = false;
+                model.togglePaused();
+            }
+        });
     }
 
 
