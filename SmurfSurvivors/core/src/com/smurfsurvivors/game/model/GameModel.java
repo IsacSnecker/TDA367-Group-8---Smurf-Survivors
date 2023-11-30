@@ -48,7 +48,7 @@ public class GameModel implements Observable {
 
         this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler, this);
         setPlayer(player);
-        //audioManager.playSong("soundtrack");
+        audioManager.playSong("soundtrack");
 
     }
 
