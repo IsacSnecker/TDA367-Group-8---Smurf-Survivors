@@ -68,10 +68,10 @@ public class EnemyHandler {
             spawnDemons((int) spawnRate, playerX, playerY);
             spawnPurpleSmurfs((int) spawnRate*3, playerX, playerY);
             if (rnd.nextInt(0,10) == 0){
-                spawnGargamels((int) spawnRate / 10, playerX, playerY);
+                spawnGargamels((int) spawnRate, playerX, playerY);
             }
             if (rnd.nextInt(0,5) == 0){
-                spawnNemesises((int) spawnRate / 5, playerX, playerY);
+                spawnNemesises((int) spawnRate, playerX, playerY);
             }
             spawnReady = false;
             spawnRate += spawnRateAdd;

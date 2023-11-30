@@ -21,8 +21,8 @@ public class SpriteManager {
         loadTexture("Demon", "Enemies/demon.png");
         loadTexture("Gargamel", "Enemies/gargamel-150x150.png");
         loadTexture("Food", "Items/health.png");
-        loadTexture("PurpleSmurf", "Enemies/demon.png");
-        loadTexture("Nemesis", "Enemies/demon.png");
+        loadTexture("PurpleSmurf", "Enemies/PurpleSmurf.png");
+        loadTexture("Nemesis", "Enemies/Nemesis.png");
     }
 
     private void loadTexture(String name, String filepath) {
