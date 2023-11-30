@@ -1,59 +1,59 @@
 package com.smurfsurvivors.game.model.weapons;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-public class KnifeWeapon extends PassiveWeapon {
+public class MacheteWeapon extends PassiveWeapon{
 
-    int playerDirection;
+    private final int direction;
 
-    public KnifeWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int playerDirection) {
-        super(_position, weaponTexture, 35f, 35f, 5000f, "Magic");
+    public MacheteWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int direction) {
+        super(_position, weaponTexture, 35f, 35f, 5000f, "Axe");
         this.velocity = velocity;
         this.attackDamage = attackDamage;
         this.passThrough = passThrough;
-        this.playerDirection = playerDirection;
+        this.direction = direction;
 
     }
 
-    public void update() {
-        if (playerDirection == 0) {
+    public void update(){
+        if (direction == 0) {
             move(0, velocity);
-        } else if (playerDirection == 1) {
+        } else if (direction == 1) {
             move(velocity, velocity);
-        } else if (playerDirection == 2) {
+        } else if (direction == 2) {
             move(velocity, 0);
-        } else if (playerDirection == 3) {
+        } else if (direction == 3) {
             move(velocity, -velocity);
-        } else if (playerDirection == 4) {
+        } else if (direction == 4) {
             move(0, -velocity);
-        } else if (playerDirection == 5) {
+        } else if (direction == 5) {
             move(-velocity, -velocity);
-        } else if (playerDirection == 6) {
+        } else if (direction == 6) {
             move(-velocity, 0);
-        } else if (playerDirection == 7) {
+        } else if (direction == 7) {
             move(-velocity, velocity);
         }
     }
 
     @Override
     public void render(SpriteBatch batch){
-        if (playerDirection == 0) {
+        if (direction == 0) {
             draw(batch, 20);
-        } else if (playerDirection == 1) {
+        } else if (direction == 1) {
             draw(batch, -25);
-        } else if (playerDirection == 2) {
+        } else if (direction == 2) {
             draw(batch, -70);
-        } else if (playerDirection == 3) {
+        } else if (direction == 3) {
             draw(batch, -115);
-        } else if (playerDirection == 4) {
+        } else if (direction == 4) {
             draw(batch, -160);
-        } else if (playerDirection == 5) {
+        } else if (direction == 5) {
             draw(batch, -205);
-        } else if (playerDirection == 6) {
+        } else if (direction == 6) {
             draw(batch, -250);
-        } else if (playerDirection == 7) {
+        } else if (direction == 7) {
             draw(batch, -295);
         }
     }
@@ -64,4 +64,3 @@ public class KnifeWeapon extends PassiveWeapon {
     }
 
 }
-

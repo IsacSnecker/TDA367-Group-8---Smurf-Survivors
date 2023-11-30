@@ -40,6 +40,11 @@ public class WeaponHandler {
         handlerList.add(missileHandler);
         handlerMap.put("Missile", missileHandler);
     }
+    public void addMacheteHandler(){
+        IHandler macheteHandler = new MacheteHandler(weaponInformationHandler);
+        handlerList.add(macheteHandler);
+        handlerMap.put("Machete", macheteHandler);
+    }
 
     public void passiveWeaponUpdate(Vector2 position){
         long elapsedTime = TimeUtils.timeSinceMillis(startTime);
@@ -84,6 +89,7 @@ public class WeaponHandler {
     public void levelUpKnife() { handlerMap.get("Knife").levelUp(); }
     public void levelUpMissile() { handlerMap.get("Missile").levelUp(); }
     public void levelUpMagic() { handlerMap.get("Magic").levelUp(); }
+    public void levelUpMachete() { handlerMap.get("Machete").levelUp(); }
 
 
 }
