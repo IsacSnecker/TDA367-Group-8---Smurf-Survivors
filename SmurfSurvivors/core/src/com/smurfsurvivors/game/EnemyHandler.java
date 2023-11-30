@@ -21,7 +21,7 @@ public class EnemyHandler {
 
     public EnemyHandler(GameModel model){
         this.spawnReady = true;
-        this.spawnRate = 4;
+        this.spawnRate = 1;
         this.model = model;
     }
 
@@ -52,17 +52,17 @@ public class EnemyHandler {
         return enemyList;
     }
 
-    public void spawnNewEnemies(long seconds, float playerX, float playerY, double spawnRateMultiplier){
-        if (seconds % 10 != 0){
+    public void spawnNewEnemies(long seconds, float playerX, float playerY, double spawnRateAdd){
+        if (seconds % 2 != 0){
             spawnReady = true;
         }
-        if (seconds % 10 == 0 && spawnReady){
+        if (seconds % 2 == 0 && spawnReady){
             spawnDemons((int) spawnRate, playerX, playerY);
-            if (rnd.nextInt(0,2) == 1){
-                spawnGargamels((int) spawnRate / 4, playerX, playerY);
+            if (rnd.nextInt(0,10) == 0){
+                spawnGargamels((int) spawnRate / 10, playerX, playerY);
             }
             spawnReady = false;
-            spawnRate = spawnRate * spawnRateMultiplier;
+            spawnRate = spawnRate + spawnRateAdd;
         }
     }
 

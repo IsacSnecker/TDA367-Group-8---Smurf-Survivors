@@ -131,7 +131,7 @@ public class GameModel implements Observable {
                 collisionHandler.update();
                 foodHandler.update();
             }
-            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
+            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateAdd());
             enemyHandler.updateEnemies(); //gör till koordinater istället för entity
         }
         notifyObservers();
