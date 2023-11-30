@@ -15,18 +15,18 @@ public class MagicHandler extends AbstractWeaponHandler implements IHandler{
     public void spawnProjectile(Vector2 position) {
         if(getLevel() == 1){
             addWeapon(position, 20, 70, 0);
-            cooldown = 200f;
+            cooldown = 700f;
         } else if (getLevel() == 2){
             addWeapon(position,20, 80, 0);
-            cooldown = 150f;
+            cooldown = 500f;
         } else if (getLevel() == 3){
             addWeapon(position,20, 90, 0);
-            cooldown = 100f;
+            cooldown = 400f;
         } else if (getLevel() == 4){
             addWeapon(position,20, 100, 0);
-            cooldown = 50f;
+            cooldown = 400f;
         } else if (getLevel() == 5){
-            cooldown = 25f;
+            cooldown = 100f;
             addWeapon(position,30, 110, 0);
             addWeapon(position,30, 110, 0);
         }
