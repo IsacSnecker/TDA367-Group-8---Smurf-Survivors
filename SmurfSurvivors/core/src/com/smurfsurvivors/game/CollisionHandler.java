@@ -27,7 +27,7 @@ public class CollisionHandler {
 
     public void update() {
         handleIfCollision(player.WHandler.getProjectiles(), enemyHandler.getEnemies());
-      //  handleIfCollision(enemyHandler.getEnemies());
+        handleIfCollision(enemyHandler.getEnemies());
         handleFoodCollision();
     }
 
@@ -61,6 +61,22 @@ public class CollisionHandler {
             }
         }
 
+    }
+
+    public void handleIfCollision(ArrayList<Enemy> enemies){
+        ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+        for(Enemy enemy : enemies){
+            if(enemy.getRectangle().overlaps(player.getRectangle())){
+                player.decreaseHealth(10);
+                if(player.getHealth() <= 0){
+                    //killPlayer();
+                }
+                enemiesToRemove.add(enemy);
+            }
+        }
+        for(Enemy enemy : enemiesToRemove){
+            enemyHandler.removeEnemy(enemy);
+        }
     }
 
     public void handleFoodCollision(){
