@@ -49,7 +49,6 @@ public abstract class Entity {
 
     public void render(Batch batch) {
         sprite.setPosition(this.position.x, this.position.y);
-        batch.setColor(1,1,1,1);
         sprite.draw(batch);
 
     }
