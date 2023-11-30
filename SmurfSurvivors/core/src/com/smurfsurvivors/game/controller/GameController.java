@@ -49,6 +49,9 @@ public class GameController implements Observer {
             inputLeft = 1;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            if(view.mainMenu.isOpen){
+                return;
+            }
             if(!model.getIsPaused()){
                 Gdx.input.setInputProcessor(view.pauseStage);
             }
