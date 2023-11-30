@@ -39,6 +39,7 @@ public class CollisionHandler {
                     if(!projectile.getHitEntities().contains(enemy)){
                         projectile.getHitEntities().add(enemy);
                         enemy.decreaseHealth(projectile.attackDamage);
+                        model.getAudioManager().playSoundEffect("DemonDeath");
                         if (enemy.getHealth() <= 0){
                             boolean levelUp = player.addXP(enemy.getXpGive());
                             model.getAudioManager().playSoundEffect("DemonDeath");
