@@ -8,8 +8,8 @@ public abstract class Enemy extends Creature{
     private int xpGive;
     private boolean isDead = false;
 
-    public Enemy(int attackPower, int health, Texture sprite, float x, float y, int width, int height, float speed, int direction, int xpGive) {
-        super(health, sprite, x, y, width, height, speed, direction);
+    public Enemy(String name, int attackPower, int health, float x, float y, int width, int height, float speed, int direction, int xpGive) {
+        super(name, health, x, y, width, height, speed, direction);
         this.attackPower = attackPower;
         this.speed = speed;
         this.xpGive = xpGive;

@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -113,9 +115,7 @@ public class GameView implements Observer {
         // Render process
         batch.begin();
         renderer.render();
-        model.getPlayer().render(this.batch);
-        renderFoods(model.getFoods());
-        renderEnemies();
+        renderEntities(model.getEntities());
         renderPlayerProjectiles(model.getPlayer());
 
         // Move camera
@@ -141,22 +141,8 @@ public class GameView implements Observer {
         }
     }
 
-    public void renderEnemies() {
-        for (Enemy e: model.getEnemies()) {
-            e.render(this.batch);
-            Color redColor = new Color(1,0,0,1);
-            if(e.getIsHurt()){
-                e.showHit();
-                e.setHurt(false);
-            }
-        }
-    }
 
-    public void renderFoods(ArrayList<Food> entityList) {
-        for (Food f: entityList) {
-            f.render(batch);
-        }
-    }
+
 
     // Disposes variables from memory. (Used during shutdown)
     public void dispose() {
@@ -170,5 +156,16 @@ public class GameView implements Observer {
             weaponHandler.renderProjectiles(this.batch);
         }
     }
+
+    private void renderEntities(ArrayList<Entity> entities) {
+
+            for (Entity entity: entities) {
+                Sprite sprite = model.getSpriteManager().getSprite(entity);
+                sprite.setPosition(entity.getX(), entity.getY());
+                sprite.draw(batch);
+            }
+
+    }
+
 }
 

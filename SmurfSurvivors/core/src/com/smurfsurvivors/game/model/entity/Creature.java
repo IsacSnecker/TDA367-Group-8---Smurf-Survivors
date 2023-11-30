@@ -11,8 +11,8 @@ public abstract class Creature extends Entity implements HasHealth, Movable {
     private float speed;
     private boolean isHurt = false;
 
-    public Creature(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
-        super(sprite, x, y, width, height);
+    public Creature(String name, int health, float x, float y, int width, int height, float speed, int direction) {
+        super(name, x, y, width, height);
         this.health = health;
         this.maxHealth = health;
         this.speed = speed;

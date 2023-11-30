@@ -13,7 +13,8 @@ public class SettingsMenu {
     public Button difficultyNormalButton;
     public Button difficultyHardButton;
     public ButtonGroup<Button> difficultyButtonGroup;
-    public Slider volumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider soundVolumeSlider;
     public Button quitButton;
     public Boolean open = false;
 
@@ -40,9 +41,12 @@ public class SettingsMenu {
         Texture backgroundTexture = new Texture("BackgroundTextures/smurfarna.png");
         backgroundImage = new Image(backgroundTexture);
         backgroundImage.setBounds(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        volumeSlider = new Slider(0, 100, 1, false, skin);
-        volumeSlider.setPosition((Gdx.graphics.getWidth()-volumeSlider.getWidth())/2, (Gdx.graphics.getHeight()- volumeSlider.getHeight())/2);
-        volumeSlider.setValue(70);
+        musicVolumeSlider = new Slider(0, 100, 1, false, skin);
+        musicVolumeSlider.setPosition((Gdx.graphics.getWidth()-musicVolumeSlider.getWidth())/2, (Gdx.graphics.getHeight()- musicVolumeSlider.getHeight())/2);
+        musicVolumeSlider.setValue(70);
+        soundVolumeSlider = new Slider(0, 100, 1, false, skin);
+        soundVolumeSlider.setPosition((Gdx.graphics.getWidth()-soundVolumeSlider.getWidth())/2, (Gdx.graphics.getHeight()/2- soundVolumeSlider.getHeight()));
+        soundVolumeSlider.setValue(70);
         quitButton = new TextButton("QUIT",skin);
         quitButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
         quitButton.setPosition(0,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10);
@@ -50,7 +54,8 @@ public class SettingsMenu {
         settingsStage.addActor(difficultyEasyButton);
         settingsStage.addActor(difficultyNormalButton);
         settingsStage.addActor(difficultyHardButton);
-        settingsStage.addActor(volumeSlider);
+        settingsStage.addActor(musicVolumeSlider);
+        settingsStage.addActor(soundVolumeSlider);
         settingsStage.addActor(quitButton);
     }
 

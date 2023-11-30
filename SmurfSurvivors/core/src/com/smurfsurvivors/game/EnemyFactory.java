@@ -1,8 +1,6 @@
 package com.smurfsurvivors.game;
 
-import com.smurfsurvivors.game.model.entity.Demon;
-import com.smurfsurvivors.game.model.entity.Enemy;
-import com.smurfsurvivors.game.model.entity.Gargamel;
+import com.smurfsurvivors.game.model.entity.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,6 +27,24 @@ public abstract class EnemyFactory {
             gargamels.add(new Gargamel(spawnCoordinates[0], spawnCoordinates[1]));
         }
         return gargamels;
+    }
+
+    public static ArrayList<Enemy> makeNemesises(int numNemesis, float playerX, float playerY){
+        ArrayList<Enemy> nemesises = new ArrayList<Enemy>();
+        for (int i = 0; i < numNemesis; i++){
+            int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
+            nemesises.add(new Nemesis(spawnCoordinates[0], spawnCoordinates[1]));
+        }
+        return nemesises;
+    }
+
+    public static ArrayList<Enemy> makePurpleSmurfs(int numPurpleSmurfs, float playerX, float playerY){
+        ArrayList<Enemy> purpleSmurfs = new ArrayList<Enemy>();
+        for (int i = 0; i < numPurpleSmurfs; i++){
+            int[] spawnCoordinates = chooseSpawnCoordinates(playerX, playerY);
+            purpleSmurfs.add(new PurpleSmurf(spawnCoordinates[0], spawnCoordinates[1]));
+        }
+        return purpleSmurfs;
     }
 
     /*
