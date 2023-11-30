@@ -9,7 +9,7 @@ import java.util.Random;
 public class BulletWeapon extends AbstractWeapon{
     private final int playerDirection;
     private Random rnd = new Random();
-    private float randomDirection;
+    private final float randomDirection;
     public BulletWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int playerDirection) {
         super(_position, weaponTexture, 35f, 35f, 5000f, "Bullet");
         this.playerDirection = playerDirection;

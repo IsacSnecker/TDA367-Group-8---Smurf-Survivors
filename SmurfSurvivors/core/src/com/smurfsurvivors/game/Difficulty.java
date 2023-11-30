@@ -1,16 +1,16 @@
 package com.smurfsurvivors.game;
 
 public class Difficulty {
-    private double spawnRateMultiplier;
+    private double spawnRateAdd;
     private double enemyHealthMultiplier;
     private double enemySpeedMultiplier;
-    public Difficulty(double spawnRateMultiplier, double enemyHealthMultiplier, double enemySpeedMultiplier){
-        this.spawnRateMultiplier = spawnRateMultiplier;
+    public Difficulty(double spawnRateAdd, double enemyHealthMultiplier, double enemySpeedMultiplier){
+        this.spawnRateAdd = spawnRateAdd;
         this.enemyHealthMultiplier = enemyHealthMultiplier;
         this.enemySpeedMultiplier = enemySpeedMultiplier;
     }
 
-    public double getSpawnRateMultiplier() { return spawnRateMultiplier; }
+    public double getSpawnRateAdd() { return spawnRateAdd; }
     public double getEnemyHealthMultiplier() { return enemyHealthMultiplier; }
     public double getEnemySpeedMultiplier() { return enemySpeedMultiplier; }
 

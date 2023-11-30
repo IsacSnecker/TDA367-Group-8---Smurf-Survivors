@@ -69,13 +69,10 @@ abstract class AbstractWeaponHandler implements IHandler{
         return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
     }
 
-    public void updateWeaponCooldown() {
-        cooldown = cooldown - (5f * Gdx.graphics.getDeltaTime());
-    }
-
     public void levelUp(){
         level++;
     }
+
     public int getLevel() {
         return level;
     }

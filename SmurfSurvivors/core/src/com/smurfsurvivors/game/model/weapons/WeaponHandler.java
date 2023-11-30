@@ -21,20 +21,24 @@ public class WeaponHandler {
         handlerList.add(handler);
     }
     public void addBulletHandler(){
-        handlerList.add(new BulletHandler(weaponInformationHandler));
-        handlerMap.put("Bullet", new BulletHandler(weaponInformationHandler));
+        IHandler bulletHandler = new BulletHandler(weaponInformationHandler);
+        handlerList.add(bulletHandler);
+        handlerMap.put("Bullet", bulletHandler);
     }
     public void addKnifeHandler(){
-        handlerList.add(new KnifeHandler(weaponInformationHandler));
-        handlerMap.put("Knife", new KnifeHandler(weaponInformationHandler));
+        IHandler knifeHandler = new KnifeHandler(weaponInformationHandler);
+        handlerList.add(knifeHandler);
+        handlerMap.put("Knife", knifeHandler);
     }
     public void addMagicHandler(){
-        handlerList.add(new MagicHandler(weaponInformationHandler));
-        handlerMap.put("Magic", new MagicHandler(weaponInformationHandler));
+        IHandler magicHandler = new MagicHandler(weaponInformationHandler);
+        handlerList.add(magicHandler);
+        handlerMap.put("Magic", magicHandler);
     }
     public void addMissileHandler(){
-        handlerList.add(new MissileHandler(weaponInformationHandler));
-        handlerMap.put("Missile", new MissileHandler(weaponInformationHandler));
+        IHandler missileHandler = new MissileHandler(weaponInformationHandler);
+        handlerList.add(missileHandler);
+        handlerMap.put("Missile", missileHandler);
     }
 
     public void passiveWeaponUpdate(Vector2 position){
@@ -76,18 +80,10 @@ public class WeaponHandler {
         playerDirection = direction;
     }
 
-    public void levelUpBullet(){
-        handlerMap.get("Bullet").levelUp();
-    }
-    public void levelUpKnife(){
-        handlerMap.get("Knife").levelUp();
-    }
-    public void levelUpMissile(){
-        handlerMap.get("Missile").levelUp();
-    }
-    public void levelUpMagic(){
-        handlerMap.get("Magic").levelUp();
-    }
+    public void levelUpBullet() { handlerMap.get("Bullet").levelUp(); }
+    public void levelUpKnife() { handlerMap.get("Knife").levelUp(); }
+    public void levelUpMissile() { handlerMap.get("Missile").levelUp(); }
+    public void levelUpMagic() { handlerMap.get("Magic").levelUp(); }
 
 
 }
