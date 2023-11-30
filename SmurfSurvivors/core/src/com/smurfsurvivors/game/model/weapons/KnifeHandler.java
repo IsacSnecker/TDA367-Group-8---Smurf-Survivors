@@ -28,8 +28,7 @@ public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
             cooldown = 100f;
         } else if (getLevel() == 5){
             cooldown = 25f;
-            addWeapon(position,30, 100, 2);
-            addWeapon(position,30, 100, 2);
+            addWeapon(position,30, 100, 5);
         }
     }
 
@@ -38,7 +37,7 @@ public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
     }
 
     private void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
-        WeaponList.add(new BulletWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getPlayerDirection()));
+        WeaponList.add(new KnifeWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getPlayerDirection()));
     }
 }
 

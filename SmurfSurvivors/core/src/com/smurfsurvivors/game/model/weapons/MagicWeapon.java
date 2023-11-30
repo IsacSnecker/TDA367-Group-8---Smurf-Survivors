@@ -8,7 +8,7 @@ public class MagicWeapon extends PassiveWeapon{
     private final Vector2 nearestEnemyPosition;
 
     public MagicWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, Vector2 nearestEnemyPosition) {
-        super(_position, weaponTexture, 35f, 35f, 5000f, "Magic");
+        super(_position, weaponTexture, 50f, 50f, 5000f, "Magic");
         this.velocity = velocity;
         this.attackDamage = attackDamage;
         this.passThrough = passThrough;
