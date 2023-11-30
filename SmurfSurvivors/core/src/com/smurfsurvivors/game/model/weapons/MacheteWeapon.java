@@ -7,13 +7,15 @@ import com.badlogic.gdx.math.Vector2;
 public class MacheteWeapon extends PassiveWeapon{
 
     private final int direction;
+    private int rotateInt;
 
     public MacheteWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int direction) {
-        super(_position, weaponTexture, 35f, 35f, 5000f, "Axe");
+        super(_position, weaponTexture, 70f, 70f, 5000f, "Axe");
         this.velocity = velocity;
         this.attackDamage = attackDamage;
         this.passThrough = passThrough;
         this.direction = direction;
+        rotateInt = 0;
 
     }
 
@@ -59,7 +61,8 @@ public class MacheteWeapon extends PassiveWeapon{
     }
 
     private void draw(SpriteBatch batch, int rotation){
-        batch.draw(weaponTexture, position.x, position.y, width, height, width, height, 1,1,rotation);
+        rotateInt += 5;
+        batch.draw(weaponTexture, position.x, position.y, width, height, width, height, 1,1,rotation + rotateInt);
 
     }
 

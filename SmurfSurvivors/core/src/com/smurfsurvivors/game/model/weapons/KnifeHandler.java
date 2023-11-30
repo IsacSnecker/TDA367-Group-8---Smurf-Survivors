@@ -4,8 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Random;
+
 public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
 
+    Random rnd = new Random();
     public KnifeHandler(WeaponInformationHandler weaponInformationHandler){
         super(500f, weaponInformationHandler);
     }
@@ -27,7 +30,7 @@ public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
             addWeapon(position,20, 70, 1);
             cooldown = 100f;
         } else if (getLevel() == 5){
-            cooldown = 25f;
+            cooldown = 100f;
             addWeapon(position,30, 100, 5);
         }
     }
@@ -37,7 +40,7 @@ public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
     }
 
     private void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
-        WeaponList.add(new KnifeWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getPlayerDirection()));
+        WeaponList.add(new KnifeWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getPlayerDirection(), rnd.nextFloat(-50,50)));
     }
 }
 
