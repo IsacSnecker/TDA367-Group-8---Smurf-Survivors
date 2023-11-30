@@ -2,7 +2,6 @@ package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.model.weapons.*;
-import com.smurfsurvivors.game.model.weapons.*;
 
 
 import java.util.ArrayList;
@@ -127,4 +126,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     }
 
     public WeaponInformationHandler getWeaponInformationHandler() { return weaponInformationHandler; }
+
+
+
 }

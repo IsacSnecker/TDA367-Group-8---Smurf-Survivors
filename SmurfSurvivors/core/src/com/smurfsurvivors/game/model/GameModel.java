@@ -2,33 +2,30 @@ package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
-import com.smurfsurvivors.game.model.weapons.MagicHandler;
-import com.smurfsurvivors.game.model.weapons.MissileHandler;
-import com.smurfsurvivors.game.model.weapons.WeaponInformationHandler;
 import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
-
 public class GameModel implements Observable {
 
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
+
+    private AudioManager audioManager;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
+
     private FoodHandler foodHandler;
+
     private Difficulty difficulty;
     private Clock clock;
-    private Music soundTrack;
+
+
     private Boolean isPaused = true;
 
     private Boolean isGameOver = false;
@@ -37,26 +34,22 @@ public class GameModel implements Observable {
 
         this.difficulty = difficulty;
         this.observerList = new ArrayList<Observer>();
-        this.enemyHandler = new EnemyHandler();
         this.clock = new Clock();
-
-
-        soundTrack = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Music/Hallonsaft.mp3")); //
-        soundTrack.setLooping(true);
-        //soundTrack.play(); //Should probably not be here
-        soundTrack.setVolume(0.7f);
-
-
         clock.startClock();
+        this.audioManager = new AudioManager();
+
         initializeObservers();
 
     }
 
     public void init(PlayerCharacter player){
-        this.enemyHandler = new EnemyHandler();
+        this.enemyHandler = new EnemyHandler(this);
         this.foodHandler = new FoodHandler(500);
-        this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler);
+
+        this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler, this);
         setPlayer(player);
+        audioManager.playSong("soundtrack");
+
     }
 
     @Override
@@ -106,10 +99,6 @@ public class GameModel implements Observable {
         }
     }
 
-    public void setMusicVolume(float musicVolume){
-        soundTrack.setVolume(musicVolume);
-    }
-
 
     public Difficulty getDifficulty(){
         return this.difficulty;
@@ -124,33 +113,26 @@ public class GameModel implements Observable {
         }
     }
 
-    public void updateEnemyPositions(){
-        for (Enemy enemy : getEnemies()) {
-            enemy.moveTowardsEntity(player);
-        }
-    }
-
-    public void playerFoodCollision(){
-        collisionHandler.handleFoodCollision();
-    }
 
     public void update() {
         if(!isPaused){
-            updateEnemyPositions();
+
+            enemyHandler.updateEnemies();
+
             if(player.getHealth() <= 0){
                 setIsGameOver();
             }
+
             if(!getEnemies().isEmpty()){
-                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), getNearestEnemyPosition(), getNearestEnemy());
+                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
                 player.usePassiveWeapon();
                 player.WHandler.updateWeaponCooldowns();
-                enemyPlayerCollision();
-                enemyProjectileCollision();
-                playerFoodCollision();
+
+                collisionHandler.update();
                 foodHandler.update();
             }
             enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateMultiplier());
-            enemyHandler.updateEnemies(player); //gör till koordinater istället för entity
+            enemyHandler.updateEnemies(); //gör till koordinater istället för entity
         }
         notifyObservers();
     }
@@ -161,37 +143,16 @@ public class GameModel implements Observable {
 
     public ArrayList<Food> getFoods() {return foodHandler.getFoods();}
 
-    public Vector2 getNearestEnemyPosition(){
-        return getNearestEnemy().getPosition();
+    public void setMusicVolume(float volume) {
+        audioManager.setMusicVolume(volume);
     }
 
-    public Enemy getNearestEnemy(){
-        ArrayList<Enemy> enemyList = getEnemies();
-        Enemy nearestEnemy = enemyList.get(0);
-        for(Enemy enemy: enemyList){
-            if(calculateDistance(enemy.getPosition(), player.getPosition()) < calculateDistance(nearestEnemy.getPosition(), player.getPosition())){
-                nearestEnemy = enemy;
-            }
-        }
-        return nearestEnemy;
+    public void setSoundEffectVolume(float volume) {
+        audioManager.setSoundVolume(volume);
     }
 
-    public void enemyProjectileCollision(){
-        collisionHandler.handleIfCollision(player.WHandler.getProjectiles(), getEnemies());
-    }
-
-    public void enemyPlayerCollision(){
-        collisionHandler.handleIfCollision(getEnemies());
-        ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
-        for(Enemy enemy : getEnemies()){
-            if(enemy.getRectangle().overlaps(player.getRectangle())){
-                player.decreaseHealth(10);
-                enemiesToRemove.add(enemy);
-            }
-        }
-        for(Enemy enemy : enemiesToRemove){
-            enemyHandler.removeEnemy(enemy);
-        }
+    public AudioManager getAudioManager() {
+        return this.audioManager;
     }
 
     public void setIsGameOver(){
@@ -201,7 +162,4 @@ public class GameModel implements Observable {
         return this.isGameOver;
     }
 
-    public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
-        return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
-    }
 }
