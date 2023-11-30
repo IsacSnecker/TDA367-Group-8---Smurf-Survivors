@@ -20,18 +20,18 @@ public class BulletHandler extends AbstractWeaponHandler implements IHandler{
             addWeapon(position, 20, 30, 0);
             cooldown = 200f;
         } else if (getLevel() == 2){
-            addWeapon(position,20, 40, 1);
+            addWeapon(position,20, 40, 0);
             cooldown = 150f;
         } else if (getLevel() == 3){
-            addWeapon(position,20, 40, 1);
+            addWeapon(position,20, 40, 0);
             cooldown = 100f;
         } else if (getLevel() == 4){
-            addWeapon(position,20, 40, 1);
+            addWeapon(position,20, 40, 0);
             cooldown = 50f;
         } else if (getLevel() == 5){
             cooldown = 25f;
-            addWeapon(position,30, 50, 2);
-            addWeapon(position,30, 50, 2);
+            addWeapon(position,30, 50, 0);
+            addWeapon(position,30, 50, 0);
         }
     }
 

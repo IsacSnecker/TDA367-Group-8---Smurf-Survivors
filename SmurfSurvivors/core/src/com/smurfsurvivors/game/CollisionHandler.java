@@ -100,6 +100,21 @@ public class CollisionHandler {
                             if(levelUp && player.getLevel() == 20){
                                 player.WHandler.levelUpMagic();
                             }
+                            if(levelUp && player.getLevel() == 21){
+                                player.WHandler.addMacheteHandler();
+                            }
+                            if(levelUp && player.getLevel() == 22){
+                                player.WHandler.levelUpMachete();
+                            }
+                            if(levelUp && player.getLevel() == 23){
+                                player.WHandler.levelUpMachete();
+                            }
+                            if(levelUp && player.getLevel() == 24){
+                                player.WHandler.levelUpMachete();
+                            }
+                            if(levelUp && player.getLevel() == 25){
+                                player.WHandler.levelUpMachete();
+                            }
                         }
                         if(projectile.getPassThrough() == 0){
                             player.WHandler.removeProjectile(projectile);

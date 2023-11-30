@@ -26,6 +26,7 @@ public class MainMenu {
         quitButton = new TextButton("QUIT",skin);
         quitButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
         quitButton.setPosition(0,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10);
+        quitButton.setColor(1f,0.1f,0.1f,1f);
         settingsButton = new TextButton("SETTINGS",skin);
         settingsButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
         settingsButton.setPosition(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10);

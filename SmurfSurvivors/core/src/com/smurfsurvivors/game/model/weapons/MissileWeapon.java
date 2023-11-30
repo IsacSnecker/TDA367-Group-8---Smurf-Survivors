@@ -10,7 +10,7 @@ public class MissileWeapon extends PassiveWeapon{
     Enemy nearestEnemy;
 
     public MissileWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, Enemy nearestEnemy) {
-        super(_position, weaponTexture, 35f, 35f, 5000f, "Missile");
+        super(_position, weaponTexture, 50f, 100f, 5000f, "Missile");
         this.velocity = velocity;
         this.attackDamage = attackDamage;
         this.passThrough = passThrough;
