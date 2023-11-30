@@ -31,6 +31,14 @@ public class EnemyHandler {
 
     public void spawnGargamels(int numGargamels, float playerX, float playerY) {
         enemyList.addAll(EnemyFactory.makeGargamels(numGargamels, playerX, playerY));
+    }
+
+    public void spawnNemesises(int numNemesises, float playerX, float playerY){
+        enemyList.addAll(EnemyFactory.makeNemesises(numNemesises, playerX, playerY));
+    }
+
+    public void spawnPurpleSmurfs(int numPurpleSmurfs, float playerX, float playerY){
+        enemyList.addAll(EnemyFactory.makePurpleSmurfs(numPurpleSmurfs, playerX, playerY));
 
     }
 
@@ -58,11 +66,15 @@ public class EnemyHandler {
         }
         if (seconds % 2 == 0 && spawnReady){
             spawnDemons((int) spawnRate, playerX, playerY);
+            spawnPurpleSmurfs((int) spawnRate*3, playerX, playerY);
             if (rnd.nextInt(0,10) == 0){
                 spawnGargamels((int) spawnRate / 10, playerX, playerY);
             }
+            if (rnd.nextInt(0,5) == 0){
+                spawnNemesises((int) spawnRate / 5, playerX, playerY);
+            }
             spawnReady = false;
-            spawnRate = spawnRate + spawnRateAdd;
+            spawnRate += spawnRateAdd;
         }
     }
 
