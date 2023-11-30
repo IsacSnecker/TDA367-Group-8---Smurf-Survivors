@@ -2,6 +2,7 @@ package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
@@ -16,6 +17,7 @@ public class GameModel implements Observable {
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
 
+    private SpriteManager spriteManager;
     private AudioManager audioManager;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
@@ -37,6 +39,7 @@ public class GameModel implements Observable {
         this.clock = new Clock();
         clock.startClock();
         this.audioManager = new AudioManager();
+        this.spriteManager = new SpriteManager();
 
         initializeObservers();
 
@@ -143,6 +146,16 @@ public class GameModel implements Observable {
 
     public ArrayList<Food> getFoods() {return foodHandler.getFoods();}
 
+    public ArrayList<Entity> getEntities() {
+        ArrayList<Entity> entities = new ArrayList<>();
+
+        entities.addAll(getEnemies());
+        entities.addAll(getFoods());
+        entities.add(player);
+
+        return entities;
+    }
+
     public void setMusicVolume(float volume) {
         audioManager.setMusicVolume(volume);
     }
@@ -154,6 +167,8 @@ public class GameModel implements Observable {
     public AudioManager getAudioManager() {
         return this.audioManager;
     }
+
+    public SpriteManager getSpriteManager() { return this.spriteManager; }
 
     public void setIsGameOver(){
         this.isGameOver = true;

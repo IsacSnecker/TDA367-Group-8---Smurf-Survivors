@@ -23,8 +23,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public WeaponHandler WHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
 
-    public PlayerCharacter(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
-        super(health, sprite, x, y, width, height, speed, direction);
+    public PlayerCharacter(int health, float x, float y, int width, int height, float speed, int direction) {
+        super("Player", health, x, y, width, height, speed, direction);
         //WHandler.addKnifeHandler();
         WHandler.addBulletHandler();
         this.xp = 0;
@@ -58,34 +58,34 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(differenceDiagonal, differenceDiagonal);
             setDirection(1);
-            getSprite().setTexture(this.spriteRight);
+            //getSprite().setTexture(this.spriteRight);
         }
         else if(inputList.get(0) == 1 && inputList.get(3) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(-differenceDiagonal, differenceDiagonal);
             setDirection(7);
-            getSprite().setTexture(this.spriteLeft);
+            //getSprite().setTexture(this.spriteLeft);
         }
         else if(inputList.get(2) == 1 && inputList.get(1) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(differenceDiagonal, -differenceDiagonal);
             setDirection(3);
-            getSprite().setTexture(this.spriteRight);
+            //getSprite().setTexture(this.spriteRight);
         }
         else if(inputList.get(2) == 1 && inputList.get(3) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(-differenceDiagonal, -differenceDiagonal);
             setDirection(5);
-            getSprite().setTexture(this.spriteLeft);
+            //getSprite().setTexture(this.spriteLeft);
         }
         else if (inputList.get(1) == 1 && inputList.get(3) != 1){
             move(getSpeed(), 0);
-            getSprite().setTexture(this.spriteRight);
+           // getSprite().setTexture(this.spriteRight);
             setDirection(2);
         }
         else if (inputList.get(3) == 1 && inputList.get(1) != 1){
             move(-getSpeed(), 0);
-            getSprite().setTexture(this.spriteLeft);
+           // getSprite().setTexture(this.spriteLeft);
             setDirection(6);
         }
         else if (inputList.get(2) == 1 && inputList.get(0) != 1){

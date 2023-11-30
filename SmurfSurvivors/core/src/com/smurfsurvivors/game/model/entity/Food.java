@@ -12,24 +12,14 @@ public class Food extends Entity {
     private int health;
 
 
-    static Texture foodTexture = new Texture("Items/health.png");
-
     public Food(int health, int x, int y, int width, int height) {
-        super(foodTexture, x, y,width, height);
+        super("Food", x, y,width, height);
         this.health = health;
-        foodInit();
-    }
-
-    private void foodInit() {
-
     }
 
     public int getHealth() {
         return this.health;
     }
 
-    public void render(Batch batch) {
-        batch.draw(foodTexture, getX(), getY());
-    }
 
 }
