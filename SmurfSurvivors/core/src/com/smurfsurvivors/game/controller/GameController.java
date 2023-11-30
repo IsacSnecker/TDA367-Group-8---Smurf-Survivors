@@ -108,10 +108,16 @@ public class GameController implements Observer {
                 System.out.println(model.getDifficulty());
             }
         });
-        this.view.settingsMenu.volumeSlider.addListener(new ChangeListener() {
+        this.view.settingsMenu.musicVolumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                model.setMusicVolume(view.settingsMenu.volumeSlider.getValue()/100);
+                model.setMusicVolume(view.settingsMenu.musicVolumeSlider.getValue()/100);
+            }
+        });
+        this.view.settingsMenu.soundVolumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                model.setSoundEffectVolume(view.settingsMenu.soundVolumeSlider.getValue()/100);
             }
         });
         this.view.settingsMenu.quitButton.addListener(new ClickListener() {

@@ -13,6 +13,8 @@ public class AudioManager  {
     private float soundVolume = 0.7f;
 
 
+
+
     private Map<String, Music> songs;
     private Map<String, Sound> soundEffects;
 
@@ -39,7 +41,7 @@ public class AudioManager  {
         System.out.println("Played:" + soundEffectKey);
         Sound sound = soundEffects.get(soundEffectKey);
         if (sound != null) {
-            sound.play();
+            sound.play(soundVolume);
         }
     }
     public void playSong(String songName) {
@@ -58,10 +60,16 @@ public class AudioManager  {
 
     public void setMusicVolume(float volume) {
         musicVolume = volume;
+        for(Music music : songs.values()){
+            music.setVolume(volume);
+        }
     }
 
     public void setSoundVolume(float volume) {
         soundVolume = volume;
+        for(Sound sound : soundEffects.values()){
+            sound.setVolume(0, volume);
+        }
     }
 
     private void loadSoundEffect(String name, String filePath) {
