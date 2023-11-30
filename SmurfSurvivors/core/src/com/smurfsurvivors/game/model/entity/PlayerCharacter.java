@@ -26,7 +26,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public PlayerCharacter(int health, Texture sprite, float x, float y, int width, int height, float speed, int direction) {
         super(health, sprite, x, y, width, height, speed, direction);
-        WHandler.addKnifeHandler();
+        //WHandler.addKnifeHandler();
+        WHandler.addBulletHandler();
         this.xp = 0;
         this.level = 1;
         this.levelCap = 100;

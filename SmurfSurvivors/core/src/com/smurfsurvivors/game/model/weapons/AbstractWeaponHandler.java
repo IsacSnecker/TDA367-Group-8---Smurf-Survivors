@@ -17,6 +17,7 @@ abstract class AbstractWeaponHandler implements IHandler{
     float cooldown;
     boolean useable;
     long oldTime;
+    private int level;
     WeaponInformationHandler weaponInformationHandler;
     public ArrayList<AbstractWeapon> weaponsToRemove = new ArrayList<AbstractWeapon>();
 
@@ -24,6 +25,7 @@ abstract class AbstractWeaponHandler implements IHandler{
         cooldown = _cooldown;
         useable = true;
         oldTime = 0;
+        level = 1;
         this.weaponInformationHandler = weaponInformationHandler;
     }
 
@@ -69,5 +71,12 @@ abstract class AbstractWeaponHandler implements IHandler{
 
     public void updateWeaponCooldown() {
         cooldown = cooldown - (5f * Gdx.graphics.getDeltaTime());
+    }
+
+    public void levelUp(){
+        level++;
+    }
+    public int getLevel() {
+        return level;
     }
 }

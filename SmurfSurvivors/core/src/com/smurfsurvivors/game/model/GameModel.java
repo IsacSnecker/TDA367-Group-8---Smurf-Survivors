@@ -25,14 +25,10 @@ public class GameModel implements Observable {
     private PlayerCharacter player;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
-
     private FoodHandler foodHandler;
-
     private Difficulty difficulty;
     private Clock clock;
-
     private Music soundTrack;
-
     private Boolean isPaused = true;
 
     private Boolean isGameOver = false;

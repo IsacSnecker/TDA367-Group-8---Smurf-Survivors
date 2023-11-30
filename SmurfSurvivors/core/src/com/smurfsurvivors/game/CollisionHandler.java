@@ -30,11 +30,63 @@ public class CollisionHandler {
                         enemy.decreaseHealth(projectile.attackDamage);
                         if (enemy.getHealth() <= 0){
                             boolean levelUp = player.addXP(enemy.getXpGive());
+                            if(levelUp && player.getLevel() == 2){
+                                player.WHandler.levelUpBullet();
+                            }
+                            if(levelUp && player.getLevel() == 3){
+                                player.WHandler.addKnifeHandler();
+                            }
+                            if(levelUp && player.getLevel() == 4){
+                                player.WHandler.levelUpKnife();
+                            }
                             if(levelUp && player.getLevel() == 5){
+                                player.WHandler.levelUpKnife();
+                            }
+                            if(levelUp && player.getLevel() == 6){
+                                player.WHandler.levelUpBullet();
+                            }
+                            if(levelUp && player.getLevel() == 7){
                                 player.WHandler.addMissileHandler();
                             }
+                            if(levelUp && player.getLevel() == 8){
+                                player.WHandler.levelUpKnife();
+                            }
+                            if(levelUp && player.getLevel() == 9){
+                                player.WHandler.levelUpKnife();
+                            }
                             if(levelUp && player.getLevel() == 10){
+                                player.WHandler.levelUpBullet();
+                            }
+                            if(levelUp && player.getLevel() == 11){
+                                player.WHandler.levelUpBullet();
+                            }
+                            if(levelUp && player.getLevel() == 12){
+                                player.WHandler.levelUpBullet();
+                            }
+                            if(levelUp && player.getLevel() == 13){
+                                player.WHandler.levelUpMissile();
+                            }
+                            if(levelUp && player.getLevel() == 14){
+                                player.WHandler.levelUpMissile();
+                            }
+                            if(levelUp && player.getLevel() == 15){
+                                player.WHandler.levelUpMissile();
                                 player.WHandler.addMagicHandler();
+                            }
+                            if(levelUp && player.getLevel() == 16){
+                                player.WHandler.levelUpMissile();
+                            }
+                            if(levelUp && player.getLevel() == 17){
+                                player.WHandler.levelUpMagic();
+                            }
+                            if(levelUp && player.getLevel() == 18){
+                                player.WHandler.levelUpMagic();
+                            }
+                            if(levelUp && player.getLevel() == 19){
+                                player.WHandler.levelUpMagic();
+                            }
+                            if(levelUp && player.getLevel() == 20){
+                                player.WHandler.levelUpMagic();
                             }
                         }
                         if(projectile.getPassThrough() == 0){

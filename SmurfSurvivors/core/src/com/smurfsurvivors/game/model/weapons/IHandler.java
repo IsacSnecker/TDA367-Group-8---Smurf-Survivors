@@ -13,4 +13,5 @@ public interface IHandler {
     void renderProjectiles(SpriteBatch batch);
     void removeProjectile(AbstractWeapon projectile);
     void updateWeaponCooldown();
+    void levelUp();
 }

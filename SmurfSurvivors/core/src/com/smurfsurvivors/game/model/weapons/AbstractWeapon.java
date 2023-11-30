@@ -20,20 +20,18 @@ public abstract class AbstractWeapon{
     public int attackDamage;
     String weaponName;
     boolean removeMe = false;
-    private int passThrough;
+    int passThrough;
+    private int level;
     private ArrayList<Entity> hitEntities = new ArrayList<Entity>();
 
-    public AbstractWeapon(Vector2 _position, TextureRegion _weaponTexture, float _width, float _height, float _attackRange, int _velocity, int _attackDamage, int _passThrough, String _weaponName){
+    public AbstractWeapon(Vector2 _position, TextureRegion _weaponTexture, float _width, float _height, float _attackRange, String _weaponName){
         position = _position;
         originalPosition = new Vector2(_position.x, _position.y);
         weaponTexture = _weaponTexture;
         width = _width;
         height = _height;
         attackRange = _attackRange;
-        velocity = _velocity;
-        attackDamage = _attackDamage;
         weaponName = _weaponName;
-        passThrough = _passThrough;
     }
     abstract void update();
     public void performAttack() {

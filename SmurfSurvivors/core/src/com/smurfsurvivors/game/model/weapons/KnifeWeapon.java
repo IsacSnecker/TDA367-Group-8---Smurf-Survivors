@@ -8,8 +8,11 @@ public class KnifeWeapon extends PassiveWeapon {
 
     int playerDirection;
 
-    public KnifeWeapon(Vector2 _position, TextureRegion weaponTexture, int playerDirection) {
-        super(_position, weaponTexture, 75f, 75f, 5000f, 20, 50, 1, "Knife");
+    public KnifeWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int playerDirection) {
+        super(_position, weaponTexture, 35f, 35f, 5000f, "Magic");
+        this.velocity = velocity;
+        this.attackDamage = attackDamage;
+        this.passThrough = passThrough;
         this.playerDirection = playerDirection;
 
     }
