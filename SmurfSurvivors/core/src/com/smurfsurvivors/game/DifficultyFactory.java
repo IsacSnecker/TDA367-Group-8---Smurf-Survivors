@@ -10,4 +10,5 @@ public class DifficultyFactory {
     public static Difficulty createHardDifficulty(){
         return new Difficulty(0.2,3,3);
     }
+
 }
