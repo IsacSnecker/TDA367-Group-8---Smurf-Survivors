@@ -13,7 +13,7 @@ public abstract class GameModelFactory {
         model.setMusicVolume(0.2f);
         model.setSoundEffectVolume(0.7f);
 
-        PlayerCharacter player = new PlayerCharacter(100, 16000,16000, 100,100, 7, 0);
+        PlayerCharacter player = new PlayerCharacter(100, 16000,16000, 100,100, 5, 0);
 
         model.init(player);
         return model;
