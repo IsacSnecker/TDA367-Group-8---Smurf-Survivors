@@ -7,13 +7,10 @@ import com.badlogic.gdx.audio.Sound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AudioManager  {
+public class AudioManager implements IAudioManager {
 
     private float musicVolume = 0.7f;
     private float soundVolume = 0.7f;
-
-
-
 
     private Map<String, Music> songs;
     private Map<String, Sound> soundEffects;
@@ -51,11 +48,6 @@ public class AudioManager  {
             song.setVolume(musicVolume);
             song.play();
         }
-    }
-
-    public void stopMusic(String song) {
-        Music music = songs.get(song);
-        music.stop();
     }
 
     public void setMusicVolume(float volume) {

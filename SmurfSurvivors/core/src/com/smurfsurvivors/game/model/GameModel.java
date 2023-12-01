@@ -17,8 +17,8 @@ public class GameModel implements Observable {
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
 
-    private SpriteManager spriteManager;
-    private AudioManager audioManager;
+    private ISpriteManager spriteManager;
+    private IAudioManager audioManager;
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
@@ -164,11 +164,11 @@ public class GameModel implements Observable {
         audioManager.setSoundVolume(volume);
     }
 
-    public AudioManager getAudioManager() {
+    public IAudioManager getAudioManager() {
         return this.audioManager;
     }
 
-    public SpriteManager getSpriteManager() { return this.spriteManager; }
+    public ISpriteManager getSpriteManager() { return this.spriteManager; }
 
     public void setIsGameOver(){
         this.isGameOver = true;

@@ -14,6 +14,8 @@ public abstract class Entity {
 
     private String name;
     private Vector2 position;
+
+    private boolean lookingRight = true;
     private final int width; //should width be final?
     private final int height; //should height be final?
 
@@ -52,4 +54,11 @@ public abstract class Entity {
 
     public String getName() { return name; }
 
+    public boolean isLookingRight() {
+        return lookingRight;
+    }
+
+    public void setLookingRight(boolean val) {
+        lookingRight = val;
+    }
 }

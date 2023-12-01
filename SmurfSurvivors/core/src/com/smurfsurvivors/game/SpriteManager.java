@@ -3,11 +3,12 @@ package com.smurfsurvivors.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.smurfsurvivors.game.model.entity.Entity;
+import com.smurfsurvivors.game.model.entity.ISpriteManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpriteManager {
+public class SpriteManager implements ISpriteManager {
 
     Map<String, Texture> textures;
 

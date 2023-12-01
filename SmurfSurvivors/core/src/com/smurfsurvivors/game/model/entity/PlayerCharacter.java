@@ -58,34 +58,34 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(differenceDiagonal, differenceDiagonal);
             setDirection(1);
-            //getSprite().setTexture(this.spriteRight);
+            setLookingRight(true);
         }
         else if(inputList.get(0) == 1 && inputList.get(3) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(-differenceDiagonal, differenceDiagonal);
             setDirection(7);
-            //getSprite().setTexture(this.spriteLeft);
+            setLookingRight(false);
         }
         else if(inputList.get(2) == 1 && inputList.get(1) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(differenceDiagonal, -differenceDiagonal);
             setDirection(3);
-            //getSprite().setTexture(this.spriteRight);
+            setLookingRight(true);
         }
         else if(inputList.get(2) == 1 && inputList.get(3) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(-differenceDiagonal, -differenceDiagonal);
             setDirection(5);
-            //getSprite().setTexture(this.spriteLeft);
+            setLookingRight(false);
         }
         else if (inputList.get(1) == 1 && inputList.get(3) != 1){
             move(getSpeed(), 0);
-           // getSprite().setTexture(this.spriteRight);
+           setLookingRight(true);
             setDirection(2);
         }
         else if (inputList.get(3) == 1 && inputList.get(1) != 1){
             move(-getSpeed(), 0);
-           // getSprite().setTexture(this.spriteLeft);
+            setLookingRight(false);
             setDirection(6);
         }
         else if (inputList.get(2) == 1 && inputList.get(0) != 1){

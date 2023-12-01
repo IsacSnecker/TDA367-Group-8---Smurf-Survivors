@@ -161,6 +161,7 @@ public class GameView implements Observer {
 
             for (Entity entity: entities) {
                 Sprite sprite = model.getSpriteManager().getSprite(entity);
+                sprite.flip(entity.isLookingRight(), false);
                 sprite.setPosition(entity.getX(), entity.getY());
                 sprite.draw(batch);
             }
