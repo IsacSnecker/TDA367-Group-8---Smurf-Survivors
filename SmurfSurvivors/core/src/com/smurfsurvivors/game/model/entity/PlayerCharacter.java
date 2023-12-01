@@ -2,11 +2,8 @@ package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.model.weapons.*;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.lang.Math.*;
 
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
@@ -34,22 +31,10 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         this.spriteRight = new Texture("Player/smurf-100x100-right.png");
         this.spriteLeft = new Texture("Player/smurf-100x100.png");
     }
-    //private
 
-    public void addAbility(ActiveWeapon ability){
-        abilities.add(ability);
-    }
     public void usePassiveWeapon(){
         WHandler.updatePlayerDirection(getDirection());
         WHandler.passiveWeaponUpdate(getPosition());
-    }
-    public void useAbility(ActiveWeapon ability){
-        ability.performAttack();
-    }
-    public void useAllAbilities(){
-        for(ActiveWeapon ability : abilities){
-            useAbility(ability);
-        }
     }
 
     public void updatePosition(ArrayList<Integer> inputList){
