@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.smurfsurvivors.game.EntityFactory;
 import com.smurfsurvivors.game.FoodHandler;
+import com.smurfsurvivors.game.SpriteManager;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.model.entity.Enemy;
@@ -33,6 +34,8 @@ import java.util.LinkedList;
 public class GameView implements Observer {
 
     private GameModel model;
+
+    private SpriteManager spriteManager;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -50,6 +53,7 @@ public class GameView implements Observer {
     public MainMenu mainMenu;
 
     public GameView(GameModel model) {
+        this.spriteManager = new SpriteManager();
         this.model = model;
         gameViewInit();
     }
@@ -160,7 +164,7 @@ public class GameView implements Observer {
     private void renderEntities(ArrayList<Entity> entities) {
 
             for (Entity entity: entities) {
-                Sprite sprite = model.getSpriteManager().getSprite(entity);
+                Sprite sprite = spriteManager.getSprite(entity);
                 sprite.flip(entity.isLookingRight(), false);
                 sprite.setPosition(entity.getX(), entity.getY());
                 sprite.draw(batch);
