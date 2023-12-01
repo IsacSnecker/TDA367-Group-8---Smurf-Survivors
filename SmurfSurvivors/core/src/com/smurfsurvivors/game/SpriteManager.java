@@ -21,7 +21,7 @@ public class SpriteManager {
         loadTexture("Demon", "Enemies/demon-96x96.png");
         loadTexture("Gargamel", "Enemies/gargamel-150x150.png");
         loadTexture("Food", "Items/health.png");
-        loadTexture("PurpleSmurf", "Enemies/PurpleSmurf-63x80.png");
+        loadTexture("PurpleSmurf", "Enemies/purplemsmurf-pixel-60x83.png");
         loadTexture("Nemesis", "Enemies/Nemesis.png");
     }
 
