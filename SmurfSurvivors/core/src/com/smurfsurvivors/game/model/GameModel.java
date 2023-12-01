@@ -152,5 +152,4 @@ public class GameModel implements Observable {
     public boolean getIsGameOver(){
         return this.isGameOver;
     }
-
 }

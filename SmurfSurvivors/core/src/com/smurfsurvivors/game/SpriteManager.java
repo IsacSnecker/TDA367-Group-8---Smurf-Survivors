@@ -17,11 +17,11 @@ public class SpriteManager {
     }
 
     private void loadSprites() {
-        loadTexture("Player", "Player/smurf-100x100.png");
-        loadTexture("Demon", "Enemies/demon.png");
+        loadTexture("Player", "Player/smurf-90x90.png");
+        loadTexture("Demon", "Enemies/demon-96x96.png");
         loadTexture("Gargamel", "Enemies/gargamel-150x150.png");
         loadTexture("Food", "Items/health.png");
-        loadTexture("PurpleSmurf", "Enemies/PurpleSmurf.png");
+        loadTexture("PurpleSmurf", "Enemies/PurpleSmurf-63x80.png");
         loadTexture("Nemesis", "Enemies/Nemesis.png");
     }
 

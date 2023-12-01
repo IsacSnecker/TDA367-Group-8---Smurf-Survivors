@@ -16,7 +16,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     private List<ActiveWeapon> abilities; //Should be List<Ability>
     private int levelCap;
     private float levelCapMultiplier;
-
     public WeaponHandler WHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
 
@@ -28,8 +27,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         this.level = 1;
         this.levelCap = 100;
         this.levelCapMultiplier = (float) 1.10;
-        this.spriteRight = new Texture("Player/smurf-100x100-right.png");
-        this.spriteLeft = new Texture("Player/smurf-100x100.png");
+        this.spriteRight = new Texture("Player/smurf-90x90-right.png");
+        this.spriteLeft = new Texture("Player/smurf-90x90.png");
     }
 
     public void usePassiveWeapon(){
