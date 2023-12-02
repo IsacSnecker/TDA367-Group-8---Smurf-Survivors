@@ -1,6 +1,5 @@
-package com.smurfsurvivors.test;
+package com.smurfsurvivors.test.model;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import org.junit.jupiter.api.Test;
 

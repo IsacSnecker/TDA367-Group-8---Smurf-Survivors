@@ -10,8 +10,8 @@ public abstract class GameModelFactory {
 
         GameModel model = new GameModel(DifficultyFactory.createNormalDifficulty());
 
-        model.setMusicVolume(0.2f);
-        model.setSoundEffectVolume(0.7f);
+        //model.setMusicVolume(0.2f);
+        //model.setSoundEffectVolume(0.7f);
 
         PlayerCharacter player = new PlayerCharacter(100, 16000,16000, 100,100, 7, 0);
 

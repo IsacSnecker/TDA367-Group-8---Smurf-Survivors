@@ -16,7 +16,7 @@ public class GameModel implements Observable {
 
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
-    private IAudioManager audioManager;
+
     public EnemyHandler enemyHandler;
     private CollisionHandler collisionHandler;
 
@@ -36,7 +36,6 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         clock.startClock();
-        this.audioManager = new AudioManager();
 
         initializeObservers();
 
@@ -48,7 +47,7 @@ public class GameModel implements Observable {
 
         this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler, this);
         setPlayer(player);
-        audioManager.playSong("soundtrack");
+        //audioManager.playSong("soundtrack");
 
     }
 
@@ -153,7 +152,7 @@ public class GameModel implements Observable {
         return entities;
     }
 
-    public void setMusicVolume(float volume) {
+    /*public void setMusicVolume(float volume) {
         audioManager.setMusicVolume(volume);
     }
 
@@ -163,6 +162,10 @@ public class GameModel implements Observable {
 
     public IAudioManager getAudioManager() {
         return this.audioManager;
+    }*/
+
+    public CollisionHandler getCollisionHandler() {
+        return collisionHandler;
     }
 
     public void setIsGameOver(){

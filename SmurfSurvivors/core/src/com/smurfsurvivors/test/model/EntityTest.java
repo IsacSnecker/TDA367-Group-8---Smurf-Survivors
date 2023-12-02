@@ -1,4 +1,4 @@
-package com.smurfsurvivors.test;
+package com.smurfsurvivors.test.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Demon;

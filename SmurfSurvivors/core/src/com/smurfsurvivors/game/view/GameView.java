@@ -14,15 +14,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.smurfsurvivors.game.EntityFactory;
-import com.smurfsurvivors.game.FoodHandler;
-import com.smurfsurvivors.game.SpriteManager;
+import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.GameModel;
-import com.smurfsurvivors.game.Observer;
-import com.smurfsurvivors.game.model.entity.Enemy;
-import com.smurfsurvivors.game.model.entity.Entity;
-import com.smurfsurvivors.game.model.entity.Food;
-import com.smurfsurvivors.game.model.entity.PlayerCharacter;
+import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.model.weapons.IHandler;
@@ -31,11 +25,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-public class GameView implements Observer {
+public class GameView implements Observer{
 
     private GameModel model;
 
-    private SpriteManager spriteManager;
+    private ISpriteManager spriteManager;
+
+    private IAudioManager audioManager;
+
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -54,8 +51,11 @@ public class GameView implements Observer {
 
     public GameView(GameModel model) {
         this.spriteManager = new SpriteManager();
+        this.audioManager = new AudioManager(model.getCollisionHandler());
         this.model = model;
         gameViewInit();
+        audioManager.playSong("soundtrack");
+
     }
 
     public void gameViewInit() {

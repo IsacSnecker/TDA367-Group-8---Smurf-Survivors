@@ -7,4 +7,5 @@ public interface IAudioManager {
     void setMusicVolume(float volume);
     void setSoundVolume(float volume);
 
+
 }

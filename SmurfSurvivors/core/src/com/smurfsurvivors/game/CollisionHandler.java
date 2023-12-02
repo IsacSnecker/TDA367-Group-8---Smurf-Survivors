@@ -1,20 +1,17 @@
 package com.smurfsurvivors.game;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
-import org.lwjgl.Sys;
-import java.util.Iterator;
-import java.util.List;
 
 import java.util.ArrayList;
 
-public class CollisionHandler {
+public class CollisionHandler implements AudioObservable {
     private PlayerCharacter player;
     private EnemyHandler enemyHandler;
     private FoodHandler foodHandler;
+
+    private ArrayList<AudioObserver> soundObservers;
 
     private GameModel model;
 
@@ -23,6 +20,7 @@ public class CollisionHandler {
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
         this.model = model;
+        this.soundObservers = new ArrayList<>();
     }
 
     public void update() {
@@ -39,10 +37,10 @@ public class CollisionHandler {
                     if(!projectile.getHitEntities().contains(enemy)){
                         projectile.getHitEntities().add(enemy);
                         enemy.decreaseHealth(projectile.attackDamage);
-                        model.getAudioManager().playSoundEffect("DemonDeath");
+                        //model.getAudioManager().playSoundEffect("DemonDeath");
                         if (enemy.getHealth() <= 0){
+                            notifyAudioObservers("DemonDeath");
                             boolean levelUp = player.addXP(enemy.getXpGive());
-                            model.getAudioManager().playSoundEffect("DemonDeath");
                             if(levelUp && player.getLevel() == 2){
                                 player.WHandler.levelUpBullet();
                             }
@@ -150,15 +148,32 @@ public class CollisionHandler {
 
         for(Food food : foodHandler.getFoods()){
             if(food.getRectangle().overlaps(player.getRectangle())){
-
+                notifyAudioObservers("HealthPickUp");
                 player.addHealth(10);
-                model.getAudioManager().playSoundEffect("HealthPickUp");
+                //model.getAudioManager().playSoundEffect("HealthPickUp");
 
                 foodsToRemove.add(food);
             }
         }
         for(Food food : foodsToRemove) {
             foodHandler.removeFood(food);
+        }
+    }
+
+    @Override
+    public void addSoundObserver(AudioObserver o) {
+        soundObservers.add(o);
+    }
+
+    @Override
+    public void removeSoundObserver(AudioObserver o) {
+        soundObservers.remove(o);
+    }
+
+    @Override
+    public void notifyAudioObservers(String soundName) {
+        for (AudioObserver o: soundObservers) {
+            o.playSound(soundName);
         }
     }
 }

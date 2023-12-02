@@ -1,4 +1,4 @@
-package com.smurfsurvivors.test;
+package com.smurfsurvivors.test.model;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
