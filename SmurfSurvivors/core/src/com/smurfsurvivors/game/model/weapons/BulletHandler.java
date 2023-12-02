@@ -29,7 +29,7 @@ public class BulletHandler extends AbstractWeaponHandler implements IHandler{
             addWeapon(position,20, 40, 0);
             cooldown = 50f;
         } else if (getLevel() == 5){
-            cooldown = 25f;
+            cooldown = 50f;
             addWeapon(position,30, 50, 0);
             addWeapon(position,30, 50, 0);
         }

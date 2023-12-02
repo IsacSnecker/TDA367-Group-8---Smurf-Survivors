@@ -15,20 +15,20 @@ public class MacheteHandler extends AbstractWeaponHandler implements IHandler{
     @Override
     public void spawnProjectile(Vector2 position) {
     if(getLevel() == 1){
-        addWeapon(position, 20, 30, 0);
+        addWeapon(position, 10, 30, 0);
         cooldown = 5000f;
     } else if (getLevel() == 2){
-        addWeapon(position,20, 40, 0);
+        addWeapon(position,12, 40, 0);
         cooldown = 4000f;
     } else if (getLevel() == 3){
-        addWeapon(position,20, 40, 0);
+        addWeapon(position,14, 40, 0);
         cooldown = 3000f;
     } else if (getLevel() == 4){
-        addWeapon(position,20, 50, 1);
+        addWeapon(position,16, 50, 1);
         cooldown = 3000f;
     } else if (getLevel() == 5){
         cooldown = 500f;
-        addWeapon(position,30, 100, 10);
+        addWeapon(position,20, 100, 10);
     }
 }
 

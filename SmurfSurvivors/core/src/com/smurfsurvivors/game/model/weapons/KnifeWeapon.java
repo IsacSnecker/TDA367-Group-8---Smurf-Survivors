@@ -7,13 +7,15 @@ import com.badlogic.gdx.math.Vector2;
 public class KnifeWeapon extends PassiveWeapon {
 
     int playerDirection;
+    private final float randomPosition;
 
-    public KnifeWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int playerDirection) {
+    public KnifeWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, int playerDirection, float randomPosition) {
         super(_position, weaponTexture, 70f, 70f, 5000f, "Knife");
         this.velocity = velocity;
         this.attackDamage = attackDamage;
         this.passThrough = passThrough;
         this.playerDirection = playerDirection;
+        this.randomPosition = randomPosition;
 
     }
 
@@ -59,7 +61,7 @@ public class KnifeWeapon extends PassiveWeapon {
     }
 
     private void draw(SpriteBatch batch, int rotation){
-        batch.draw(weaponTexture, position.x, position.y, width, height, width, height, 1,1,rotation);
+        batch.draw(weaponTexture, position.x, position.y, width + randomPosition, height + randomPosition, width, height, 1,1,rotation);
 
     }
 

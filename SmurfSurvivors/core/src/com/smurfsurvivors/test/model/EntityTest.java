@@ -44,8 +44,5 @@ class EntityTest extends LibGDXTest {
         Demon demon = new Demon(100,100);
         assertEquals(new Vector2(100,100), demon.getPosition());
     }
-
-
-
 }
 
