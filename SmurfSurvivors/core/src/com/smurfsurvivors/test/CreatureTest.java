@@ -3,6 +3,7 @@ package com.smurfsurvivors.test;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Demon;
 import com.smurfsurvivors.game.model.entity.Creature;
+import com.smurfsurvivors.test.model.LibGDXTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

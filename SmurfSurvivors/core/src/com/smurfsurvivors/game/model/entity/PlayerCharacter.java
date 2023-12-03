@@ -42,34 +42,34 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(differenceDiagonal, differenceDiagonal);
             setDirection(1);
-            setLookingRight(true);
+            setLookingRight(false);
         }
         else if(inputList.get(0) == 1 && inputList.get(3) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(-differenceDiagonal, differenceDiagonal);
             setDirection(7);
-            setLookingRight(false);
+            setLookingRight(true);
         }
         else if(inputList.get(2) == 1 && inputList.get(1) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(differenceDiagonal, -differenceDiagonal);
             setDirection(3);
-            setLookingRight(true);
+            setLookingRight(false);
         }
         else if(inputList.get(2) == 1 && inputList.get(3) == 1){
             differenceDiagonal =  calculateSpeedWhenDiagonal();
             move(-differenceDiagonal, -differenceDiagonal);
             setDirection(5);
-            setLookingRight(false);
+            setLookingRight(true);
         }
         else if (inputList.get(1) == 1 && inputList.get(3) != 1){
             move(getSpeed(), 0);
-           setLookingRight(true);
+           setLookingRight(false);
             setDirection(2);
         }
         else if (inputList.get(3) == 1 && inputList.get(1) != 1){
             move(-getSpeed(), 0);
-            setLookingRight(false);
+            setLookingRight(true);
             setDirection(6);
         }
         else if (inputList.get(2) == 1 && inputList.get(0) != 1){
