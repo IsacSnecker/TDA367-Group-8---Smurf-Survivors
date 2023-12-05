@@ -1,13 +1,9 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model.handlers;
 
-import com.badlogic.gdx.Gdx;
-import com.smurfsurvivors.game.model.GameModel;
+import com.smurfsurvivors.game.model.factories.EntityFactory;
 import com.smurfsurvivors.game.model.entity.Food;
-import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class FoodHandler  {

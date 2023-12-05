@@ -1,8 +1,8 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model.handlers;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.factories.EnemyFactory;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.Enemy;
-import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.Random;

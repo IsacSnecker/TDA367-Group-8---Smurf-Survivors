@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.view.audiomanager;
 
 public interface IAudioManager {
 
@@ -6,6 +6,5 @@ public interface IAudioManager {
     void playSoundEffect(String soundEffectKey);
     void setMusicVolume(float volume);
     void setSoundVolume(float volume);
-
 
 }

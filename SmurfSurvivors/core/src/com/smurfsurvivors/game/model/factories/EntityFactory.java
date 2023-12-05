@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model.factories;
 
 import com.smurfsurvivors.game.model.entity.Food;
 

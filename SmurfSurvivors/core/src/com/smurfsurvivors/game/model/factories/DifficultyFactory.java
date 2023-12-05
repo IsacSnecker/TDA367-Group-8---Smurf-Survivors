@@ -1,4 +1,6 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model.factories;
+
+import com.smurfsurvivors.game.model.Difficulty;
 
 public class DifficultyFactory {
     public static Difficulty createEasyDifficulty(){

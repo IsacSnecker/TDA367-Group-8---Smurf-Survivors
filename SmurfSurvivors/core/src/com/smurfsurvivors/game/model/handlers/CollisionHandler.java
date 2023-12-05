@@ -1,5 +1,7 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model.handlers;
 
+import com.smurfsurvivors.game.AudioObservable;
+import com.smurfsurvivors.game.AudioObserver;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.weapons.AbstractWeapon;

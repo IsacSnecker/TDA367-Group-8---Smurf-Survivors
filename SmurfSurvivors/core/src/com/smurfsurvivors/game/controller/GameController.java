@@ -4,14 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.smurfsurvivors.game.DifficultyFactory;
+import com.smurfsurvivors.game.model.factories.DifficultyFactory;
 import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.view.GameView;
-import com.smurfsurvivors.game.view.PauseMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;

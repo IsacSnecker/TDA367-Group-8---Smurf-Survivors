@@ -1,7 +1,7 @@
 package com.smurfsurvivors.game.view.hud;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.smurfsurvivors.game.Clock;
+import com.smurfsurvivors.game.model.clock.Clock;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 public class HUD implements IHUD {

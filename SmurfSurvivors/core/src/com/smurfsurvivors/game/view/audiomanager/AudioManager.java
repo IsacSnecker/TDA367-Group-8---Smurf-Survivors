@@ -1,8 +1,10 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.view.audiomanager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.smurfsurvivors.game.AudioObservable;
+import com.smurfsurvivors.game.AudioObserver;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model;
 
 public class Difficulty {
     private double spawnRateAdd;

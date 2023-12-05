@@ -1,16 +1,15 @@
 package com.smurfsurvivors.game.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.smurfsurvivors.game.*;
+import com.smurfsurvivors.game.model.clock.Clock;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import org.lwjgl.Sys;
+import com.smurfsurvivors.game.model.handlers.CollisionHandler;
+import com.smurfsurvivors.game.model.handlers.EnemyHandler;
+import com.smurfsurvivors.game.model.handlers.FoodHandler;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class GameModel implements Observable {
 

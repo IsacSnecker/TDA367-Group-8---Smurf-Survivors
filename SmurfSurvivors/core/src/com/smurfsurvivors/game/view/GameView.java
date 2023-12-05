@@ -1,10 +1,8 @@
 package com.smurfsurvivors.game.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,12 +15,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.*;
+import com.smurfsurvivors.game.view.audiomanager.AudioManager;
+import com.smurfsurvivors.game.view.audiomanager.IAudioManager;
 import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.model.weapons.IHandler;
+import com.smurfsurvivors.game.view.spritemanager.ISpriteManager;
+import com.smurfsurvivors.game.view.spritemanager.SpriteManager;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 
 public class GameView implements Observer{

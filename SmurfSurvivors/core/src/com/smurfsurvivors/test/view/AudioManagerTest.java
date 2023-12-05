@@ -1,6 +1,6 @@
 package com.smurfsurvivors.test.view;
 
-import com.smurfsurvivors.game.AudioManager;
+import com.smurfsurvivors.game.view.audiomanager.AudioManager;
 import com.smurfsurvivors.game.AudioObservable;
 import com.smurfsurvivors.test.model.LibGDXTest;
 import org.junit.jupiter.api.BeforeEach;

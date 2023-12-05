@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game;
+package com.smurfsurvivors.game.model.clock;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
