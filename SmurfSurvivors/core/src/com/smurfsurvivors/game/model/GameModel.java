@@ -48,12 +48,8 @@ public class GameModel implements Observable {
                 setIsGameOver();
             }
 
-            if(!getEnemies().isEmpty()){
-                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), compositeHandler.getEnemyHandler().getNearestEnemy().getPosition(), compositeHandler.getEnemyHandler().getNearestEnemy());
-                player.usePassiveWeapon();
-                player.WHandler.updateWeaponCooldowns();
+            player.performAttack(compositeHandler.getEnemyHandler());
 
-            }
 
         }
 

@@ -4,6 +4,6 @@ public interface AudioObservable {
 
     void addSoundObserver(AudioObserver o);
     void removeSoundObserver(AudioObserver o);
-    void notifyAudioObservers();
+    void notifyAudioObservers(String soundname);
 
 }

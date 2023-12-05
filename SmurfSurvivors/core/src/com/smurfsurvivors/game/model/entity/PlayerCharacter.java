@@ -1,6 +1,7 @@
 package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.smurfsurvivors.game.model.handlers.IEnemyHandler;
 import com.smurfsurvivors.game.model.weapons.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,13 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     }
 
     public WeaponInformationHandler getWeaponInformationHandler() { return weaponInformationHandler; }
+
+    public void performAttack(IEnemyHandler enemyHandler) {
+        usePassiveWeapon();
+        WHandler.weaponInformationHandler.updateWeaponInformation(getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
+        usePassiveWeapon();
+        WHandler.updateWeaponCooldowns();
+    }
 
 
 
