@@ -5,16 +5,23 @@ import com.smurfsurvivors.game.model.factories.DifficultyFactory;
 
 public abstract class GameModelFactory {
 
-    public static GameModel createDefaultModel() {
 
-        GameModel model = new GameModel(DifficultyFactory.createNormalDifficulty());
+    public static GameModel createEasyModel() {
+        GameModel model = new GameModel(DifficultyFactory.createEasyDifficulty());
 
-        //model.setMusicVolume(0.2f);
-        //model.setSoundEffectVolume(0.7f);
-
-        PlayerCharacter player = new PlayerCharacter(100, 16000,16000, 90,90, 5, 0);
-
-        model.init(player);
         return model;
     }
+
+    public static GameModel createNormalModel() {
+        GameModel model = new GameModel(DifficultyFactory.createNormalDifficulty());
+
+        return model;
+    }
+
+    public static GameModel createHardModel() {
+        GameModel model = new GameModel(DifficultyFactory.createHardDifficulty());
+
+        return model;
+    }
+
 }

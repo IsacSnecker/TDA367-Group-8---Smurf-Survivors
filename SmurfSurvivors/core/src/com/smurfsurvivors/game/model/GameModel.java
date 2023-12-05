@@ -5,9 +5,7 @@ import com.smurfsurvivors.game.model.clock.Clock;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
-import com.smurfsurvivors.game.model.handlers.CollisionHandler;
-import com.smurfsurvivors.game.model.handlers.EnemyHandler;
-import com.smurfsurvivors.game.model.handlers.FoodHandler;
+import com.smurfsurvivors.game.model.handlers.*;
 
 import java.util.ArrayList;
 
@@ -16,10 +14,8 @@ public class GameModel implements Observable {
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
 
-    public EnemyHandler enemyHandler;
-    private CollisionHandler collisionHandler;
+    private ICompositeHandler compositeHandler;
 
-    private FoodHandler foodHandler;
 
     private Difficulty difficulty;
     private Clock clock;
@@ -30,25 +26,41 @@ public class GameModel implements Observable {
     private Boolean isGameOver = false;
 
     public GameModel(Difficulty difficulty){
-
+        this.player = new PlayerCharacter(100, 16000,16000, 90,90, 5, 0);
         this.difficulty = difficulty;
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
+        this.compositeHandler = new CompositeHandler(this);
         clock.startClock();
 
         initializeObservers();
 
     }
 
-    public void init(PlayerCharacter player){
-        this.enemyHandler = new EnemyHandler(this);
-        this.foodHandler = new FoodHandler(500);
+    public void update() {
+        notifyObservers();
 
-        this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler, this);
-        setPlayer(player);
-        //audioManager.playSong("soundtrack");
+        if(!isPaused){
+
+            compositeHandler.updateHandlers(clock, player, difficulty);
+
+            if(player.getHealth() <= 0){
+                setIsGameOver();
+            }
+
+            if(!getEnemies().isEmpty()){
+                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), compositeHandler.getEnemyHandler().getNearestEnemy().getPosition(), compositeHandler.getEnemyHandler().getNearestEnemy());
+                player.usePassiveWeapon();
+                player.WHandler.updateWeaponCooldowns();
+
+            }
+
+        }
+
 
     }
+
+
 
     @Override
     public void initializeObservers() {
@@ -112,34 +124,11 @@ public class GameModel implements Observable {
     }
 
 
-    public void update() {
-        if(!isPaused){
-
-            enemyHandler.updateEnemies();
-
-            if(player.getHealth() <= 0){
-                setIsGameOver();
-            }
-
-            if(!getEnemies().isEmpty()){
-                player.WHandler.weaponInformationHandler.updateWeaponInformation(player.getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
-                player.usePassiveWeapon();
-                player.WHandler.updateWeaponCooldowns();
-
-                collisionHandler.update();
-                foodHandler.update();
-            }
-            enemyHandler.spawnNewEnemies(clock.getTimeSeconds(), player.getX(), player.getY(), difficulty.getSpawnRateAdd());
-            enemyHandler.updateEnemies(); //gör till koordinater istället för entity
-        }
-        notifyObservers();
-    }
-
     public ArrayList<Enemy> getEnemies() {
-        return enemyHandler.getEnemies();
+        return compositeHandler.getEnemyHandler().getEnemies();
     }
 
-    public ArrayList<Food> getFoods() {return foodHandler.getFoods();}
+    public ArrayList<Food> getFoods() {return compositeHandler.getFoodHandler().getFoods();}
 
     public ArrayList<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<>();
@@ -151,20 +140,8 @@ public class GameModel implements Observable {
         return entities;
     }
 
-    /*public void setMusicVolume(float volume) {
-        audioManager.setMusicVolume(volume);
-    }
-
-    public void setSoundEffectVolume(float volume) {
-        audioManager.setSoundVolume(volume);
-    }
-
-    public IAudioManager getAudioManager() {
-        return this.audioManager;
-    }*/
-
-    public CollisionHandler getCollisionHandler() {
-        return collisionHandler;
+    public ICollisionHandler getCollisionHandler() {
+        return compositeHandler.getCollisionHandler();
     }
 
     public void setIsGameOver(){

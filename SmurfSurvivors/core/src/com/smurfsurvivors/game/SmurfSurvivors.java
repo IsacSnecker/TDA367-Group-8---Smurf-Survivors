@@ -17,7 +17,7 @@ public class SmurfSurvivors extends Game {
     public void create() {
 
         // MVC initialization
-        gameModel = GameModelFactory.createDefaultModel();
+        gameModel = GameModelFactory.createNormalModel();
         gameView = new GameView(gameModel);
         gameController = new GameController(gameModel, gameView);
 

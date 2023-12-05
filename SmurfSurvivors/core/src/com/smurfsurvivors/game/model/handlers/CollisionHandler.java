@@ -8,17 +8,17 @@ import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
 
 import java.util.ArrayList;
 
-public class CollisionHandler implements AudioObservable {
+public class CollisionHandler implements ICollisionHandler {
     private PlayerCharacter player;
-    private EnemyHandler enemyHandler;
-    private FoodHandler foodHandler;
+    private IEnemyHandler enemyHandler;
+    private IFoodHandler foodHandler;
 
     private ArrayList<AudioObserver> soundObservers;
 
     private GameModel model;
 
-    public CollisionHandler(PlayerCharacter player, EnemyHandler enemyHandler, FoodHandler foodHandler, GameModel model){
-        this.player = player;
+    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, GameModel model){
+        this.player = model.getPlayer();
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
         this.model = model;

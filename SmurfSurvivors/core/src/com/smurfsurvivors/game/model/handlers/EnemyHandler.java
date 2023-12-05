@@ -11,7 +11,7 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 
-public class EnemyHandler {
+public class EnemyHandler implements IEnemyHandler {
 
     GameModel model;
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
@@ -25,19 +25,19 @@ public class EnemyHandler {
         this.model = model;
     }
 
-    public void spawnDemons(int numDemons, float playerX, float playerY){
+    private void spawnDemons(int numDemons, float playerX, float playerY){
         enemyList.addAll(EnemyFactory.makeDemons(numDemons, playerX, playerY));
     }
 
-    public void spawnGargamels(int numGargamels, float playerX, float playerY) {
+    private void spawnGargamels(int numGargamels, float playerX, float playerY) {
         enemyList.addAll(EnemyFactory.makeGargamels(numGargamels, playerX, playerY));
     }
 
-    public void spawnNemesises(int numNemesises, float playerX, float playerY){
+    private void spawnNemesises(int numNemesises, float playerX, float playerY){
         enemyList.addAll(EnemyFactory.makeNemesises(numNemesises, playerX, playerY));
     }
 
-    public void spawnPurpleSmurfs(int numPurpleSmurfs, float playerX, float playerY){
+    private void spawnPurpleSmurfs(int numPurpleSmurfs, float playerX, float playerY){
         enemyList.addAll(EnemyFactory.makePurpleSmurfs(numPurpleSmurfs, playerX, playerY));
 
     }
@@ -89,11 +89,11 @@ public class EnemyHandler {
         return nearestEnemy;
     }
 
-    public double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
+    private double calculateDistance(Vector2 fromPosition, Vector2 toPosition){
         return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
     }
 
-    public void addEnemy(Enemy enemy){
+    private void addEnemy(Enemy enemy){
         enemyList.add(enemy);
     }
     public void removeEnemy(Enemy enemy){

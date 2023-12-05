@@ -6,7 +6,7 @@ import com.smurfsurvivors.game.model.entity.Food;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class FoodHandler  {
+public class FoodHandler implements IFoodHandler {
 
     private int maxFoodCount;
     private int foodCount;
