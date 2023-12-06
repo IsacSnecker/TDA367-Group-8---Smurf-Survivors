@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.view.hud;
+package com.smurfsurvivors.game.model.hud;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
