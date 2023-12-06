@@ -13,7 +13,6 @@ public class LibGDXTest extends ApplicationAdapter {
 
     @BeforeAll
     static void testSetup() {
-
         // Mock the GL20 class
         Gdx.gl = mock(GL20.class);
 

@@ -118,7 +118,5 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         usePassiveWeapon();
         WHandler.updateWeaponCooldowns();
     }
-
-
-
+    
 }
