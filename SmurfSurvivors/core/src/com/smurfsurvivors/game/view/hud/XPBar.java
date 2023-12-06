@@ -21,8 +21,8 @@ public class XPBar {
         this.hudBatch = hudBatch;
         this.barEmptyTexture = new Texture("UI/barEmpty.png");
         this.xpBarFullTexture = new Texture("UI/xpBarFull.png");
-        this.width = 400;
-        this.height = 50;
+        this.width = 700;
+        this.height = 70;
         font.getData().setScale(2);
 
     }
@@ -30,8 +30,8 @@ public class XPBar {
 
     public void render(int _xp, int levelCap, int playerLevel) {
         xp = _xp;
-        hudBatch.draw(barEmptyTexture, 0, 40, width, height);
-        hudBatch.draw(xpBarFullTexture,0, 40, (int)((float)this.xp * ((float)width/(float)levelCap)), height);
-        font.draw(hudBatch, "Level: " + playerLevel, width-160, height+30);
+        hudBatch.draw(barEmptyTexture, 0, 70, width, height);
+        hudBatch.draw(xpBarFullTexture,0, 70, (int)((float)this.xp * ((float)width/(float)levelCap)), height);
+        font.draw(hudBatch, "Level: " + playerLevel, 40, height+46);
     }
 }
