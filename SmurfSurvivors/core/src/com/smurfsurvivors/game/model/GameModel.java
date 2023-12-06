@@ -66,10 +66,6 @@ public class GameModel implements Observable {
             player.performAttack(compositeHandler.getEnemyHandler());
         }
     }
-            player.performAttack(compositeHandler.getEnemyHandler());
-
-
-        }
 
 
     public void stageInit(){
