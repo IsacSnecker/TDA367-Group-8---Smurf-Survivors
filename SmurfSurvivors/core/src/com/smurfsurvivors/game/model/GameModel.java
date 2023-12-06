@@ -1,5 +1,7 @@
 package com.smurfsurvivors.game.model;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.clock.Clock;
 import com.smurfsurvivors.game.model.entity.*;
@@ -40,6 +42,7 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         clock.startClock();
+        stageInit();
 
         initializeObservers();
 
@@ -62,6 +65,16 @@ public class GameModel implements Observable {
         }
 
 
+    }
+
+    public void stageInit(){
+        this.pauseMenu = MenuFactory.createPauseMenu();
+        this.settingsMenu = MenuFactory.createSettingsMenu();
+        this.mainMenu = MenuFactory.createMainMenu();
+        stageOpenMap = new HashMap<>();
+        stageOpenMap.put(this.pauseMenu, Boolean.FALSE);
+        stageOpenMap.put(this.settingsMenu, Boolean.FALSE);
+        stageOpenMap.put(this.mainMenu, Boolean.TRUE);
     }
 
 
@@ -155,4 +168,40 @@ public class GameModel implements Observable {
         return this.isGameOver;
     }
 
+    public void setCompositeHandler(ICompositeHandler compositeHandler) {
+        this.compositeHandler = compositeHandler;
+    }
+
+    public boolean getIsOpen(Stage stage) {
+        return stageOpenMap.get(stage);
+    }
+
+    private void setIsOpen(Stage stage, Boolean isOpen){
+        stageOpenMap.put(stage, isOpen);
+    }
+
+    public void switchMenu(Stage stage){
+        if(stage != settingsMenu){
+            for(Stage key : stageOpenMap.keySet()){
+                setIsOpen(key, false);
+            }
+        }
+        setIsOpen(stage, true);
+    }
+
+    public Actor getActor(Stage stage, String name){
+        return stage.getRoot().findActor(name);
+    }
+
+    public Stage getPauseMenu(){
+        return this.pauseMenu;
+    }
+
+    public Stage getSettingsMenu(){
+        return this.settingsMenu;
+    }
+
+    public Stage getMainMenu(){
+        return this.mainMenu;
+    }
 }
