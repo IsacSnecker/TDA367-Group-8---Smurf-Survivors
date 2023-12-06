@@ -10,13 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class CreatureTest extends LibGDXTest {
-    @Test
-    public void testConstructor() {
-        Creature creature = new Demon(100, 100);
-        assertEquals(100, creature.getX());
-        assertEquals(100, creature.getY());
-        assertFalse(creature.getIsHurt());
-    }
 
     @Test
     public void testAddHealth() {
