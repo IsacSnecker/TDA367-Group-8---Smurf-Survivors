@@ -33,7 +33,8 @@ public abstract class AbstractWeapon{
         attackRange = _attackRange;
         weaponName = _weaponName;
     }
-    abstract void update();
+
+    public abstract void update();
     public void performAttack() {
     }
 

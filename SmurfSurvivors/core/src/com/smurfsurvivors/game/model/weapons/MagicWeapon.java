@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-public class MagicWeapon extends PassiveWeapon{
+public class MagicWeapon extends AbstractWeapon {
     private final Vector2 nearestEnemyPosition;
 
     public MagicWeapon(Vector2 _position, TextureRegion weaponTexture, int velocity, int attackDamage, int passThrough, Vector2 nearestEnemyPosition) {
@@ -16,6 +16,7 @@ public class MagicWeapon extends PassiveWeapon{
 
     }
 
+    @Override
     public void update(){
         moveTowardsPosition(nearestEnemyPosition);
     }

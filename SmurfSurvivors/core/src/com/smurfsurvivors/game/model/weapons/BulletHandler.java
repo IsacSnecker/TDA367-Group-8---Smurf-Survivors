@@ -17,21 +17,21 @@ public class BulletHandler extends AbstractWeaponHandler implements IHandler{
     @Override
     public void spawnProjectile(Vector2 position) {
         if(getLevel() == 1){
-            addWeapon(position, 20, 30, 0);
+            addWeapon(position, 7, 30, 0);
             cooldown = 200f;
         } else if (getLevel() == 2){
-            addWeapon(position,20, 40, 0);
+            addWeapon(position,7, 40, 0);
             cooldown = 150f;
         } else if (getLevel() == 3){
-            addWeapon(position,20, 40, 0);
+            addWeapon(position,8, 40, 0);
             cooldown = 100f;
         } else if (getLevel() == 4){
-            addWeapon(position,20, 40, 0);
+            addWeapon(position,10, 40, 0);
             cooldown = 50f;
         } else if (getLevel() == 5){
             cooldown = 50f;
-            addWeapon(position,30, 50, 0);
-            addWeapon(position,30, 50, 0);
+            addWeapon(position,12, 50, 0);
+            addWeapon(position,12, 50, 0);
         }
     }
 

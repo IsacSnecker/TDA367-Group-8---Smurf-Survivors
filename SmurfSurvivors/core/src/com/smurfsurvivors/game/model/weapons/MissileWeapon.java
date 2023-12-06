@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Enemy;
 
-public class MissileWeapon extends PassiveWeapon{
+public class MissileWeapon extends AbstractWeapon {
 
     Enemy nearestEnemy;
 
@@ -18,7 +18,7 @@ public class MissileWeapon extends PassiveWeapon{
 
     }
 
-    void update(){
+    public void update(){
         moveTowardsPosition(nearestEnemy.getPosition());
     }
 

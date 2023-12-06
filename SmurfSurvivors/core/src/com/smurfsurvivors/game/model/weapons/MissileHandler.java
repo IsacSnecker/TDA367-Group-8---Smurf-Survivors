@@ -14,21 +14,21 @@ public class MissileHandler extends AbstractWeaponHandler implements IHandler{
     @Override
     public void spawnProjectile(Vector2 position) {
         if(getLevel() == 1){
-            addWeapon(position, 20, 100, 0);
+            addWeapon(position, 7, 100, 0);
             cooldown = 1000f;
         } else if (getLevel() == 2){
-            addWeapon(position,20, 150, 0);
+            addWeapon(position,7, 150, 0);
             cooldown = 800f;
         } else if (getLevel() == 3){
-            addWeapon(position,20, 200, 0);
+            addWeapon(position,8, 200, 0);
             cooldown = 700f;
         } else if (getLevel() == 4){
-            addWeapon(position,20, 250, 0);
+            addWeapon(position,10, 250, 0);
             cooldown = 500f;
         } else if (getLevel() == 5){
             cooldown = 200f;
-            addWeapon(position,30, 300, 0);
-            addWeapon(position,30, 300, 0);
+            addWeapon(position,15, 300, 0);
+            addWeapon(position,15, 300, 0);
         }
     }
 

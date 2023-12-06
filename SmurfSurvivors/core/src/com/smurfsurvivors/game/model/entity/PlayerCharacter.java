@@ -13,8 +13,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     private int level;
     private Texture spriteRight;
     private Texture spriteLeft;
-    private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
-    private List<ActiveWeapon> abilities; //Should be List<Ability>
     private int levelCap;
     private float levelCapMultiplier;
     public WeaponHandler WHandler = new WeaponHandler();

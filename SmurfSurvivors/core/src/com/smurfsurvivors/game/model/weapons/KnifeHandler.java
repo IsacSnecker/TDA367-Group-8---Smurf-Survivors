@@ -18,20 +18,20 @@ public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
     @Override
     public void spawnProjectile(Vector2 position) {
         if(getLevel() == 1){
-            addWeapon(position, 20, 50, 0);
+            addWeapon(position, 7, 50, 0);
             cooldown = 500f;
         } else if (getLevel() == 2){
-            addWeapon(position,20, 70, 1);
+            addWeapon(position,7, 70, 1);
             cooldown = 400f;
         } else if (getLevel() == 3){
-            addWeapon(position,20, 70, 1);
+            addWeapon(position,7, 70, 1);
             cooldown = 300f;
         } else if (getLevel() == 4){
-            addWeapon(position,20, 70, 1);
+            addWeapon(position,7, 70, 1);
             cooldown = 100f;
         } else if (getLevel() == 5){
             cooldown = 100f;
-            addWeapon(position,30, 100, 5);
+            addWeapon(position,10, 100, 5);
         }
     }
 
