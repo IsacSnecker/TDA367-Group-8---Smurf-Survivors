@@ -100,6 +100,7 @@ public class GameController implements Observer {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.input.setInputProcessor(null);
+                model.switchMenu(null);
                 model.togglePaused();
             }
         });

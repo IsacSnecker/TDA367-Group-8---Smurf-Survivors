@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.model.hud;
+package com.smurfsurvivors.game.view.hud;
 
 public interface IHUD {
 
