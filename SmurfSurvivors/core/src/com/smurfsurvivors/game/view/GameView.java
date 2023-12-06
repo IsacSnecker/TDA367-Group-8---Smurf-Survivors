@@ -14,6 +14,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.GameModel;
+import com.smurfsurvivors.game.model.MainMenu;
+import com.smurfsurvivors.game.model.PauseMenu;
+import com.smurfsurvivors.game.model.SettingsMenu;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.view.audiomanager.AudioManager;
 import com.smurfsurvivors.game.view.audiomanager.IAudioManager;
@@ -98,12 +101,12 @@ public class GameView implements Observer{
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        pauseStage = new Stage();
-        pause = new PauseMenu(pauseStage);
-        settingsStage = new Stage();
-        settingsMenu = new SettingsMenu(settingsStage);
-        mainStage = new Stage();
-        mainMenu = new MainMenu(mainStage);
+        //pauseStage = new Stage();
+        //pause = new PauseMenu(pauseStage);
+        //settingsStage = new Stage();
+        //settingsMenu = new SettingsMenu(settingsStage);
+        //mainStage = new Stage();
+        //mainMenu = new MainMenu(mainStage);
     }
 
     private void HUDInit() {
@@ -136,13 +139,13 @@ public class GameView implements Observer{
         hudBatch.end();
 
         if(model.getIsPaused()) {
-            pauseStage.draw();
+            model.getPauseMenu().draw();
         }
-        if(settingsMenu.open) {
-            settingsMenu.render();
+        if(model.getIsOpen(model.getMainMenu())) {
+            model.getMainMenu().draw();
         }
-        if(mainMenu.isOpen) {
-            mainMenu.render();
+        if(model.getIsOpen(model.getSettingsMenu())) {
+            model.getSettingsMenu().draw();
         }
     }
 

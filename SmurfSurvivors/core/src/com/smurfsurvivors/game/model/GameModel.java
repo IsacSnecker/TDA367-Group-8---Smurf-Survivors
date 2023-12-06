@@ -1,5 +1,10 @@
 package com.smurfsurvivors.game.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.clock.Clock;
 import com.smurfsurvivors.game.model.entity.*;
@@ -8,6 +13,9 @@ import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.model.handlers.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class GameModel implements Observable {
 
@@ -20,6 +28,12 @@ public class GameModel implements Observable {
     private Difficulty difficulty;
     private Clock clock;
 
+    private Stage pauseMenu;
+    private Stage settingsMenu;
+    private Stage mainMenu;
+
+    private Map<Stage, Boolean> stageOpenMap;
+
 
     private Boolean isPaused = true;
 
@@ -31,6 +45,7 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         this.compositeHandler = new CompositeHandler(this);
+        stageInit();
         clock.startClock();
 
         initializeObservers();
@@ -40,24 +55,32 @@ public class GameModel implements Observable {
     public void update() {
         notifyObservers();
 
-        if(!isPaused){
+        if (!isPaused) {
 
             compositeHandler.updateHandlers(clock, player, difficulty);
 
-            if(player.getHealth() <= 0){
+            if (player.getHealth() <= 0) {
                 setIsGameOver();
             }
 
+            player.performAttack(compositeHandler.getEnemyHandler());
+        }
+    }
             player.performAttack(compositeHandler.getEnemyHandler());
 
 
         }
 
 
+    public void stageInit(){
+        this.pauseMenu = MenuFactory.createPauseMenu();
+        this.settingsMenu = MenuFactory.createSettingsMenu();
+        this.mainMenu = MenuFactory.createMainMenu();
+        stageOpenMap = new HashMap<>();
+        stageOpenMap.put(this.pauseMenu, Boolean.FALSE);
+        stageOpenMap.put(this.settingsMenu, Boolean.FALSE);
+        stageOpenMap.put(this.mainMenu, Boolean.TRUE);
     }
-
-
-
     @Override
     public void initializeObservers() {
         for (Observer o : observerList){
@@ -91,6 +114,39 @@ public class GameModel implements Observable {
 
     public Boolean getIsPaused(){
         return this.isPaused;
+    }
+
+    public Stage getPauseMenu(){
+        return this.pauseMenu;
+    }
+
+    public Stage getSettingsMenu(){
+        return this.settingsMenu;
+    }
+
+    public Stage getMainMenu(){
+        return this.mainMenu;
+    }
+
+    public Boolean getIsOpen(Stage stage){
+        return stageOpenMap.get(stage);
+    }
+    private void setIsOpen(Stage stage, Boolean isOpen){
+        stageOpenMap.put(stage, isOpen);
+    }
+
+    public void switchMenu(Stage stage){
+        if(stage != settingsMenu){
+            for(Stage key : stageOpenMap.keySet()) { //Should maybe create new list
+                setIsOpen(key, false);
+            }
+        }
+        setIsOpen(stage, true);
+
+    }
+
+    public Actor getActor(Stage stage, String name){
+        return stage.getRoot().findActor(name); //Add setName for all actors //Law of demeter?
     }
 
     public void setPlayer(PlayerCharacter player) { this.player = player; }

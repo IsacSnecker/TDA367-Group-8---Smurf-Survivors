@@ -1,12 +1,13 @@
-package com.smurfsurvivors.game.view;
+package com.smurfsurvivors.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 
 public class SettingsMenu {
-    private Stage settingsStage;
+    /*private Stage settingsStage;
     private Image backgroundImage;
 
     public Button difficultyEasyButton;
@@ -22,8 +23,10 @@ public class SettingsMenu {
 
     public SettingsMenu(Stage stage){
         this.settingsStage = stage;
+        Group group = new Group();
         Skin skin = new Skin(Gdx.files.internal("Skins/skin/uiskin.json"));
         difficultyEasyButton = new TextButton("EASY", skin);
+        difficultyEasyButton.setN
         difficultyNormalButton = new TextButton("NORMAL", skin);
         difficultyHardButton = new TextButton("HARD", skin);
         difficultyButtonGroup = new ButtonGroup<>(difficultyEasyButton, difficultyNormalButton, difficultyHardButton);
@@ -62,5 +65,5 @@ public class SettingsMenu {
 
     public void render(){
         settingsStage.draw();
-    }
+    }*/
 }
