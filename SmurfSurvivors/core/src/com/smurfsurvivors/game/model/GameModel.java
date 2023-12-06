@@ -186,7 +186,13 @@ public class GameModel implements Observable {
                 setIsOpen(key, false);
             }
         }
-        setIsOpen(stage, true);
+        if(stage != null) {
+            setIsOpen(stage, true);
+        }
+    }
+
+    public Map<Stage, Boolean> getStageOpenMap(){
+        return this.stageOpenMap;
     }
 
     public Actor getActor(Stage stage, String name){

@@ -103,7 +103,7 @@ public abstract class MenuFactory {
 
 
         Button quitButton = new TextButton("BACK",skin);
-        quitButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        quitButton.setSize(Gdx.graphics.getWidth()/15, Gdx.graphics.getHeight()/10);
         quitButton.setPosition(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10);
         quitButton.setName("Back");
 

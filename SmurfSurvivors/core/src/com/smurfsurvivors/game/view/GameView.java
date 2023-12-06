@@ -27,6 +27,7 @@ import com.smurfsurvivors.game.view.spritemanager.ISpriteManager;
 import com.smurfsurvivors.game.view.spritemanager.SpriteManager;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class GameView implements Observer{
@@ -138,15 +139,8 @@ public class GameView implements Observer{
         hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel());
         hudBatch.end();
 
-        if(model.getIsPaused()) {
-            model.getPauseMenu().draw();
-        }
-        if(model.getIsOpen(model.getMainMenu())) {
-            model.getMainMenu().draw();
-        }
-        if(model.getIsOpen(model.getSettingsMenu())) {
-            model.getSettingsMenu().draw();
-        }
+        renderMenus(model.getStageOpenMap());
+
     }
 
 
@@ -173,7 +167,14 @@ public class GameView implements Observer{
                 sprite.setPosition(entity.getX(), entity.getY());
                 sprite.draw(batch);
             }
+    }
 
+    private void renderMenus(Map<Stage,Boolean> menuMap){
+        for(Stage menu : menuMap.keySet()){
+            if(menuMap.get(menu)){
+                menu.draw();
+            }
+        }
     }
 
     public IAudioManager getAudioManager() {
