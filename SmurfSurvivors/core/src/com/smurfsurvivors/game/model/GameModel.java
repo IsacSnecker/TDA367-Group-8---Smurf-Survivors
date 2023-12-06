@@ -45,6 +45,7 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         this.compositeHandler = new CompositeHandler(this);
+        stageInit();
         clock.startClock();
 
         initializeObservers();
@@ -54,22 +55,18 @@ public class GameModel implements Observable {
     public void update() {
         notifyObservers();
 
-        if(!isPaused){
+        if (!isPaused) {
 
             compositeHandler.updateHandlers(clock, player, difficulty);
 
-            if(player.getHealth() <= 0){
+            if (player.getHealth() <= 0) {
                 setIsGameOver();
             }
 
             player.performAttack(compositeHandler.getEnemyHandler());
-
-        this.collisionHandler = new CollisionHandler(player, enemyHandler, foodHandler, this);
-        setPlayer(player);
-        stageInit();
-        //audioManager.playSong("soundtrack");
-
+        }
     }
+
 
     public void stageInit(){
         this.pauseMenu = MenuFactory.createPauseMenu();

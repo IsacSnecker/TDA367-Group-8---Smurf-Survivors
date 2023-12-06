@@ -22,8 +22,6 @@ import com.smurfsurvivors.game.view.audiomanager.AudioManager;
 import com.smurfsurvivors.game.view.audiomanager.IAudioManager;
 import com.smurfsurvivors.game.view.hud.HUD;
 import com.smurfsurvivors.game.view.hud.IHUD;
-import com.smurfsurvivors.game.model.hud.HUD;
-import com.smurfsurvivors.game.model.hud.IHUD;
 import com.smurfsurvivors.game.model.weapons.IHandler;
 import com.smurfsurvivors.game.view.spritemanager.ISpriteManager;
 import com.smurfsurvivors.game.view.spritemanager.SpriteManager;
