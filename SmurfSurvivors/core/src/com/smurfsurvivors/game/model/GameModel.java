@@ -25,12 +25,11 @@ public class GameModel implements Observable {
 
     private Boolean isGameOver = false;
 
-    public GameModel(Difficulty difficulty){
-        this.player = new PlayerCharacter(100, 16000,16000, 90,90, 5, 0);
+    public GameModel(Difficulty difficulty, PlayerCharacter player){
         this.difficulty = difficulty;
+        this.player = player;
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
-        this.compositeHandler = new CompositeHandler(this);
         clock.startClock();
 
         initializeObservers();
@@ -50,9 +49,7 @@ public class GameModel implements Observable {
 
             player.performAttack(compositeHandler.getEnemyHandler());
 
-
         }
-
 
     }
 
@@ -146,5 +143,11 @@ public class GameModel implements Observable {
     public boolean getIsGameOver(){
         return this.isGameOver;
     }
+
+
+    public void setCompositeHandler(ICompositeHandler compositeHandler) {
+        this.compositeHandler = compositeHandler;
+    }
+
 
 }
