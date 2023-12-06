@@ -46,7 +46,7 @@ public class EnemyFactoryTest extends LibGDXTest{
     }
 
     @Test
-    void makeNemesies(){
+    void makeNemesises(){
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
         enemyList.addAll(EnemyFactory.makeNemesises(7, 16000, 16000));
         assertEquals(7, enemyList.size());
