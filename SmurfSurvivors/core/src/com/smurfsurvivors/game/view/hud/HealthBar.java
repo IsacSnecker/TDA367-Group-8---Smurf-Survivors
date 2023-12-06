@@ -22,8 +22,8 @@ public class HealthBar  {
         this.hudBatch = hudBatch;
         this.barEmptyTexture = new Texture("UI/barEmpty.png");
         this.healthBarFullTexture = new Texture("UI/healthBarFull.png");
-        this.width = 400;
-        this.height = 50;
+        this.width = 700;
+        this.height = 70;
         font.getData().setScale(2);
     }
 
@@ -32,6 +32,6 @@ public class HealthBar  {
         currentHealth = _currentHealth;
         hudBatch.draw(barEmptyTexture, 0, 0, width, height);
         hudBatch.draw(healthBarFullTexture, 0, 0, (int)((float)_currentHealth * ((float)width/(float)maxHealth)), height);
-        font.draw(hudBatch, "Health: " + _currentHealth, width-160, 35);
+        font.draw(hudBatch, "Health: " + _currentHealth, 40, 46);
     }
 }
