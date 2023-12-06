@@ -9,13 +9,12 @@ public class CompositeHandler implements ICompositeHandler {
 
     private ICollisionHandler collisionHandler;
     private IEnemyHandler enemyHandler;
-
     private IFoodHandler foodHandler;
 
-    public CompositeHandler(GameModel model) {
-        this.foodHandler = new FoodHandler(500);
-        this.enemyHandler = new EnemyHandler(model);
-        this.collisionHandler = new CollisionHandler(enemyHandler, foodHandler, model);
+    public CompositeHandler(IFoodHandler foodHandler, IEnemyHandler enemyHandler, ICollisionHandler collisionHandler) {
+        this.foodHandler = foodHandler;
+        this.enemyHandler = enemyHandler;
+        this.collisionHandler = collisionHandler;
     }
 
 

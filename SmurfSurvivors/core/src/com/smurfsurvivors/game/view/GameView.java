@@ -176,5 +176,9 @@ public class GameView implements Observer{
 
     }
 
+    public IAudioManager getAudioManager() {
+        return audioManager;
+    }
+
 }
 
