@@ -21,6 +21,7 @@ public class CollisionHandler implements ICollisionHandler {
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
         this.soundObservers = new ArrayList<>();
+        // JIK
     }
 
     public void update() {
