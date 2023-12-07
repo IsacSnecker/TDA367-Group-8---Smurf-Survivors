@@ -12,26 +12,26 @@ public class CollisionHandler implements ICollisionHandler {
     private PlayerCharacter player;
     private IEnemyHandler enemyHandler;
     private IFoodHandler foodHandler;
-
+    private LevelHandler levelHandler;
     private ArrayList<AudioObserver> soundObservers;
+    private GameModel model;
 
-
-    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, PlayerCharacter player){
+    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, PlayerCharacter player, LevelHandler levelHandler){
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
         this.soundObservers = new ArrayList<>();
-        // JIK
+        this.levelHandler = levelHandler;
     }
 
     public void update() {
-        handleIfCollision(player.WHandler.getProjectiles(), enemyHandler.getEnemies());
+        handleIfCollision(player.WHandler.getProjectiles(), enemyHandler.getEnemies(), levelHandler);
         handleIfCollision(enemyHandler.getEnemies());
         handleFoodCollision();
     }
 
 
-    public void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies){
+    public void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies, LevelHandler levelHandler){
         for(AbstractWeapon projectile : projectiles){
             for(Enemy enemy : enemies){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){
@@ -40,79 +40,8 @@ public class CollisionHandler implements ICollisionHandler {
                         enemy.decreaseHealth(projectile.attackDamage);
                         if (enemy.getHealth() <= 0){
                             notifyAudioObservers("DemonDeath");
-                            boolean levelUp = player.addXP(enemy.getXpGive());
-                            if(levelUp && player.getLevel() == 2){
-                                player.WHandler.levelUpBullet();
-                            }
-                            if(levelUp && player.getLevel() == 3){
-                                player.WHandler.addKnifeHandler();
-                            }
-                            if(levelUp && player.getLevel() == 4){
-                                player.WHandler.levelUpKnife();
-                            }
-                            if(levelUp && player.getLevel() == 5){
-                                player.WHandler.levelUpKnife();
-                            }
-                            if(levelUp && player.getLevel() == 6){
-                                player.WHandler.levelUpBullet();
-                            }
-                            if(levelUp && player.getLevel() == 7){
-                                player.WHandler.addMissileHandler();
-                            }
-                            if(levelUp && player.getLevel() == 8){
-                                player.WHandler.levelUpKnife();
-                            }
-                            if(levelUp && player.getLevel() == 9){
-                                player.WHandler.levelUpKnife();
-                            }
-                            if(levelUp && player.getLevel() == 10){
-                                player.WHandler.levelUpBullet();
-                            }
-                            if(levelUp && player.getLevel() == 11){
-                                player.WHandler.levelUpBullet();
-                            }
-                            if(levelUp && player.getLevel() == 12){
-                                player.WHandler.addMagicHandler();
-                            }
-                            if(levelUp && player.getLevel() == 13){
-                                player.WHandler.levelUpMissile();
-                            }
-                            if(levelUp && player.getLevel() == 14){
-                                player.WHandler.levelUpMissile();
-                            }
-                            if(levelUp && player.getLevel() == 15){
-                                player.WHandler.levelUpMissile();
-                            }
-                            if(levelUp && player.getLevel() == 16){
-                                player.WHandler.levelUpMissile();
-                            }
-                            if(levelUp && player.getLevel() == 17){
-                                player.WHandler.levelUpMagic();
-                            }
-                            if(levelUp && player.getLevel() == 18){
-                                player.WHandler.levelUpMagic();
-                            }
-                            if(levelUp && player.getLevel() == 19){
-                                player.WHandler.levelUpMagic();
-                            }
-                            if(levelUp && player.getLevel() == 20){
-                                player.WHandler.levelUpMagic();
-                            }
-                            if(levelUp && player.getLevel() == 21){
-                                player.WHandler.addMacheteHandler();
-                            }
-                            if(levelUp && player.getLevel() == 22){
-                                player.WHandler.levelUpMachete();
-                            }
-                            if(levelUp && player.getLevel() == 23){
-                                player.WHandler.levelUpMachete();
-                            }
-                            if(levelUp && player.getLevel() == 24){
-                                player.WHandler.levelUpMachete();
-                            }
-                            if(levelUp && player.getLevel() == 25){
-                                player.WHandler.levelUpMachete();
-                            }
+                            levelHandler.playerLevelUp(enemy);
+
                         }
                         if(projectile.getPassThrough() == 0){
                             player.WHandler.removeProjectile(projectile);

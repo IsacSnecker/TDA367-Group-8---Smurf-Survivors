@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface ICollisionHandler extends AudioObservable {
 
     void update();
-    void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies);
+    void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies, LevelHandler levelHandler);
     void handleIfCollision(ArrayList<Enemy> enemies);
     void handleFoodCollision();
 

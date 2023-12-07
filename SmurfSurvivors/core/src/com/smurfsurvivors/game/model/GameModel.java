@@ -21,7 +21,6 @@ public class GameModel implements Observable {
 
     private ICompositeHandler compositeHandler;
 
-
     private Difficulty difficulty;
     private Clock clock;
 
@@ -201,4 +200,5 @@ public class GameModel implements Observable {
     public Stage getMainMenu(){
         return this.mainMenu;
     }
+    public LevelHandler gePlayertLevelHandler() { return player.getLevelHandler(); }
 }

@@ -3,6 +3,7 @@ package com.smurfsurvivors.game.model.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.model.handlers.IEnemyHandler;
 import com.smurfsurvivors.game.model.weapons.*;
+import com.smurfsurvivors.game.model.handlers.LevelHandler;
 import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.*;
@@ -19,11 +20,12 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     private float levelCapMultiplier;
     public WeaponHandler WHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
+    private LevelHandler levelHandler;
 
     public PlayerCharacter(int health, float x, float y, int width, int height, float speed, int direction) {
         super("Player", health, x, y, width, height, speed, direction);
-        //WHandler.addKnifeHandler();
         WHandler.addBulletHandler();
+        levelHandler = new LevelHandler(this);
         this.xp = 0;
         this.level = 1;
         this.levelCap = 100;
@@ -109,6 +111,7 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public int getLevelCap() {
         return this.levelCap;
     }
+    public LevelHandler getLevelHandler() { return levelHandler; }
 
     public WeaponInformationHandler getWeaponInformationHandler() { return weaponInformationHandler; }
 
