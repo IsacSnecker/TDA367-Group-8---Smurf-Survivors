@@ -29,7 +29,7 @@ import com.smurfsurvivors.game.view.spritemanager.SpriteManager;
 import java.util.ArrayList;
 
 
-public class GameView implements Observer{
+public class GameView implements IGameView{
 
     private GameModel model;
 
@@ -110,7 +110,7 @@ public class GameView implements Observer{
     }
 
     private void HUDInit() {
-        this.hud = new HUD(this.model.getClock(), model.getPlayer(), hudBatch);
+        this.hud = new HUD(model.getPlayer(), hudBatch);
     }
 
 
@@ -135,7 +135,7 @@ public class GameView implements Observer{
 
         // Render HUD
         hudBatch.begin();
-        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel());
+        hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel(), model.getClock());
         hudBatch.end();
 
         if(model.getIsPaused()) {

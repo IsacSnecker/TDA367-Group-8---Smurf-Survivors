@@ -31,7 +31,6 @@ public class GameModel implements Observable {
 
     private Map<Stage, Boolean> stageOpenMap;
 
-
     private Boolean isPaused = true;
 
     private Boolean isGameOver = false;
@@ -113,8 +112,6 @@ public class GameModel implements Observable {
     public Boolean getIsPaused(){
         return this.isPaused;
     }
-
-    public void setPlayer(PlayerCharacter player) { this.player = player; }
 
     public void togglePaused(){
         isPaused = !isPaused;

@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class XPBar {
 
-    private int level;
-    private int xp;
     private Batch hudBatch;
     private Texture barEmptyTexture;
     private Texture xpBarFullTexture;
@@ -15,9 +13,7 @@ public class XPBar {
     private int height;
     BitmapFont font = new BitmapFont();
 
-    public XPBar(int level, int xp, Batch hudBatch) {
-        this.level = level;
-        this.xp = xp;
+    public XPBar(Batch hudBatch) {
         this.hudBatch = hudBatch;
         this.barEmptyTexture = new Texture("UI/barEmpty.png");
         this.xpBarFullTexture = new Texture("UI/xpBarFull.png");
@@ -28,10 +24,9 @@ public class XPBar {
     }
 
 
-    public void render(int _xp, int levelCap, int playerLevel) {
-        xp = _xp;
+    public void render(int xp, int levelCap, int playerLevel) {
         hudBatch.draw(barEmptyTexture, 0, 40, width, height);
-        hudBatch.draw(xpBarFullTexture,0, 40, (int)((float)this.xp * ((float)width/(float)levelCap)), height);
+        hudBatch.draw(xpBarFullTexture,0, 40, (int)((float)xp * ((float)width/(float)levelCap)), height);
         font.draw(hudBatch, "Level: " + playerLevel, width-160, height+30);
     }
 }

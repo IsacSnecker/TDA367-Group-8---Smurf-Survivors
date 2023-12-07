@@ -11,16 +11,17 @@ import com.smurfsurvivors.game.model.factories.DifficultyFactory;
 import com.smurfsurvivors.game.Observer;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.view.GameView;
+import com.smurfsurvivors.game.view.IGameView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameController implements Observer {
+public class GameController implements IGameController {
 
     private GameModel model;
-    private GameView view;
+    private IGameView view;
 
-    public GameController(GameModel model, GameView view) {
+    public GameController(GameModel model, IGameView view) {
         this.model = model;
         this.view = view;
         controllerInit();
@@ -80,7 +81,7 @@ public class GameController implements Observer {
         model.addObserver(this);
     }
 
-    public void buttonsInit() {
+    private void buttonsInit() {
         Gdx.input.setInputProcessor(model.getMainMenu());
         this.model.getActor(model.getPauseMenu(), "Quit").addListener(new ClickListener() {
             @Override

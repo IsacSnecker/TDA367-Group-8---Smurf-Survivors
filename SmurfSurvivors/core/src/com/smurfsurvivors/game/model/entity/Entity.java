@@ -39,10 +39,6 @@ public abstract class Entity {
     public void setX(float x) {  position.x = x; }
     public void setY(float y) { position.y = y; }
 
-
-    public void showHit(){
-       // sprite.setColor(1,0,0,1);
-    }
     public Rectangle getRectangle(){
         return new Rectangle(position.x, position.y, width, height);
     }

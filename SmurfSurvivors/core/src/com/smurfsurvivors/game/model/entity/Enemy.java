@@ -50,10 +50,6 @@ public abstract class Enemy extends Creature{
 
     private float calculatedy(float radianDegree){ return (float)(Math.cos(radianDegree)*getSpeed()); }
 
-    public void damageEntity(HasHealth entity){
-        entity.decreaseHealth(attackPower);
-    }
-
     public boolean getIsDead(){
         return isDead;
     }

@@ -15,13 +15,11 @@ public class CollisionHandler implements ICollisionHandler {
 
     private ArrayList<AudioObserver> soundObservers;
 
-    private GameModel model;
 
-    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, GameModel model){
-        this.player = model.getPlayer();
+    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, PlayerCharacter player){
+        this.player = player;
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
-        this.model = model;
         this.soundObservers = new ArrayList<>();
     }
 
@@ -39,7 +37,6 @@ public class CollisionHandler implements ICollisionHandler {
                     if(!projectile.getHitEntities().contains(enemy)){
                         projectile.getHitEntities().add(enemy);
                         enemy.decreaseHealth(projectile.attackDamage);
-                        //model.getAudioManager().playSoundEffect("DemonDeath");
                         if (enemy.getHealth() <= 0){
                             notifyAudioObservers("DemonDeath");
                             boolean levelUp = player.addXP(enemy.getXpGive());
@@ -152,7 +149,6 @@ public class CollisionHandler implements ICollisionHandler {
             if(food.getRectangle().overlaps(player.getRectangle())){
                 notifyAudioObservers("HealthPickUp");
                 player.addHealth(10);
-                //model.getAudioManager().playSoundEffect("HealthPickUp");
 
                 foodsToRemove.add(food);
             }

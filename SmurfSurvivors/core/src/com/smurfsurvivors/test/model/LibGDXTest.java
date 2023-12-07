@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
+import com.smurfsurvivors.game.model.GameModel;
 import org.junit.jupiter.api.BeforeAll;
 
 import static org.mockito.Mockito.mock;
