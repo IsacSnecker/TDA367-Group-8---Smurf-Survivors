@@ -1,13 +1,12 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.handlers;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.projectiles.BulletWeapon;
 
-import java.util.ArrayList;
-
-public class BulletHandler extends AbstractWeaponHandler implements IHandler{
+public class BulletHandler extends AbstractWeaponHandler implements IHandler {
     public BulletHandler(WeaponInformationHandler weaponInformationHandler){
         super(200f, weaponInformationHandler);
     }

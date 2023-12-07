@@ -1,12 +1,14 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.handlers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.projectiles.KnifeWeapon;
 
 import java.util.Random;
 
-public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
+public class KnifeHandler extends AbstractWeaponHandler implements IHandler {
 
     Random rnd = new Random();
     public KnifeHandler(WeaponInformationHandler weaponInformationHandler){

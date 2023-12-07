@@ -1,9 +1,12 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.handlers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WeaponHandler {
     long startTime;

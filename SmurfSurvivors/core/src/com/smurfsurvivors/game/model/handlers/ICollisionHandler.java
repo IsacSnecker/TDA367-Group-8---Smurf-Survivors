@@ -2,7 +2,7 @@ package com.smurfsurvivors.game.model.handlers;
 
 import com.smurfsurvivors.game.AudioObservable;
 import com.smurfsurvivors.game.model.entity.Enemy;
-import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
 
 import java.util.ArrayList;
 

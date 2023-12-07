@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.projectiles;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Entity;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public abstract class AbstractWeapon{
     Vector2 position;
@@ -95,6 +96,10 @@ public abstract class AbstractWeapon{
         batch.draw(weaponTexture, position.x, position.y, width, height, width, height, 1,1,180);
     }
 
+    public Vector2 getPosition(){
+        return position;
+    }
+
     public float getX() {
         return position.x;
     }
@@ -109,6 +114,14 @@ public abstract class AbstractWeapon{
 
     public void setY(float y){
         position = new Vector2(position.x, y);
+    }
+
+    public Vector2 getOriginalPosition(){
+        return originalPosition;
+    }
+
+    public void setOriginalPosition(Vector2 originalPosition){
+        this.originalPosition = originalPosition;
     }
 
     public float getWidth() {
@@ -157,6 +170,9 @@ public abstract class AbstractWeapon{
 
     public void setPassThrough(int passThrough) {
         this.passThrough = passThrough;
+    }
+    public float getVelocity() {
+        return velocity;
     }
 
     public void addHitEntity(Entity entity){

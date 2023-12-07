@@ -1,10 +1,12 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.handlers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.projectiles.MagicWeapon;
 
-public class MagicHandler extends AbstractWeaponHandler implements IHandler{
+public class MagicHandler extends AbstractWeaponHandler implements IHandler {
     public MagicHandler(WeaponInformationHandler weaponInformationHandler){
         super(1000f, weaponInformationHandler);
     }
@@ -35,7 +37,7 @@ public class MagicHandler extends AbstractWeaponHandler implements IHandler{
     public void updateProjectile(AbstractWeapon Weapon){
         Weapon.update();
         if(Weapon instanceof MagicWeapon){
-            if(Weapon.position.dst2(((MagicWeapon) Weapon).getEnemyPosition()) < Weapon.velocity + 50){
+            if(Weapon.getPosition().dst2(((MagicWeapon) Weapon).getEnemyPosition()) < Weapon.getVelocity() + 50){
                 weaponsToRemove.add(Weapon);
             }
         }

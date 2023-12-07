@@ -2,7 +2,7 @@ package com.smurfsurvivors.test.model.weapons;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
 
 class TestWeapon extends AbstractWeapon {
     public TestWeapon(Vector2 _position, TextureRegion _weaponTexture, float _width, float _height, float _attackRange, String _weaponName) {

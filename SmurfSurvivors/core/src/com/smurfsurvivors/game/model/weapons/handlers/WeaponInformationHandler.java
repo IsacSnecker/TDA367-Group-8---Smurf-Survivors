@@ -1,9 +1,7 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.handlers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.smurfsurvivors.game.model.entity.Enemy;
-
-import java.util.Vector;
 
 public class WeaponInformationHandler {
     private int playerDirection;

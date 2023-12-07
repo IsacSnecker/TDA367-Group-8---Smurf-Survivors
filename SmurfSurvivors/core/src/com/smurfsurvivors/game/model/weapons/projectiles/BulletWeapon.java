@@ -1,4 +1,4 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.projectiles;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
 
-public class BulletWeapon extends AbstractWeapon{
+public class BulletWeapon extends AbstractWeapon {
     private final int playerDirection;
     private Random rnd = new Random();
     private final float randomDirection;

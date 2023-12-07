@@ -2,9 +2,11 @@ package com.smurfsurvivors.game.model.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.model.handlers.IEnemyHandler;
-import com.smurfsurvivors.game.model.weapons.*;
+import com.smurfsurvivors.game.model.weapons.handlers.WeaponHandler;
+import com.smurfsurvivors.game.model.weapons.handlers.WeaponInformationHandler;
+
 import java.util.ArrayList;
-import java.util.List;
+
 import static java.lang.Math.*;
 
 public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?

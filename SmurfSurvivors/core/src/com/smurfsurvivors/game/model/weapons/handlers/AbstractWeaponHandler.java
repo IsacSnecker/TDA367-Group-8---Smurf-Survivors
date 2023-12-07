@@ -1,8 +1,8 @@
-package com.smurfsurvivors.game.model.weapons;
+package com.smurfsurvivors.game.model.weapons.handlers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.weapons.projectiles.AbstractWeapon;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.Collection;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-abstract class AbstractWeaponHandler implements IHandler{
+abstract class AbstractWeaponHandler implements IHandler {
 
     public interface List<E> extends Collection<E> {};
     ArrayList<AbstractWeapon> WeaponList = new ArrayList<AbstractWeapon> ();
@@ -31,7 +31,7 @@ abstract class AbstractWeaponHandler implements IHandler{
 
     public void updateProjectiles(Vector2 position, long currentTime){
         for(AbstractWeapon Weapon : WeaponList){
-            if(calculateDistance(new Vector2(Weapon.position.x, Weapon.position.y), Weapon.originalPosition) > Weapon.attackRange){
+            if(calculateDistance(new Vector2(Weapon.getX(), Weapon.getY()), Weapon.getOriginalPosition()) > Weapon.getAttackRange()){
                 weaponsToRemove.add(Weapon);
             }
             updateProjectile(Weapon);
