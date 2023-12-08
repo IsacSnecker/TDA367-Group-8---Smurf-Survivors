@@ -130,13 +130,13 @@ public class GameController implements IGameController {
         this.model.getActor(model.getSettingsMenu(), "Music").addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //view.((Slider)model.getActor(model.getSettingsMenu(), "Music")).getValue()/100
+                view.getAudioManager().setMusicVolume(((Slider)model.getActor(model.getSettingsMenu(), "Music")).getValue()/100);
             }
         });
         this.model.getActor(model.getSettingsMenu(), "Sound").addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //view.((Slider)model.getActor(model.getSettingsMenu(), "Sound")).getValue()/100
+                view.getAudioManager().setSoundVolume(((Slider)model.getActor(model.getSettingsMenu(), "Sound")).getValue()/100);
             }
         });
         this.model.getActor(model.getSettingsMenu(), "Back").addListener(new ClickListener() {
