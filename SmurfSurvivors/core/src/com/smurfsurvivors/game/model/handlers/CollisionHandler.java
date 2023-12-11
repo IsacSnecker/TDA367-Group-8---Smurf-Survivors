@@ -12,11 +12,11 @@ public class CollisionHandler implements ICollisionHandler {
     private PlayerCharacter player;
     private IEnemyHandler enemyHandler;
     private IFoodHandler foodHandler;
-    private LevelHandler levelHandler;
+    private ILevelHandler levelHandler;
     private ArrayList<AudioObserver> soundObservers;
     private GameModel model;
 
-    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, PlayerCharacter player, LevelHandler levelHandler){
+    public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, PlayerCharacter player, ILevelHandler levelHandler){
         this.player = player;
         this.enemyHandler = enemyHandler;
         this.foodHandler = foodHandler;
@@ -31,7 +31,7 @@ public class CollisionHandler implements ICollisionHandler {
     }
 
 
-    public void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies, LevelHandler levelHandler){
+    public void handleIfCollision(ArrayList<AbstractWeapon> projectiles, ArrayList<Enemy> enemies, ILevelHandler levelHandler){
         for(AbstractWeapon projectile : projectiles){
             for(Enemy enemy : enemies){
                 if(projectile.getPositionRectangle().overlaps(enemy.getRectangle())){

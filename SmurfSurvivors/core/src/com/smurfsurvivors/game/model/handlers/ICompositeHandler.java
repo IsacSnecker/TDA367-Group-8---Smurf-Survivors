@@ -14,4 +14,6 @@ public interface ICompositeHandler {
 
     ICollisionHandler getCollisionHandler();
 
+    ILevelHandler getLevelHandler();
+
 }

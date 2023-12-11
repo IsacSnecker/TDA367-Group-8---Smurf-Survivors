@@ -11,10 +11,13 @@ public class CompositeHandler implements ICompositeHandler {
     private IEnemyHandler enemyHandler;
     private IFoodHandler foodHandler;
 
-    public CompositeHandler(IFoodHandler foodHandler, IEnemyHandler enemyHandler, ICollisionHandler collisionHandler) {
+    private ILevelHandler levelHandler;
+
+    public CompositeHandler(IFoodHandler foodHandler, IEnemyHandler enemyHandler, ICollisionHandler collisionHandler, ILevelHandler levelHandler) {
         this.foodHandler = foodHandler;
         this.enemyHandler = enemyHandler;
         this.collisionHandler = collisionHandler;
+        this.levelHandler = levelHandler;
     }
 
 
@@ -42,4 +45,7 @@ public class CompositeHandler implements ICompositeHandler {
     public ICollisionHandler getCollisionHandler() {
         return collisionHandler;
     }
+
+    @Override
+    public ILevelHandler getLevelHandler() { return levelHandler; }
 }

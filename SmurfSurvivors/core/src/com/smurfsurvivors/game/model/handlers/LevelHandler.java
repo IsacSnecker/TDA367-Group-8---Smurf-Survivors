@@ -3,7 +3,7 @@ package com.smurfsurvivors.game.model.handlers;
 import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
-public class LevelHandler {
+public class LevelHandler implements ILevelHandler {
     PlayerCharacter player;
     public LevelHandler(PlayerCharacter player){
         this.player = player;

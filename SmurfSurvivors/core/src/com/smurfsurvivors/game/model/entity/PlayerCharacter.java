@@ -20,12 +20,10 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     private float levelCapMultiplier;
     public WeaponHandler WHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
-    private LevelHandler levelHandler;
 
     public PlayerCharacter(int health, float x, float y, int width, int height, float speed, int direction) {
         super("Player", health, x, y, width, height, speed, direction);
         WHandler.addBulletHandler();
-        levelHandler = new LevelHandler(this);
         this.xp = 0;
         this.level = 1;
         this.levelCap = 100;
@@ -111,7 +109,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     public int getLevelCap() {
         return this.levelCap;
     }
-    public LevelHandler getLevelHandler() { return levelHandler; }
 
     public WeaponInformationHandler getWeaponInformationHandler() { return weaponInformationHandler; }
 

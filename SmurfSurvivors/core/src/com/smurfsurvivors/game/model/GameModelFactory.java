@@ -39,8 +39,9 @@ public abstract class GameModelFactory {
         // Dependency injection by setter method
         IFoodHandler foodHandler = new FoodHandler(500);
         IEnemyHandler enemyHandler = new EnemyHandler(model);
-        ICollisionHandler collisionHandler = new CollisionHandler(enemyHandler,foodHandler, model.getPlayer(), model.gePlayertLevelHandler());
-        ICompositeHandler compositeHandler = new CompositeHandler(foodHandler, enemyHandler, collisionHandler);
+        ILevelHandler levelHandler = new LevelHandler(model.getPlayer());
+        ICollisionHandler collisionHandler = new CollisionHandler(enemyHandler,foodHandler, model.getPlayer(), levelHandler);
+        ICompositeHandler compositeHandler = new CompositeHandler(foodHandler, enemyHandler, collisionHandler, levelHandler);
         model.setCompositeHandler(compositeHandler);
 
         return model;

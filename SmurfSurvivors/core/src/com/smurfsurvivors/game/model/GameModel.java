@@ -200,5 +200,5 @@ public class GameModel implements Observable {
     public Stage getMainMenu(){
         return this.mainMenu;
     }
-    public LevelHandler gePlayertLevelHandler() { return player.getLevelHandler(); }
+    public ILevelHandler getLevelHandler() { return compositeHandler.getLevelHandler(); }
 }
