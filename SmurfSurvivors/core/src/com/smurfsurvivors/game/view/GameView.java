@@ -25,8 +25,10 @@ import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.model.weapons.IHandler;
 import com.smurfsurvivors.game.view.spritemanager.ISpriteManager;
 import com.smurfsurvivors.game.view.spritemanager.SpriteManager;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class GameView implements IGameView{
@@ -44,14 +46,6 @@ public class GameView implements IGameView{
     private SpriteBatch hudBatch;
     private BitmapFont font = new BitmapFont();
     private IHUD hud;
-    public Stage pauseStage;
-    public PauseMenu pause;
-    public Stage settingsStage;
-
-    public SettingsMenu settingsMenu;
-
-    public Stage mainStage;
-    public MainMenu mainMenu;
 
     public GameView(GameModel model) {
         this.spriteManager = new SpriteManager();
@@ -138,15 +132,7 @@ public class GameView implements IGameView{
         hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel(), model.getClock());
         hudBatch.end();
 
-        if(model.getIsPaused()) {
-            model.getPauseMenu().draw();
-        }
-        if(model.getIsOpen(model.getMainMenu())) {
-            model.getMainMenu().draw();
-        }
-        if(model.getIsOpen(model.getSettingsMenu())) {
-            model.getSettingsMenu().draw();
-        }
+        renderMenus(model.getStageOpenMap());
     }
 
 
@@ -175,6 +161,14 @@ public class GameView implements IGameView{
                 sprite.draw(batch);
             }
 
+    }
+
+    private void renderMenus(Map<Stage, Boolean> stageOpenMap){
+        for(Stage stage : stageOpenMap.keySet()){
+            if(stageOpenMap.get(stage)){
+                stage.draw();
+            }
+        }
     }
 
     public IAudioManager getAudioManager() {

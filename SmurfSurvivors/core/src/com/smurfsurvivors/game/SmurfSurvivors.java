@@ -29,7 +29,8 @@ public class SmurfSurvivors extends Game {
         gameModel.update();
 
         if(gameModel.getIsGameOver()){
-            create();
+            System.exit(0);
+            //create();
         }
     }
     @Override

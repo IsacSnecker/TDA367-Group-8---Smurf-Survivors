@@ -10,9 +10,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MenuHandler implements IMenuHandler{
-    private Stage pauseMenu;
-    private Stage settingsMenu;
-    private Stage mainMenu;
     private Map<String, Stage> stageStringMap;
     private Map<Stage, Boolean> stageOpenMap;
     private Stage lastUsed = null;
@@ -23,17 +20,17 @@ public class MenuHandler implements IMenuHandler{
     }
 
     public void stageInit(){
-        this.pauseMenu = MenuFactory.createPauseMenu();
-        this.settingsMenu = MenuFactory.createSettingsMenu();
-        this.mainMenu = MenuFactory.createMainMenu();
+        Stage pauseMenu = MenuFactory.createPauseMenu();
+        Stage settingsMenu = MenuFactory.createSettingsMenu();
+        Stage mainMenu = MenuFactory.createMainMenu();
         stageOpenMap = new HashMap<>();
-        stageOpenMap.put(this.settingsMenu, Boolean.FALSE);
-        stageOpenMap.put(this.pauseMenu, Boolean.FALSE);
-        stageOpenMap.put(this.mainMenu, Boolean.TRUE);
+        stageOpenMap.put(pauseMenu, Boolean.FALSE);
+        stageOpenMap.put(settingsMenu, Boolean.FALSE);
+        stageOpenMap.put(mainMenu, Boolean.TRUE);
         stageStringMap = new HashMap<>();
-        stageStringMap.put("Settings", this.settingsMenu);
-        stageStringMap.put("Pause", this.pauseMenu);
-        stageStringMap.put("Main", this.mainMenu);
+        stageStringMap.put("Settings", settingsMenu);
+        stageStringMap.put("Pause", pauseMenu);
+        stageStringMap.put("Main", mainMenu);
     }
 
     public void switchMenu(String stageString){
@@ -66,18 +63,6 @@ public class MenuHandler implements IMenuHandler{
 
     private void setIsOpen(Stage stage, Boolean isOpen){
         stageOpenMap.put(stage, isOpen);
-    }
-
-    public Stage getMainMenu() {
-        return mainMenu;
-    }
-
-    public Stage getPauseMenu() {
-        return pauseMenu;
-    }
-
-    public Stage getSettingsMenu() {
-        return settingsMenu;
     }
 
     public Map<Stage, Boolean> getStageOpenMap(){

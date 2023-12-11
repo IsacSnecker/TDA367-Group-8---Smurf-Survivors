@@ -49,7 +49,9 @@ public class GameController implements IGameController {
             inputLeft = 1;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            if(model.getIsOpen(model.getPauseMenu())){
+            model.setIsPaused(true);
+            model.switchMenu("Pause");
+            /*if(model.getIsOpen(model.getPauseMenu())){
                 Gdx.input.setInputProcessor(null);
                 model.switchMenu(null);
                 model.togglePaused();
@@ -58,7 +60,7 @@ public class GameController implements IGameController {
                 Gdx.input.setInputProcessor(model.getPauseMenu());
                 model.switchMenu(model.getPauseMenu());
                 model.togglePaused();
-            }/*
+            }
             if(model.getIsOpen(model.getMainMenu()) || model.getIsOpen(model.getSettingsMenu())){
                 return;
             }
@@ -82,101 +84,101 @@ public class GameController implements IGameController {
     }
 
     private void buttonsInit() {
-        Gdx.input.setInputProcessor(model.getMainMenu());
-        this.model.getActor(model.getPauseMenu(), "Quit").addListener(new ClickListener() {
+        Gdx.input.setInputProcessor(model.getMenu("Main"));
+        this.model.getActor(model.getMenu("Pause"), "Quit").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.exit(0);
             }
         });
-        this.model.getActor(model.getPauseMenu(),"Settings").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Pause"),"Settings").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                Gdx.input.setInputProcessor(model.getSettingsMenu());
+                //Gdx.input.setInputProcessor(model.getSettingsMenu());
                 //model.setIsOpen(model.getSettingsMenu(), true);
-                model.switchMenu(model.getSettingsMenu());
+                model.switchMenu("Settings");
             }
         });
-        this.model.getActor(model.getPauseMenu(), "Resume").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Pause"), "Resume").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.input.setInputProcessor(null);
-                model.switchMenu(null);
-                model.togglePaused();
+                //Gdx.input.setInputProcessor(null);
+                model.switchMenu("");
+                model.setIsPaused(false);
             }
         });
 
-        this.model.getActor(model.getSettingsMenu(), "Easy").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Settings"), "Easy").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.setDifficulty(DifficultyFactory.createEasyDifficulty());
                 //System.out.println(model.getDifficulty().getEnemyHealthMultiplier());
             }
         });
-        this.model.getActor(model.getSettingsMenu(), "Normal").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Settings"), "Normal").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.setDifficulty(DifficultyFactory.createNormalDifficulty());
                 //System.out.println(model.getDifficulty().getEnemyHealthMultiplier());
             }
         });
-        this.model.getActor(model.getSettingsMenu(), "Hard").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Settings"), "Hard").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 model.setDifficulty(DifficultyFactory.createHardDifficulty());
                 //System.out.println(model.getDifficulty().getEnemyHealthMultiplier());
             }
         });
-        this.model.getActor(model.getSettingsMenu(), "Music").addListener(new ChangeListener() {
+        this.model.getActor(model.getMenu("Settings"), "Music").addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                view.getAudioManager().setMusicVolume(((Slider)model.getActor(model.getSettingsMenu(), "Music")).getValue()/100);
+                view.getAudioManager().setMusicVolume(((Slider)model.getActor(model.getMenu("Settings"), "Music")).getValue()/100);
             }
         });
-        this.model.getActor(model.getSettingsMenu(), "Sound").addListener(new ChangeListener() {
+        this.model.getActor(model.getMenu("Settings"), "Sound").addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                view.getAudioManager().setSoundVolume(((Slider)model.getActor(model.getSettingsMenu(), "Sound")).getValue()/100);
+                view.getAudioManager().setSoundVolume(((Slider)model.getActor(model.getMenu("Settings"), "Sound")).getValue()/100);
             }
         });
-        this.model.getActor(model.getSettingsMenu(), "Back").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Settings"), "Back").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //model.setIsOpen(model.getSettingsMenu(), false);
-                if(model.getIsOpen(model.getPauseMenu())){
-                    Gdx.input.setInputProcessor(model.getPauseMenu());
-                    model.switchMenu(model.getPauseMenu());
+                /*if(model.getIsOpen(model.getMenu("Pause"))){
+                    Gdx.input.setInputProcessor(model.getMenu("Pause"));
+                    model.switchMenu(model.getMenu("Pause"));
                 }
                 else {
-                    Gdx.input.setInputProcessor(model.getMainMenu());
+                    Gdx.input.setInputProcessor(model.get());
                     model.switchMenu(model.getMainMenu());
                     //model.setIsOpen(model.getMainMenu(), true);
-                }
-
+                }*/
+                model.closeMenu();
             }
         });
-        this.model.getActor(model.getMainMenu(), "Quit").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Main"), "Quit").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.exit(0);
             }
         });
-        this.model.getActor(model.getMainMenu(), "Settings").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Main"), "Settings").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                Gdx.input.setInputProcessor(model.getSettingsMenu());
+                //Gdx.input.setInputProcessor(model.getSettingsMenu());
                 //model.setIsOpen(model.getMainMenu(), false);
-                model.switchMenu(model.getSettingsMenu());
+                model.switchMenu("Settings");
                 //model.setIsOpen(model.getSettingsMenu(), true);
             }
         });
-        this.model.getActor(model.getMainMenu(), "Start").addListener(new ClickListener() {
+        this.model.getActor(model.getMenu("Main"), "Start").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.input.setInputProcessor(null);
+                //Gdx.input.setInputProcessor(null);
                 //model.setIsOpen(model.getMainMenu(), false);
-                model.switchMenu(null);
-                model.togglePaused();
+                model.switchMenu("");
+                model.setIsPaused(false);
             }
         });
     }

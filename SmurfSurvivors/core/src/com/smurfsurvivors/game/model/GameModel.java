@@ -18,20 +18,10 @@ public class GameModel implements Observable {
 
     private ArrayList<Observer> observerList;
     private PlayerCharacter player;
-
     private ICompositeHandler compositeHandler;
-
+    private IMenuHandler menuHandler;
     private Difficulty difficulty;
     private Clock clock;
-
-    private Stage pauseMenu;
-    private Stage settingsMenu;
-    private Stage mainMenu;
-
-    private Map<Stage, Boolean> stageOpenMap;
-
-    private Boolean isPaused = true;
-
     private Boolean isGameOver = false;
 
     public GameModel(Difficulty difficulty, PlayerCharacter player){
@@ -40,7 +30,7 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         clock.startClock();
-        stageInit();
+        this.menuHandler = new MenuHandler();
 
         initializeObservers();
 
@@ -49,7 +39,7 @@ public class GameModel implements Observable {
     public void update() {
         notifyObservers();
 
-        if(!isPaused){
+        if(!menuHandler.getIsPaused()){
 
             compositeHandler.updateHandlers(clock, player, difficulty);
 
@@ -64,18 +54,6 @@ public class GameModel implements Observable {
 
 
     }
-
-    public void stageInit(){
-        this.pauseMenu = MenuFactory.createPauseMenu();
-        this.settingsMenu = MenuFactory.createSettingsMenu();
-        this.mainMenu = MenuFactory.createMainMenu();
-        stageOpenMap = new HashMap<>();
-        stageOpenMap.put(this.pauseMenu, Boolean.FALSE);
-        stageOpenMap.put(this.settingsMenu, Boolean.FALSE);
-        stageOpenMap.put(this.mainMenu, Boolean.TRUE);
-    }
-
-
 
     @Override
     public void initializeObservers() {
@@ -109,10 +87,10 @@ public class GameModel implements Observable {
     }
 
     public Boolean getIsPaused(){
-        return this.isPaused;
+        return menuHandler.getIsPaused();
     }
 
-    public void togglePaused(){
+    /*public void togglePaused(){
         isPaused = !isPaused;
         if(isPaused){
             clock.pauseClock();
@@ -120,9 +98,18 @@ public class GameModel implements Observable {
         else {
             clock.resumeClock();
         }
+    }*/
+
+    public void setIsPaused(Boolean paused){
+        menuHandler.setIsPaused(paused);
+        if(menuHandler.getIsPaused()){
+            clock.pauseClock();
+        }
+        else {
+            clock.resumeClock();
+        }
+
     }
-
-
     public Difficulty getDifficulty(){
         return this.difficulty;
     }
@@ -131,7 +118,7 @@ public class GameModel implements Observable {
     }
 
     public void updatePlayerPosition(ArrayList<Integer> inputList){
-        if(!isPaused){
+        if(!menuHandler.getIsPaused()){
             player.updatePosition(inputList);
         }
     }
@@ -168,37 +155,24 @@ public class GameModel implements Observable {
         this.compositeHandler = compositeHandler;
     }
 
-    public boolean getIsOpen(Stage stage) {
-        return stageOpenMap.get(stage);
+    public void switchMenu(String stageString){
+        menuHandler.switchMenu(stageString);
     }
 
-    private void setIsOpen(Stage stage, Boolean isOpen){
-        stageOpenMap.put(stage, isOpen);
-    }
-
-    public void switchMenu(Stage stage){
-        if(stage != settingsMenu){
-            for(Stage key : stageOpenMap.keySet()){
-                setIsOpen(key, false);
-            }
-        }
-        setIsOpen(stage, true);
+    public void closeMenu(){
+        menuHandler.closeMenu();
     }
 
     public Actor getActor(Stage stage, String name){
         return stage.getRoot().findActor(name);
     }
 
-    public Stage getPauseMenu(){
-        return this.pauseMenu;
+    public Stage getMenu(String menuString){
+        return menuHandler.getMenu(menuString);
     }
 
-    public Stage getSettingsMenu(){
-        return this.settingsMenu;
-    }
-
-    public Stage getMainMenu(){
-        return this.mainMenu;
+    public Map<Stage, Boolean> getStageOpenMap(){
+        return menuHandler.getStageOpenMap();
     }
     public ILevelHandler getLevelHandler() { return compositeHandler.getLevelHandler(); }
 }
