@@ -38,6 +38,7 @@ public class CollisionHandler implements ICollisionHandler {
                     if(!projectile.getHitEntities().contains(enemy)){
                         projectile.getHitEntities().add(enemy);
                         enemy.decreaseHealth(projectile.attackDamage);
+                        enemy.setIsHit(true);
                         if (enemy.getHealth() <= 0){
                             notifyAudioObservers("DemonDeath");
                             levelHandler.playerLevelUp(enemy);
@@ -61,9 +62,6 @@ public class CollisionHandler implements ICollisionHandler {
         for(Enemy enemy : enemies){
             if(enemy.getRectangle().overlaps(player.getRectangle())){
                 player.decreaseHealth(10);
-                if(player.getHealth() <= 0){
-                    //killPlayer();
-                }
                 enemiesToRemove.add(enemy);
             }
         }

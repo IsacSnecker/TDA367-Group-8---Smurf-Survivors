@@ -169,6 +169,7 @@ public class GameView implements IGameView{
 
             for (Entity entity: entities) {
                 Sprite sprite = spriteManager.getSprite(entity);
+                if(entity.getIsHit()){ sprite.setColor(1, 0, 0, 1); }
                 sprite.flip(entity.isLookingRight(), false);
                 sprite.setPosition(entity.getX(), entity.getY());
                 sprite.draw(batch);

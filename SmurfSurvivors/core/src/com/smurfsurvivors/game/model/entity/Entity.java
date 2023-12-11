@@ -14,7 +14,7 @@ public abstract class Entity {
 
     private String name;
     private Vector2 position;
-
+    private boolean isHit = false;
     private boolean lookingRight = true;
     private final int width; //should width be final?
     private final int height; //should height be final?
@@ -35,7 +35,8 @@ public abstract class Entity {
     public int getHeight() {
         return height;
     }
-
+    public boolean getIsHit() { return isHit; }
+    public void setIsHit(boolean _isHit) { isHit = _isHit; }
     public void setX(float x) {  position.x = x; }
     public void setY(float y) { position.y = y; }
 
