@@ -14,7 +14,6 @@ public class CollisionHandler implements ICollisionHandler {
     private IFoodHandler foodHandler;
     private ILevelHandler levelHandler;
     private ArrayList<AudioObserver> soundObservers;
-    private GameModel model;
 
     public CollisionHandler(IEnemyHandler enemyHandler, IFoodHandler foodHandler, PlayerCharacter player, ILevelHandler levelHandler){
         this.player = player;
@@ -41,7 +40,7 @@ public class CollisionHandler implements ICollisionHandler {
                         enemy.setIsHit(true);
                         if (enemy.getHealth() <= 0){
                             notifyAudioObservers("DemonDeath");
-                            levelHandler.playerLevelUp(enemy);
+                            levelHandler.playerLevelUp(player, enemy);
 
                         }
                         if(projectile.getPassThrough() == 0){

@@ -4,12 +4,12 @@ import com.smurfsurvivors.game.model.entity.Enemy;
 import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 
 public class LevelHandler implements ILevelHandler {
-    PlayerCharacter player;
-    public LevelHandler(PlayerCharacter player){
-        this.player = player;
+
+    public LevelHandler(){
+
     }
 
-    public void playerLevelUp(Enemy enemy){
+    public void playerLevelUp(PlayerCharacter player, Enemy enemy){
         boolean levelUp = player.addXP(enemy.getXpGive());
         if(levelUp && player.getLevel() == 2){
             player.WHandler.levelUpBullet();
