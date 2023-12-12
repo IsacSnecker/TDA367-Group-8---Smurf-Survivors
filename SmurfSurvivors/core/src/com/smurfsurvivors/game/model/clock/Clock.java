@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
 public class Clock {
-    //Coordinates?
-    private Texture texture;//???
     private BitmapFont bitmapFont;
     private GlyphLayout glyphLayout;
     private long timeMillis;
@@ -66,7 +64,6 @@ public class Clock {
 
     public void render(Batch batch){
         glyphLayout.setText(bitmapFont,getTimeString());
-        //batch.draw(new Texture("UI/barEmpty.png"), Gdx.graphics.getWidth() - 300, Gdx.graphics.getHeight() - 200, 300, 200);
         bitmapFont.draw(batch, getTimeString(), (Gdx.graphics.getWidth() - glyphLayout.width)/2 , Gdx.graphics.getHeight() - 10);
     }
 }

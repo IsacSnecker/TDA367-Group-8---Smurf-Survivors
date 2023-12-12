@@ -1,5 +1,6 @@
 package com.smurfsurvivors.game.model.handlers;
 import com.badlogic.gdx.math.Vector2;
+import com.smurfsurvivors.game.model.entity.PlayerCharacter;
 import com.smurfsurvivors.game.model.factories.EnemyFactory;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.Enemy;
@@ -13,16 +14,16 @@ import static java.lang.Math.sqrt;
 
 public class EnemyHandler implements IEnemyHandler {
 
-    GameModel model;
+    PlayerCharacter player;
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     private boolean spawnReady;
     private double spawnRate;
     Random rnd = new Random();
 
-    public EnemyHandler(GameModel model){
+    public EnemyHandler(PlayerCharacter player){
         this.spawnReady = true;
         this.spawnRate = 1;
-        this.model = model;
+        this.player = player;
     }
 
     private void spawnDemons(int numDemons, float playerX, float playerY){
@@ -46,7 +47,7 @@ public class EnemyHandler implements IEnemyHandler {
         ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
         for(Enemy enemy: enemyList){
             if(enemy.getHealth() > 0){
-                enemy.moveTowardsEntity(model.getPlayer());
+                enemy.moveTowardsEntity(player);
             } else {
                 enemiesToRemove.add(enemy);
                 enemy.setIsDead(true);
@@ -82,7 +83,7 @@ public class EnemyHandler implements IEnemyHandler {
         ArrayList<Enemy> enemyList = getEnemies();
         Enemy nearestEnemy = enemyList.get(0);
         for(Enemy enemy: enemyList){
-            if(calculateDistance(enemy.getPosition(), model.getPlayer().getPosition()) < calculateDistance(nearestEnemy.getPosition(), model.getPlayer().getPosition())){
+            if(calculateDistance(enemy.getPosition(), player.getPosition()) < calculateDistance(nearestEnemy.getPosition(), player.getPosition())){
                 nearestEnemy = enemy;
             }
         }
@@ -93,9 +94,6 @@ public class EnemyHandler implements IEnemyHandler {
         return sqrt(pow(fromPosition.x - toPosition.x,2) + pow(fromPosition.y - toPosition.y,2));
     }
 
-    private void addEnemy(Enemy enemy){
-        enemyList.add(enemy);
-    }
     public void removeEnemy(Enemy enemy){
         enemyList.remove(enemy);
     }
