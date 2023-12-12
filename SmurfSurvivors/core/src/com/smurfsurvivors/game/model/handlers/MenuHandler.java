@@ -19,7 +19,7 @@ public class MenuHandler implements IMenuHandler{
         stageInit();
     }
 
-    public void stageInit(){
+    private void stageInit(){
         Stage pauseMenu = MenuFactory.createPauseMenu();
         Stage settingsMenu = MenuFactory.createSettingsMenu();
         Stage mainMenu = MenuFactory.createMainMenu();
