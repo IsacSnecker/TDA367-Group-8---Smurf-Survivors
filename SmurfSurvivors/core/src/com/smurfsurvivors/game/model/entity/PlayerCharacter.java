@@ -25,8 +25,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         this.level = 1;
         this.levelCap = 100;
         this.levelCapMultiplier = (float) 1.10;
-        this.spriteRight = new Texture("Player/smurf-90x90-right.png");
-        this.spriteLeft = new Texture("Player/smurf-90x90.png");
     }
 
     public void usePassiveWeapon(){
@@ -113,7 +111,6 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         usePassiveWeapon();
         wHandler.weaponInformationHandler.updateWeaponInformation(getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
         usePassiveWeapon();
-        wHandler.updateWeaponCooldowns();
     }
     
 }
