@@ -43,6 +43,8 @@ public abstract class GameModelFactory {
         ICollisionHandler collisionHandler = new CollisionHandler(enemyHandler,foodHandler, model.getPlayer(), levelHandler);
         ICompositeHandler compositeHandler = new CompositeHandler(foodHandler, enemyHandler, collisionHandler, levelHandler);
         model.setCompositeHandler(compositeHandler);
+        IMenuHandler menuHandler = new MenuHandler();
+        //model.setMenuHandler(menuHandler);
 
         return model;
     }

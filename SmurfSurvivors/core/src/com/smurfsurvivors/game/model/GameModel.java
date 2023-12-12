@@ -155,6 +155,9 @@ public class GameModel implements Observable {
         this.compositeHandler = compositeHandler;
     }
 
+    public void setMenuHandler(IMenuHandler menuHandler) {
+        this.menuHandler = menuHandler;
+    }
     public void switchMenu(String stageString){
         menuHandler.switchMenu(stageString);
     }
