@@ -1,7 +1,5 @@
 package com.smurfsurvivors.game.model.entity;
 
-import com.badlogic.gdx.graphics.Texture;
-
 public abstract class Creature extends Entity implements HasHealth, Movable {
 
     private int health;

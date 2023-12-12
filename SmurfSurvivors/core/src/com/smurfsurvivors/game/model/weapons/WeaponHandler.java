@@ -17,9 +17,6 @@ public class WeaponHandler {
         weaponInformationHandler = new WeaponInformationHandler();
     }
 
-    public void addWeaponHandler(IHandler handler){
-        handlerList.add(handler);
-    }
     public void addBulletHandler(){
         IHandler bulletHandler = new BulletHandler(weaponInformationHandler);
         handlerList.add(bulletHandler);

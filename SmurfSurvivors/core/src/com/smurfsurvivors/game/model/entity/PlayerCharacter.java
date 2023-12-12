@@ -12,18 +12,15 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     private int xp;
     private int level;
-    private Texture spriteRight;
-    private Texture spriteLeft;
-    private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
-    private List<ActiveWeapon> abilities; //Should be List<Ability>
+
     private int levelCap;
     private float levelCapMultiplier;
-    public WeaponHandler WHandler = new WeaponHandler();
+    public WeaponHandler wHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
 
     public PlayerCharacter(int health, float x, float y, int width, int height, float speed, int direction) {
         super("Player", health, x, y, width, height, speed, direction);
-        WHandler.addBulletHandler();
+        wHandler.addBulletHandler();
         this.xp = 0;
         this.level = 1;
         this.levelCap = 100;
@@ -33,8 +30,8 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
     }
 
     public void usePassiveWeapon(){
-        WHandler.updatePlayerDirection(getDirection());
-        WHandler.passiveWeaponUpdate(getPosition());
+        wHandler.updatePlayerDirection(getDirection());
+        wHandler.passiveWeaponUpdate(getPosition());
     }
 
     public void updatePosition(ArrayList<Integer> inputList){
@@ -114,8 +111,9 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
 
     public void performAttack(IEnemyHandler enemyHandler) {
         usePassiveWeapon();
-        WHandler.weaponInformationHandler.updateWeaponInformation(getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
+        wHandler.weaponInformationHandler.updateWeaponInformation(getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
         usePassiveWeapon();
+        wHandler.updateWeaponCooldowns();
     }
     
 }
