@@ -12,7 +12,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.smurfsurvivors.game.*;
 import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.view.audiomanager.AudioManager;
@@ -22,7 +21,6 @@ import com.smurfsurvivors.game.view.hud.IHUD;
 import com.smurfsurvivors.game.model.weapons.IHandler;
 import com.smurfsurvivors.game.view.spritemanager.ISpriteManager;
 import com.smurfsurvivors.game.view.spritemanager.SpriteManager;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -143,7 +141,7 @@ public class GameView implements IGameView{
     }
 
     public void renderPlayerProjectiles(PlayerCharacter player){
-        for(IHandler weaponHandler : player.WHandler.getWeaponHandlers()){
+        for(IHandler weaponHandler : player.wHandler.getWeaponHandlers()){
             weaponHandler.renderProjectiles(this.batch);
         }
     }

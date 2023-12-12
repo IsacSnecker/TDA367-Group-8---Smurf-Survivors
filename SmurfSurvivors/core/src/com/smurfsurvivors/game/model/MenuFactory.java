@@ -34,6 +34,7 @@ public abstract class MenuFactory {
         Button startButton = new TextButton("START",skin);
         startButton.setSize(2 * Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
         startButton.setPosition((Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5)/2,(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10)/2);
+        startButton.setColor(0.1f,1f,0.1f,1f);
         startButton.setName("Start");
 
         mainMenu.addActor(backgroundImage);
