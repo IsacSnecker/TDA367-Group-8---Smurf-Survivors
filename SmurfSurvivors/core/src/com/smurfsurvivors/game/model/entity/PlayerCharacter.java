@@ -1,40 +1,33 @@
 package com.smurfsurvivors.game.model.entity;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.smurfsurvivors.game.model.handlers.IEnemyHandler;
 import com.smurfsurvivors.game.model.weapons.*;
-import com.smurfsurvivors.game.model.handlers.LevelHandler;
 import java.util.ArrayList;
-import java.util.List;
+
 import static java.lang.Math.*;
 
-public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used through delegation?
+public class PlayerCharacter extends Creature{
 
     private int xp;
     private int level;
-    private Texture spriteRight;
-    private Texture spriteLeft;
-    private List<PassiveWeapon> passiveWeapons; //Should be List<PassiveWeapon>
-    private List<ActiveWeapon> abilities; //Should be List<Ability>
+
     private int levelCap;
     private float levelCapMultiplier;
-    public WeaponHandler WHandler = new WeaponHandler();
+    public WeaponHandler wHandler = new WeaponHandler();
     public WeaponInformationHandler weaponInformationHandler = new WeaponInformationHandler();
 
     public PlayerCharacter(int health, float x, float y, int width, int height, float speed, int direction) {
         super("Player", health, x, y, width, height, speed, direction);
-        WHandler.addBulletHandler();
+        wHandler.addBulletHandler();
         this.xp = 0;
         this.level = 1;
         this.levelCap = 100;
         this.levelCapMultiplier = (float) 1.10;
-        this.spriteRight = new Texture("Player/smurf-90x90-right.png");
-        this.spriteLeft = new Texture("Player/smurf-90x90.png");
     }
 
     public void usePassiveWeapon(){
-        WHandler.updatePlayerDirection(getDirection());
-        WHandler.passiveWeaponUpdate(getPosition());
+        wHandler.updatePlayerDirection(getDirection());
+        wHandler.passiveWeaponUpdate(getPosition());
     }
 
     public void updatePosition(ArrayList<Integer> inputList){
@@ -110,13 +103,11 @@ public class PlayerCharacter extends Creature{ //Should PlayerCharacter be used 
         return this.levelCap;
     }
 
-    public WeaponInformationHandler getWeaponInformationHandler() { return weaponInformationHandler; }
-
     public void performAttack(IEnemyHandler enemyHandler) {
         usePassiveWeapon();
-        WHandler.weaponInformationHandler.updateWeaponInformation(getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
+        wHandler.weaponInformationHandler.updateWeaponInformation(getDirection(), enemyHandler.getNearestEnemy().getPosition(), enemyHandler.getNearestEnemy());
         usePassiveWeapon();
-        WHandler.updateWeaponCooldowns();
+        wHandler.updateWeaponCooldowns();
     }
     
 }

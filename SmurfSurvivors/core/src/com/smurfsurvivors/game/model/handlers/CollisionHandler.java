@@ -1,8 +1,6 @@
 package com.smurfsurvivors.game.model.handlers;
 
-import com.smurfsurvivors.game.AudioObservable;
 import com.smurfsurvivors.game.AudioObserver;
-import com.smurfsurvivors.game.model.GameModel;
 import com.smurfsurvivors.game.model.entity.*;
 import com.smurfsurvivors.game.model.weapons.AbstractWeapon;
 
@@ -24,7 +22,7 @@ public class CollisionHandler implements ICollisionHandler {
     }
 
     public void update() {
-        handleIfCollision(player.WHandler.getProjectiles(), enemyHandler.getEnemies(), levelHandler);
+        handleIfCollision(player.wHandler.getProjectiles(), enemyHandler.getEnemies(), levelHandler);
         handleIfCollision(enemyHandler.getEnemies());
         handleFoodCollision();
     }
@@ -44,7 +42,7 @@ public class CollisionHandler implements ICollisionHandler {
 
                         }
                         if(projectile.getPassThrough() == 0){
-                            player.WHandler.removeProjectile(projectile);
+                            player.wHandler.removeProjectile(projectile);
                         }
                         else{
                             projectile.setPassThrough(projectile.getPassThrough() - 1);

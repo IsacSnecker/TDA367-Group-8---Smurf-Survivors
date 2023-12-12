@@ -174,5 +174,4 @@ public class GameModel implements Observable {
     public Map<Stage, Boolean> getStageOpenMap(){
         return menuHandler.getStageOpenMap();
     }
-    public ILevelHandler getLevelHandler() { return compositeHandler.getLevelHandler(); }
 }
