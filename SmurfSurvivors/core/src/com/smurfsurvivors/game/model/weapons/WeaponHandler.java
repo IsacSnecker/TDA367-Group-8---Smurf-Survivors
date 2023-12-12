@@ -78,9 +78,6 @@ public class WeaponHandler {
         }
     }
 
-    public void updateWeaponCooldowns(){
-    }
-
     public void updatePlayerDirection(int direction) {
         playerDirection = direction;
     }
@@ -90,6 +87,5 @@ public class WeaponHandler {
     public void levelUpMissile() { handlerMap.get("Missile").levelUp(); }
     public void levelUpMagic() { handlerMap.get("Magic").levelUp(); }
     public void levelUpMachete() { handlerMap.get("Machete").levelUp(); }
-
-
+    public ArrayList<IHandler> getHandlerList() { return handlerList; }
 }
