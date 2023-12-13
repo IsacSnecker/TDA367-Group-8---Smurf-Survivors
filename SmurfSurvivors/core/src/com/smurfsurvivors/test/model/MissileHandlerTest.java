@@ -28,12 +28,12 @@ public class MissileHandlerTest extends LibGDXTest{
         assertEquals(3, missileHandler.getProjectiles().size());
         assertEquals(700, missileHandler.getCooldown(), 0.001);
 
-        missileHandler.levelUp(); // Level up to 2
+        missileHandler.levelUp(); // Level up to 4
         missileHandler.spawnProjectile(new Vector2(0, 0));
         assertEquals(4, missileHandler.getProjectiles().size());
         assertEquals(500, missileHandler.getCooldown(), 0.001);
 
-        missileHandler.levelUp(); // Level up to 2
+        missileHandler.levelUp(); // Level up to 5
         missileHandler.spawnProjectile(new Vector2(0, 0));
         assertEquals(6, missileHandler.getProjectiles().size());
         assertEquals(200, missileHandler.getCooldown(), 0.001);

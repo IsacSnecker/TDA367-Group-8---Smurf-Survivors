@@ -36,7 +36,7 @@ public class MacheteHandler extends AbstractWeaponHandler implements IHandler{
     Weapon.update();
 }
 
-    private void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
+    public void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
         for(int i = 0; i <= 7; i++){
             WeaponList.add(new MacheteWeapon(position, weaponTexture, velocity, attackDamage, passThrough, i));
         }

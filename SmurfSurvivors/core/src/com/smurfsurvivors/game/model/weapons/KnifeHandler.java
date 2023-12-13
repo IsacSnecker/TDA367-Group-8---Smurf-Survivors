@@ -39,7 +39,7 @@ public class KnifeHandler extends AbstractWeaponHandler implements IHandler{
         Weapon.update();
     }
 
-    private void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
+    public void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
         WeaponList.add(new KnifeWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getPlayerDirection(), rnd.nextFloat(-50,50)));
     }
 }

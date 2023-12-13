@@ -39,7 +39,7 @@ public class BulletHandler extends AbstractWeaponHandler implements IHandler{
         Weapon.update();
     }
 
-    private void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
+    public void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
         WeaponList.add(new BulletWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getPlayerDirection()));
     }
 

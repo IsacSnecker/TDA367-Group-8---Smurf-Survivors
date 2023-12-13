@@ -39,7 +39,7 @@ public class MagicHandler extends AbstractWeaponHandler implements IHandler{
         }
     }
 
-    private void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
+    public void addWeapon(Vector2 position, int velocity, int attackDamage, int passThrough){
         WeaponList.add(new MagicWeapon(position, weaponTexture, velocity, attackDamage, passThrough, weaponInformationHandler.getEnemyPosition()));
     }
 }
