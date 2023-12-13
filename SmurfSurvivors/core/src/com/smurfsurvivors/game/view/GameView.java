@@ -90,12 +90,6 @@ public class GameView implements IGameView{
     private void batchInit() {
         batch = new SpriteBatch();
         hudBatch = new SpriteBatch();
-        //pauseStage = new Stage();
-        //pause = new PauseMenu(pauseStage);
-        //settingsStage = new Stage();
-        //settingsMenu = new SettingsMenu(settingsStage);
-        //mainStage = new Stage();
-        //mainMenu = new MainMenu(mainStage);
     }
 
     private void HUDInit() {

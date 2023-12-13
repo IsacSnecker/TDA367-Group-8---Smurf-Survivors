@@ -30,7 +30,7 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         clock.startClock();
-        this.menuHandler = new MenuHandler();
+        //this.menuHandler = new MenuHandler();
 
         initializeObservers();
 

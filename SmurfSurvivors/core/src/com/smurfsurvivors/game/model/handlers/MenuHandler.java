@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.smurfsurvivors.game.model.MenuFactory;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -23,14 +24,14 @@ public class MenuHandler implements IMenuHandler{
         Stage pauseMenu = MenuFactory.createPauseMenu();
         Stage settingsMenu = MenuFactory.createSettingsMenu();
         Stage mainMenu = MenuFactory.createMainMenu();
-        stageOpenMap = new HashMap<>();
+        stageOpenMap = new LinkedHashMap<>();
+        stageOpenMap.put(mainMenu, Boolean.TRUE);
         stageOpenMap.put(pauseMenu, Boolean.FALSE);
         stageOpenMap.put(settingsMenu, Boolean.FALSE);
-        stageOpenMap.put(mainMenu, Boolean.TRUE);
         stageStringMap = new HashMap<>();
-        stageStringMap.put("Settings", settingsMenu);
         stageStringMap.put("Pause", pauseMenu);
         stageStringMap.put("Main", mainMenu);
+        stageStringMap.put("Settings", settingsMenu);
     }
 
     public void switchMenu(String stageString){
@@ -44,6 +45,8 @@ public class MenuHandler implements IMenuHandler{
         if(!Objects.equals(stageString, "")) {
             setIsOpen(stageStringMap.get(stageString), true);
         }
+        //Stage settingsStage = stageStringMap.get("Settings");
+        //stageOpenMap.put(settingsStage, stageOpenMap.get(settingsStage));
         Gdx.input.setInputProcessor(stageStringMap.get(stageString));
     }
 
