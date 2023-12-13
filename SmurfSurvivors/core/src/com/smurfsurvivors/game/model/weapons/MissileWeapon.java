@@ -18,7 +18,7 @@ public class MissileWeapon extends PassiveWeapon{
 
     }
 
-    void update(){
+    public void update(){
         moveTowardsPosition(nearestEnemy.getPosition());
     }
 
