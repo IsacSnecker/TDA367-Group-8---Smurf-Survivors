@@ -34,4 +34,5 @@ public class MissileWeapon extends PassiveWeapon{
     private float calculateRotation(){
         return (float) Math.toDegrees(Math.atan2(nearestEnemy.getY() - position.y, nearestEnemy.getX() - position.x));
     }
+
 }
