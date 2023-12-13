@@ -76,4 +76,6 @@ abstract class AbstractWeaponHandler implements IHandler{
     public int getLevel() {
         return level;
     }
+
+    public float getCooldown() { return cooldown; }
 }

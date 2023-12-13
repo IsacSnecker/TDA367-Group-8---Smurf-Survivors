@@ -34,10 +34,8 @@ public class MagicHandler extends AbstractWeaponHandler implements IHandler{
 
     public void updateProjectile(AbstractWeapon Weapon){
         Weapon.update();
-        if(Weapon instanceof MagicWeapon){
-            if(Weapon.position.dst2(((MagicWeapon) Weapon).getEnemyPosition()) < Weapon.velocity + 50){
-                weaponsToRemove.add(Weapon);
-            }
+        if(Weapon.position.dst2(((MagicWeapon) Weapon).getEnemyPosition()) < Weapon.velocity + 50){
+            weaponsToRemove.add(Weapon);
         }
     }
 
