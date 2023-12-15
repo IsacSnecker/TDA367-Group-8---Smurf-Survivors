@@ -84,7 +84,6 @@ public abstract class MenuFactory {
         settingsText.setPosition((Gdx.graphics.getWidth()-4*settingsText.getWidth())/2, Gdx.graphics.getHeight()-4*settingsText.getHeight());
 
         Slider musicVolumeSlider = new Slider(0, 100, 1, false, skin);
-        musicVolumeSlider.setSize(Gdx.graphics.getWidth()/3/2, musicVolumeSlider.getHeight());
         musicVolumeSlider.setPosition((Gdx.graphics.getWidth()-musicVolumeSlider.getWidth())/2, Gdx.graphics.getHeight()/2);
         musicVolumeSlider.setValue(70);
         musicVolumeSlider.setName("Music");
