@@ -45,8 +45,6 @@ public class MenuHandler implements IMenuHandler{
         if(!Objects.equals(stageString, "")) {
             setIsOpen(stageStringMap.get(stageString), true);
         }
-        //Stage settingsStage = stageStringMap.get("Settings");
-        //stageOpenMap.put(settingsStage, stageOpenMap.get(settingsStage));
         Gdx.input.setInputProcessor(stageStringMap.get(stageString));
     }
 

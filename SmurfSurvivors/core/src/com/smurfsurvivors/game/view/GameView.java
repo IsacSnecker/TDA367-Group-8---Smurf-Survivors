@@ -121,6 +121,7 @@ public class GameView implements IGameView{
         hud.renderHUD(model.getPlayer().getHealth(), model.getPlayer().getXP(), model.getPlayer().getLevelCap(), model.getPlayer().getLevel(), model.getClock());
         hudBatch.end();
 
+        // Render Menus
         renderMenus(model.getStageOpenMap());
     }
 

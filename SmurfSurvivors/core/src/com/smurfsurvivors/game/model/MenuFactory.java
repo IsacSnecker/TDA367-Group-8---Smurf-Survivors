@@ -71,24 +71,20 @@ public abstract class MenuFactory {
         return pauseMenu;
     }
     public static Stage createSettingsMenu(){
-        //Camera camera = new PerspectiveCamera();
-        //Viewport viewport = new FitViewport(Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight());
-        //Stage settingsMenu = new Stage(viewport);
         Stage settingsMenu = new Stage();
         Group group = new Group();
         Skin skin = new Skin(Gdx.files.internal("Skins/skin/uiskin.json"));
 
-        //Texture backgroundDimmingTexture = new Texture();
         Texture backgroundTexture = new Texture("BackgroundTextures/smurfarna.png");
         Image backgroundImage = new Image(backgroundTexture);
         backgroundImage.setBounds((Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/3)/2,0,Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight());
-        //backgroundImage.setBounds(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         Label settingsText = new Label("SETTINGS", skin);
         settingsText.setFontScale(4);
         settingsText.setPosition((Gdx.graphics.getWidth()-4*settingsText.getWidth())/2, Gdx.graphics.getHeight()-4*settingsText.getHeight());
 
         Slider musicVolumeSlider = new Slider(0, 100, 1, false, skin);
+        musicVolumeSlider.setSize(Gdx.graphics.getWidth()/3/2, musicVolumeSlider.getHeight());
         musicVolumeSlider.setPosition((Gdx.graphics.getWidth()-musicVolumeSlider.getWidth())/2, Gdx.graphics.getHeight()/2);
         musicVolumeSlider.setValue(70);
         musicVolumeSlider.setName("Music");
@@ -102,7 +98,6 @@ public abstract class MenuFactory {
         Label soundLabel = new Label("Sound Volume:", skin);
         soundLabel.setPosition((Gdx.graphics.getWidth()-soundVolumeSlider.getWidth())/2 - soundVolumeSlider.getWidth(), Gdx.graphics.getHeight()/2- 1.5f*musicVolumeSlider.getHeight());
 
-
         Button quitButton = new TextButton("BACK",skin);
         quitButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
         quitButton.setPosition(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10);
@@ -111,14 +106,6 @@ public abstract class MenuFactory {
         Button difficultyEasyButton = new TextButton("EASY", skin);
         Button difficultyNormalButton = new TextButton("NORMAL", skin);
         Button difficultyHardButton = new TextButton("HARD", skin);
-        ButtonGroup<Button> difficultyButtonGroup = new ButtonGroup<>(difficultyEasyButton, difficultyNormalButton, difficultyHardButton);
-
-        difficultyButtonGroup.setMaxCheckCount(1);
-        difficultyButtonGroup.setMinCheckCount(1);
-        difficultyButtonGroup.setUncheckLast(true);
-        difficultyButtonGroup.setChecked("NORMAL");
-
-        System.out.println(difficultyButtonGroup.getChecked());
 
         difficultyEasyButton.setSize(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
         difficultyEasyButton.setPosition((Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/10)/2 - Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/2+2*musicVolumeSlider.getHeight());

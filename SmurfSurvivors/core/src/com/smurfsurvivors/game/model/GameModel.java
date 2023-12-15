@@ -30,10 +30,8 @@ public class GameModel implements Observable {
         this.observerList = new ArrayList<Observer>();
         this.clock = new Clock();
         clock.startClock();
-        //this.menuHandler = new MenuHandler();
 
         initializeObservers();
-
     }
 
     public void update() {
@@ -89,16 +87,6 @@ public class GameModel implements Observable {
     public Boolean getIsPaused(){
         return menuHandler.getIsPaused();
     }
-
-    /*public void togglePaused(){
-        isPaused = !isPaused;
-        if(isPaused){
-            clock.pauseClock();
-        }
-        else {
-            clock.resumeClock();
-        }
-    }*/
 
     public void setIsPaused(Boolean paused){
         menuHandler.setIsPaused(paused);
