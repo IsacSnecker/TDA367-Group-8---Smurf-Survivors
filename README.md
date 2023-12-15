@@ -12,3 +12,6 @@ Files:
 [UML Diagram](UML-2023-12-15.pdf)
 
 [UML Link, (requires account)](https://lucid.app/lucidchart/64cda437-15cd-4a04-a768-cf5f17303efd/edit?viewport_loc=-875%2C912%2C14400%2C7294%2CHWEp-vi-RSFO&invitationId=inv_924479ab-b765-40f5-915c-01b4063a83b4)
+
+[RAD](RAD.pdf)
+[SDD](SDD.pdf)
